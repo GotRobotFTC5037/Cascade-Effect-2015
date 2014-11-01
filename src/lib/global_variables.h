@@ -19,6 +19,12 @@
 
 #include "compile_flags.h"
 
+#if ENCODER_SIDE_USED == 1
+#define ENCODER_SIDE left_motor
+#else
+#define ENCODER_SIDE right_motor
+#endif
+
 const tMUXSensor HTIRS2 = msensor_S3_1;     // HiTechnic Infrared sensor
 const tMUXSensor HTAC = msensor_S3_2;
 const tMUXSensor HTGYRO = msensor_S2_1;	   // HiTechnic GYRO sensor
@@ -29,6 +35,8 @@ const tMUXSensor HTEOPD = msensor_S3_4;
 #else
 const tMUXSensor LEGOLS = msensor_S3_4;
 #endif
+
+
 
 /**
 * @var g_gyro_true

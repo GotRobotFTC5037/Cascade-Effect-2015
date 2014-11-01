@@ -18,5 +18,8 @@
 #define EOPD_ACTIVE 1
 
 #define WAIT 0
+// 1 = Left
+// 2 = Right
+#define ENCODER_SIDE_USED 1
 
 #endif /* !COMPILE_FLAGS_H */
