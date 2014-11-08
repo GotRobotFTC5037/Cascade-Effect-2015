@@ -1,5 +1,4 @@
 #pragma config(Hubs,  S1, HTMotor,  HTMotor,  HTMotor,  HTServo)
-#pragma config(Sensor, S1,     ,               sensorI2CMuxController)
 #pragma config(Sensor, S2,     GYRO_MUX,       sensorI2CCustom)
 #pragma config(Sensor, S3,     SENSOR_MUX,     sensorI2CCustom)
 #pragma config(Sensor, S4,     angle_sensor,   sensorI2CCustom)
@@ -64,8 +63,11 @@
 //========================================
 task main()
 {
+	abs_initialize();
 	abs_drive(FORWARD, E_TIME, 2000, 100, true, NON_SENSOR);
 	abs_drive(BACKWARD, E_TIME, 2000, 100, true, NON_SENSOR);
 	abs_drive(FORWARD, E_DEGREES, 360, 100, true, NON_SENSOR);
 	abs_drive(BACKWARD, E_DEGREES, 360, 100, true, NON_SENSOR);
+	abs_turn(CLOCKWISE, POINT, TURN, 180, 60);
+	abs_turn(COUNTERCLOCKWISE, POINT, TURN, 180, 60);
 }

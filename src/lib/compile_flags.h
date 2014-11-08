@@ -17,7 +17,8 @@
 
 #define EOPD_ACTIVE 1
 
-#define WAIT 0
+#define WAIT 1
+
 // 1 = Left
 // 2 = Right
 #define ENCODER_SIDE_USED 1

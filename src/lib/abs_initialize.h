@@ -34,7 +34,7 @@ void abs_initialize()
 	servo[optical_servo] = OPTICAL_SERVO_UP;
 	abs_control_light_sensor(INACTIVE);
 	memset(g_input_array,0,INPUT_ARRAY_SIZE);
-	abs_selection_program();
+	//abs_selection_program();
 	PlaySoundFile("! Click.rso");
 	abs_cscreen("Gyros   ","Calbrtng","  lol   ");
 	g_drift = abs_gyro_wrapper();
@@ -60,23 +60,23 @@ void abs_initialize()
 		g_error = ERROR_LETHAL;
 	}
 
-	if(g_error != 0)
-	{
-		switch(g_error)
-		{
-		case ERR_ACCELERMOETER: abs_cscreen("ERROR N ","Accel   ","        "); break;
-		case ERR_GYRO_CAL: abs_cscreen("ERROR L ","Gryo1   ","cal fail"); break;
-		case ERR_SENSOR_MUX: abs_cscreen("ERROR L ","SensrMux","pwr fail"); break;
-		case ERR_GYRO_MUX: abs_cscreen("ERROR L ","Gyro1Mux","pwr fail"); break;
-		}
-		while(true)
-		{
-			g_gyro_true = true;
-			PlayTone (250,25);
-			wait1Msec(500);
-			if(nNxtButtonPressed == kEnterButton && g_error_type == ERROR_NONLETHAL)break;
-		}
-	}
+	//if(g_error != 0)
+	//{
+	//	switch(g_error)
+	//	{
+	//	case ERR_ACCELERMOETER: abs_cscreen("ERROR N ","Accel   ","        "); break;
+	//	case ERR_GYRO_CAL: abs_cscreen("ERROR L ","Gryo1   ","cal fail"); break;
+	//	case ERR_SENSOR_MUX: abs_cscreen("ERROR L ","SensrMux","pwr fail"); break;
+	//	case ERR_GYRO_MUX: abs_cscreen("ERROR L ","Gyro1Mux","pwr fail"); break;
+	//	}
+	//	while(true)
+	//	{
+	//		g_gyro_true = true;
+	//		PlayTone (250,25);
+	//		wait1Msec(500);
+	//		if(nNxtButtonPressed == kEnterButton && g_error_type == ERROR_NONLETHAL)break;
+	//	}
+	//}
 	LogData=true;
 
 	abs_cscreen("Program ","Ready   ","        "); //set the screen to show the program feedback before the auto starts
