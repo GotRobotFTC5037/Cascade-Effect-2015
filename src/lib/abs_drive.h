@@ -61,7 +61,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 		break;
 	}
 	int i = 0;
-	nMotorEncoder(right_motor)= 0;
+	nMotorEncoder(ENCODER_SIDE)= 0;
 	g_rel_heading = 0;
 
 	//------------------------
@@ -103,7 +103,11 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 		//keep going until we get an encoder value
 		while(i<5)
 		{
-			if(abs(nMotorEncoder(right_motor)) > distance_to_encoder_derees(dist)) i++;
+			if(abs(nMotorEncoder(ENCODER_SIDE)) > dist)//distance_to_encoder_derees(dist))
+			{
+				i++;
+				PlayTone(200,20);
+			}
 			if(drive_type == GYRO)
 			{
 				abs_gyro_drive(speed,dir);

@@ -2,12 +2,12 @@
 #pragma config(Sensor, S2,     GYRO_MUX,       sensorI2CCustom)
 #pragma config(Sensor, S3,     SENSOR_MUX,     sensorI2CCustom)
 #pragma config(Sensor, S4,     angle_sensor,   sensorI2CCustom)
-#pragma config(Motor,  mtr_S1_C1_1,     jolly_roger,   tmotorTetrix, openLoop, encoder)
-#pragma config(Motor,  mtr_S1_C1_2,     block_lift_motor2, tmotorTetrix, openLoop, reversed, encoder)
+#pragma config(Motor,  mtr_S1_C1_1,     right_motor,   tmotorTetrix, openLoop, reversed, encoder)
+#pragma config(Motor,  mtr_S1_C1_2,     left_motor,    tmotorTetrix, openLoop, encoder)
 #pragma config(Motor,  mtr_S1_C2_1,     block_lift_motor, tmotorTetrix, openLoop)
-#pragma config(Motor,  mtr_S1_C2_2,     sky_hook,      tmotorTetrix, openLoop)
-#pragma config(Motor,  mtr_S1_C3_1,     right_motor,   tmotorTetrix, openLoop, reversed)
-#pragma config(Motor,  mtr_S1_C3_2,     left_motor,    tmotorTetrix, openLoop)
+#pragma config(Motor,  mtr_S1_C2_2,     block_lift_motor2, tmotorTetrix, openLoop)
+#pragma config(Motor,  mtr_S1_C3_1,     sky_hook,      tmotorTetrix, openLoop, reversed)
+#pragma config(Motor,  mtr_S1_C3_2,     motorI,        tmotorTetrix, openLoop)
 #pragma config(Servo,  srvo_S1_C4_1,    grabber_right,        tServoStandard)
 #pragma config(Servo,  srvo_S1_C4_2,    grabber_left,         tServoStandard)
 #pragma config(Servo,  srvo_S1_C4_3,    roger_slide,          tServoContinuousRotation)
@@ -57,51 +57,17 @@
 #include "lib/abs_dlog.h"
 #include "lib/abs_end_ramp.h"
 #include "lib/abs_stay_on_ramp.h"
-
+#define DRIVE_TYPE = TANK
 //========================================
 // Main program
 //========================================
 task main()
 {
-	Delete(LogFileName, LogIoResult);
-	OpenWrite(LogFileHandle, LogIoResult, LogFileName, LogFileSize);
-
-	abs_dlog(__FILE__ ,"Program start"," Start time:", nPgmTime);
-
 	abs_initialize();
-
-	g_rel_heading = 0;
-	g_const_heading = 0;
-	switch(g_start_point)
-	{
-	case 1: abs_s1_mission_execute(); break;
-	case 2: abs_s2_mission_execute(); break;
-	case 3: abs_s3_mission_execute(); break;
-	case 4: abs_s4_mission_execute(); break;
-	case 5: abs_s5_mission_execute(); break;
-	case 6: abs_s6_mission_execute(); break;
-	}
-
-	g_const_heading = 0;
-	switch(g_end_point)
-	{
-	case 1:
-		wait1Msec(2000);
-		servo[abdd] = g_abdd_down;
-		abs_stop_robot();
-		break;
-	case 2:
-	case 3:
-		abs_end_ramp(500,40);
-		break;
-	default:
-		abs_dlog(__FILE__,"Invalid Ramp Option");
-		break;
-	}
-
-	abs_dlog(__FILE__ ,"end auto", "End time:", nPgmTime);
-	Close(LogFileHandle, LogIoResult);
-	LogData=false;
-
-	if(g_stay_on_ramp) abs_stay_on_ramp();
+	abs_drive(FORWARD, E_TIME, 2000, 100, true, NON_SENSOR);
+	abs_drive(BACKWARD, E_TIME, 2000, 100, true, NON_SENSOR);
+	abs_drive(FORWARD, E_DEGREES, 360, 100, true, NON_SENSOR);
+	abs_drive(BACKWARD, E_DEGREES, 360, 100, true, NON_SENSOR);
+	abs_turn(CLOCKWISE, POINT, TURN, 180, 60);
+	abs_turn(COUNTERCLOCKWISE, POINT, TURN, 180, 60);
 }
