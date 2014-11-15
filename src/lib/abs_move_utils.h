@@ -120,7 +120,7 @@ typedef enum
  *  @def distance_to_angle_derees(X)
  *  converts @a X to degrees
  */
-#define distance_to_angle_derees(X) ((float)(X*360/ANGLE_SENSOR_CIRCUMFERENCE))
+#define distance_to_angle_derees(X) ((float)((X)*360/ANGLE_SENSOR_CIRCUMFERENCE))
 
 /**
  *  @def distance_to_encoder_derees(X)
@@ -128,7 +128,7 @@ typedef enum
  */
 
 
-#define distance_to_encoder_derees(X) (X*360/DRIVE_WHEELS_CIRCUMFERENCE)
+#define distance_to_encoder_derees(X) ((X)*/*360*/1440/DRIVE_WHEELS_CIRCUMFERENCE)
 
 //#define adjusted_speed(X, Y, Z, C, P) (max(MIN_DRIVE_SPEED,(min(((C)*sqrt((Y)-(Z))+(P))*X/100),(X)))))
 
