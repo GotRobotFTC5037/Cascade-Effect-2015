@@ -1,6 +1,6 @@
 #pragma config(Hubs,  S1, HTMotor,  HTMotor,  HTMotor,  HTServo)
 #pragma config(Sensor, S2,     GYRO_MUX,       sensorI2CCustom)
-#pragma config(Sensor, S3,     SENSOR_MUX,     sensorI2CCustom)
+#pragma config(Sensor, S3,     HTIRS2,         sensorI2CCustom)
 #pragma config(Sensor, S4,     angle_sensor,   sensorI2CCustom)
 #pragma config(Motor,  mtr_S1_C1_1,     right_motor,   tmotorTetrix, openLoop, reversed, encoder)
 #pragma config(Motor,  mtr_S1_C1_2,     left_motor,    tmotorTetrix, openLoop, encoder)
@@ -48,6 +48,7 @@
 #include "lib/compile_flags.h"
 #include "lib/global_variables.h"
 #include "lib/abs_initialize.h"
+#include "lib/abs_IR_center_read.h"
 #include "lib/abs_s1_mission_execute.h"
 #include "lib/abs_s2_mission_execute.h"
 #include "lib/abs_s3_mission_execute.h"
@@ -63,11 +64,67 @@
 //========================================
 task main()
 {
+	Delete(LogFileName, LogIoResult);
+	OpenWrite(LogFileHandle, LogIoResult, LogFileName, LogFileSize);
+
+	abs_dlog(__FILE__ ,"Program start"," Start time:", nPgmTime);
+
 	abs_initialize();
-	abs_drive(FORWARD, E_TIME, 2000, 100, true, NON_SENSOR);
-	abs_drive(BACKWARD, E_TIME, 2000, 100, true, NON_SENSOR);
-	abs_drive(FORWARD, E_DEGREES, 360, 100, true, NON_SENSOR);
-	abs_drive(BACKWARD, E_DEGREES, 360, 100, true, NON_SENSOR);
-	abs_turn(CLOCKWISE, POINT, TURN, 180, 60);
-	abs_turn(COUNTERCLOCKWISE, POINT, TURN, 180, 60);
+
+	//StartTask(abs_IR_center_read);
+
+	abs_drive(FORWARD, E_ANGLE, 300, 80, true, GYRO);
+
+	//abs_drive(FORWARD, E_ANGLE, 243, 80, true, GYRO);
+	//abs_drive(BACKWARD, E_ANGLE, 12, 80, true, GYRO);
+
+	//abs_turn(COUNTERCLOCKWISE, POINT, TURN, 20, 60);
+
+	while(true)
+	{}
+	//	if(nNxtButtonPressed == kLeftButton)
+	//	{
+	//		motor[right_motor] = 60;
+	//		motor[left_motor] = 60;
+	//	}
+	//	else
+	//	{
+	//		motor[right_motor] = 0;
+	//		motor[left_motor] = 0;
+	//	}
+	//}
+
+	//abs_drive(FORWARD, E_ANGLE, 64, 80, false, GYRO);
+
+	//switch(g_bearing_ac1)
+	//{
+	//	case 5: center_pos = 3; break;
+	//	case 6: center_pos = 2; break;
+	//	case 7: center_pos = 1; break;
+	//}
+
+	//switch(center_pos)
+	//{
+	//	case 1: abs_turn(COUNTERCLOCKWISE, POINT, TURN, 180, 60); break;
+	//	case 2: abs_turn(COUNTERCLOCKWISE, POINT, TURN, 100, 60); break;
+	//	case 3: abs_turn(COUNTERCLOCKWISE, POINT, TURN, 20, 60); break;
+	//}
+
+	//abs_drive(FORWARD, E_TIME, 2500, 80, true, GYRO);
+	//abs_drive(FORWARD, E_ANGLE, 243, 80, true, GYRO);
+
+	//while(true){}
+
+	//abs_turn(CLOCKWISE, POINT, TURN, 360, 60);
+	//abs_turn(COUNTERCLOCKWISE, POINT, TURN_TO, 0, 50);
+
+
+	//abs_drive(BACKWARD, E_TIME, 2000, 100, true, NON_SENSOR);
+	//abs_drive(FORWARD, E_DEGREES, 360, 100, true, NON_SENSOR);
+	//abs_drive(BACKWARD, E_DEGREES, 360, 100, true, NON_SENSOR);
+	//abs_turn(CLOCKWISE, POINT, TURN, 180, 60);
+	//abs_turn(COUNTERCLOCKWISE, POINT, TURN, 180, 60);
+
+	abs_dlog(__FILE__ ,"end auto", "End time:", nPgmTime);
+	Close(LogFileHandle, LogIoResult);
 }
