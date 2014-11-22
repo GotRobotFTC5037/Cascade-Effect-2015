@@ -25,7 +25,7 @@
 #define ENCODER_SIDE right_motor
 #endif
 
-const tMUXSensor HTIRS2 = msensor_S3_1;     // HiTechnic Infrared sensor
+//const tMUXSensor HTIRS2 = msensor_S3_1;     // HiTechnic Infrared sensor
 const tMUXSensor HTAC = msensor_S3_2;
 const tMUXSensor HTGYRO = msensor_S2_1;	   // HiTechnic GYRO sensor
 const tMUXSensor HTIRS2_2 = msensor_S3_3;     // HiTechnic Infrared sensor 2
@@ -35,8 +35,6 @@ const tMUXSensor HTEOPD = msensor_S3_4;
 #else
 const tMUXSensor LEGOLS = msensor_S3_4;
 #endif
-
-
 
 /**
 * @var g_gyro_true
@@ -184,6 +182,9 @@ int g_optical_sensor = 0;
 * @var g_optical_move_min_dist
 * 		Tells the robot how far it should move before it should be in optical detection distence
 *
+* @var g_IR_center_goal_dist
+* 		The distance from the wall were the robot reads the center goal position
+*
 * @def NON_IR_DRIVE_SPEED
 *			Tells the robot how fast to go when its not using IR
 *
@@ -209,7 +210,7 @@ const int g_flag_speed_left = -20;
 const int g_abdd_up = 10;
 const int g_abdd_down = 235;
 
-const int g_gyro_adjust = 10;
+const int g_gyro_adjust = 5;//10;
 int g_original_gyro_val = 0;
 
 const int g_ground_arm_up = 0;
@@ -221,6 +222,8 @@ const int g_optical_threshold = 100;//305;
 #else
 const int g_optical_threshold = 30;
 #endif
+
+const int g_IR_center_goal_dist = 64;
 
 const int g_optical_move_min_dist = 70;
 
@@ -657,6 +660,9 @@ float g_delta_drift = 0;
 * @var g_program_done
 *		degbuging var for this
 *
+* @var g_center_goal_pos
+*		var to keep track of center goal pos
+*
 * @var g_joy1_enabled
 *		degbuging var for this
 * @var g_joy2_enabled
@@ -685,6 +691,7 @@ int g_auto_missions = 10;
 int g_drive_heading = 0;
 int g_ir_heading = 5;
 bool g_program_done = false;
+int g_center_goal_pos = 0;
 
 bool g_joy1_enabled = false;
 bool g_joy2_enabled = false;

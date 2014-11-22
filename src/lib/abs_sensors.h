@@ -17,13 +17,30 @@
 
 #include "math_utils.h"
 #include "abs_get_gyro_sensor_val.h"
+#include "abs_get_angle_sensor_val.h"
+#include "abs_gyro_read.h"
 
 task abs_sensors()
 {
+	//abs_dlog(__FILE__ ,"", "", );
+
 	g_prev_time = nPgmTime;
+
+	StartTask(abs_gyro_read);
 
 	while(true)
 	{
+
+		nxtDisplayBigTextLine(1,"Gyro:%1d",g_const_heading);
+		switch(g_bearing_ac1)
+		{
+		case 5: nxtDisplayBigTextLine(3,"3"); break;
+		case 6: nxtDisplayBigTextLine(3,"2"); break;
+		case 7: nxtDisplayBigTextLine(3,"1"); break;
+		}
+		//	nxtDisplayBigTextLine(3,"IR:  %1d",g_bearing_ac1);
+		nxtDisplayBigTextLine(5,"Ang: %1d",abs_get_angle_sensor_val(RAW_BPU));
+
 		//-------------------------
 		// HiTechnic IR Sensor
 		//-------------------------
@@ -109,7 +126,7 @@ task abs_sensors()
 		//-------------------------
 		// HiTechnic Gyro
 		//-------------------------
-
+		/*
 		g_curr_time=nPgmTime;
 		g_raw_gyro = abs_get_gyro_sensor_val(RAW);
 		g_sacred_const_heading += (g_raw_gyro - (g_drift+(g_delta_drift*(float)(g_curr_time-g_prev_time)))) * (float)(g_curr_time-g_prev_time)/1000;
@@ -123,7 +140,7 @@ task abs_sensors()
 
 		g_recont_heading = g_const_heading % 360;
 		if(g_recont_heading<0) g_recont_heading += 360;
-
+		*/
 		//-------------------------
 		// HiTechnic accelermoeter
 		//-------------------------
@@ -162,6 +179,7 @@ task abs_sensors()
 		g_light_sensor = LSvalNorm(LEGOLS);
 		g_optical_sensor = g_light_sensor;
 #endif
+		wait1Msec(20);
 	}
 }
 #endif

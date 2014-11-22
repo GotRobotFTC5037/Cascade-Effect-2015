@@ -21,6 +21,7 @@
 
 float abs_gyro_wrapper()
 {
+	HTGYROstartCal(HTGYRO);
 	int delta_total = 0;
 	int drift_old = 0;
 	int delta_gyro_array [REPEAT-1];
