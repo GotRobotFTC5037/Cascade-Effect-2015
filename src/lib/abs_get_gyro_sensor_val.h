@@ -83,11 +83,22 @@ int abs_get_gyro_sensor_val(e_gyro_val_type gyro_val)
 		{
 			g_good_gyro = false;
 		}
+		else
+		{
+			g_good_gyro = true;
+		}
 	}
 
-	if(g_gyro_ran == false) g_gyro_ran = true;
+	if(g_gyro_ran == false) g_gyro_ran = true; //to indicate if we ran this program once yet
 
-	return last_gyro_read_val;
+	if(g_good_gyro)
+	{
+		return last_gyro_read_val;
+	}
+	else
+	{
+		return last_val;
+	}
 }
 
 #endif /* !ABS_GET_GYRO_SENSOR_VAL_H */
