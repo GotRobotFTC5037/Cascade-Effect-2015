@@ -49,16 +49,14 @@
 #include "lib/global_variables.h"
 #include "lib/abs_initialize.h"
 #include "lib/abs_IR_center_read.h"
-#include "lib/abs_s1_mission_execute.h"
-#include "lib/abs_s2_mission_execute.h"
-#include "lib/abs_s3_mission_execute.h"
-#include "lib/abs_s4_mission_execute.h"
-#include "lib/abs_s5_mission_execute.h"
-#include "lib/abs_s6_mission_execute.h"
 #include "lib/abs_dlog.h"
-#include "lib/abs_end_ramp.h"
 #include "lib/abs_stay_on_ramp.h"
+#include "lib/abs_drive.h"
+#include "lib/abs_ramp_mission.h"
+#include "lib/abs_floor_mission.h"
+#include "abs_second_objective.h"
 #define DRIVE_TYPE = TANK
+
 //========================================
 // Main program
 //========================================
@@ -71,9 +69,17 @@ task main()
 
 	abs_initialize();
 
+	switch(g_input_array[STARTING_POINT])
+	{
+	case 1: abs_ramp_mission(); break;
+	case 2: abs_floor_mission(); break;
+	}
+
+	abs_second_objective();
+
 	//StartTask(abs_IR_center_read);
 
-	abs_drive(FORWARD, E_ANGLE, 300, 80, true, GYRO);
+	//abs_drive(FORWARD, E_ANGLE, 300, 80, true, GYRO);
 
 	//abs_drive(FORWARD, E_ANGLE, 243, 80, true, GYRO);
 	//abs_drive(BACKWARD, E_ANGLE, 12, 80, true, GYRO);

@@ -15,12 +15,12 @@
 #define ABS_SELECTION_CUSTOM_H
 
 #include "lib/abs_cscreen.h"
-#include "lib/abs_ramp_interpret.h"
+#include "lib/abs_wait_selection.h"
 
 void abs_selection_custom()
 {
 	//---------------------------------------
-	// Start point selection 1
+	// Start point selection
 	//---------------------------------------
 	g_input_array[STARTING_POINT] = 1;
 
@@ -36,43 +36,25 @@ void abs_selection_custom()
 		{
 			PlaySoundFile("! Click.rso");
 			while(nNxtButtonPressed == kLeftButton){}
-			if(g_input_array[STARTING_POINT] > 0) g_input_array[STARTING_POINT]--;
+			if(g_input_array[STARTING_POINT] > 1/*0*/) g_input_array[STARTING_POINT]--;
 		}
-		abs_cscreen("Starting","point   ","S%1d      ",g_input_array[STARTING_POINT]);
+		if(g_input_array[STARTING_POINT]==1) abs_cscreen("Starting","point   ","RAMP    ");
+		else abs_cscreen("Starting","point   ","FLOOR   ");
 	}
 	PlaySoundFile("! Click.rso");
 	while(nNxtButtonPressed == kEnterButton){}
 	eraseDisplay();
 
 	//---------------------------------------
-	// Start of start time selection 2
+	// start time selection
 	//---------------------------------------
 	g_input_array[STARTING_DELAY] = 0;
-
-	while(nNxtButtonPressed != kEnterButton)
-	{
-		abs_cscreen("Starting","delay   ","%2d",g_input_array[STARTING_DELAY]);
-		if(nNxtButtonPressed == kRightButton)
-		{
-			PlaySoundFile("! Click.rso");
-			while(nNxtButtonPressed == kRightButton){}
-			if(g_input_array[STARTING_DELAY] < 30) g_input_array[STARTING_DELAY]++;
-		}
-		if(nNxtButtonPressed == kLeftButton)
-		{
-			PlaySoundFile("! Click.rso");
-			while(nNxtButtonPressed == kLeftButton){}
-			if(g_input_array[STARTING_DELAY] > 0) g_input_array[STARTING_DELAY]--;
-		}
-	}
-
-	PlaySoundFile("! Click.rso");
-	while(nNxtButtonPressed == kEnterButton){}
+	abs_wait_selection(STARTING_DELAY, 30, 0, "Starting", "delay   ");
 
 	//---------------------------------------
-	// Start of mission selection 3
+	// first objective selection
 	//---------------------------------------
-	g_input_array[SCOREING_POINT] = 1;
+	g_input_array[FIRST_OBJECTIVE] = 1;
 
 	while(nNxtButtonPressed != kEnterButton)
 	{
@@ -80,22 +62,20 @@ void abs_selection_custom()
 		{
 			PlaySoundFile("! Click.rso");
 			while(nNxtButtonPressed == kRightButton){}
-			if(g_input_array[SCOREING_POINT] < g_auto_missions) g_input_array[SCOREING_POINT]++;
+			if(g_input_array[FIRST_OBJECTIVE] < g_first_objectives) g_input_array[FIRST_OBJECTIVE]++;
 		}
 		if(nNxtButtonPressed == kLeftButton)
 		{
 			PlaySoundFile("! Click.rso");
 			while(nNxtButtonPressed == kLeftButton){}
-			if(g_input_array[SCOREING_POINT] > -1) g_input_array[SCOREING_POINT]--;
+			if(g_input_array[FIRST_OBJECTIVE] > -1) g_input_array[FIRST_OBJECTIVE]--;
 		}
-		switch(g_input_array[SCOREING_POINT])
+		switch(g_input_array[FIRST_OBJECTIVE])
 		{
-		case 0: abs_cscreen("Scoring ","point   ","NO CRATE"); break;
-		case 1: abs_cscreen("Scoring ","point   ","IR      "); break;
-		case 2: abs_cscreen("Scoring ","point   ","CRATE 4 "); break;
-		case 3: abs_cscreen("Scoring ","point   ","CRATE 3 "); break;
-		case 4: abs_cscreen("Scoring ","point   ","CRATE 2 "); break;
-		case 5: abs_cscreen("Scoring ","point   ","CRATE 1 "); break;
+		case 0: abs_cscreen("First   ","Objectiv","STOP    "); break;
+		case 1: abs_cscreen("First   ","Objectiv","ROLGOAL1"); break;
+		case 2: abs_cscreen("First   ","Objectiv","CENTGOAL"); break;
+		case 3: abs_cscreen("First   ","Objectiv","ROLGOAL2"); break;
 		}
 	}
 	PlaySoundFile("! Click.rso");
@@ -103,28 +83,55 @@ void abs_selection_custom()
 	eraseDisplay();
 
 	//---------------------------------------
-	// Start of time selection 4
+	// first objective time selection
 	//---------------------------------------
+	g_input_array[FIRST_OBJECTIVE_DELAY] = 0;
+	abs_wait_selection(FIRST_OBJECTIVE_DELAY, 30, 0, "1stObjec", "delay   ");
 
-	while(nNxtButtonPressed != kEnterButton)
+	//---------------------------------------
+	// second objective selection
+	//---------------------------------------
+	g_input_array[SECOND_OBJECTIVE] = 1;
+
+	while(true)
 	{
+		if(nNxtButtonPressed == kEnterButton&&(g_input_array[FIRST_OBJECTIVE]==g_input_array[SECOND_OBJECTIVE]))
+			while(nNxtButtonPressed == kEnterButton) abs_cscreen("INVALID ","OPTION  ","        ");
+		else if(nNxtButtonPressed == kEnterButton) break;
+
 		if(nNxtButtonPressed == kRightButton)
 		{
 			PlaySoundFile("! Click.rso");
 			while(nNxtButtonPressed == kRightButton){}
-			if(g_input_array[END_DELAY]< 30) g_input_array[END_DELAY]++;
+			if(g_input_array[SECOND_OBJECTIVE] < g_second_objectives) g_input_array[SECOND_OBJECTIVE]++;
 		}
 		if(nNxtButtonPressed == kLeftButton)
 		{
 			PlaySoundFile("! Click.rso");
 			while(nNxtButtonPressed == kLeftButton){}
-			if(g_input_array[END_DELAY] > 0) g_input_array[END_DELAY]--;
+			if(g_input_array[SECOND_OBJECTIVE] > -1) g_input_array[SECOND_OBJECTIVE]--;
 		}
-		abs_cscreen("Score   ","delay   ","%2d       ",g_input_array[END_DELAY]);
-	}
 
+		switch(g_input_array[SECOND_OBJECTIVE])
+		{
+		case 0: abs_cscreen("Second  ","Objectiv","STOP    "); break;
+		case 1: if(g_input_array[FIRST_OBJECTIVE]==1) abs_cscreen("Second  ","Objectiv","N/A     ");
+			else abs_cscreen("Second  ","Objectiv","ROLGOAL1"); break;
+		case 2: if(g_input_array[FIRST_OBJECTIVE]==2) abs_cscreen("Second  ","Objectiv","N/A     ");
+			else abs_cscreen("Second  ","Objectiv","CENTGOAL"); break;
+		case 3: if(g_input_array[FIRST_OBJECTIVE]==3) abs_cscreen("Second  ","Objectiv","N/A     ");
+			else abs_cscreen("Second  ","Objectiv","ROLGOAL2"); break;
+		}
+	}
 	PlaySoundFile("! Click.rso");
 	while(nNxtButtonPressed == kEnterButton){}
+	eraseDisplay();
+
+	//---------------------------------------
+	// second objective time selection
+	//---------------------------------------
+	g_input_array[SECOND_OBJECTIVE_DELAY] = 0;
+	abs_wait_selection(SECOND_OBJECTIVE_DELAY, 30, 0, "2ndObjec", "delay   ");
 
 	//---------------------------------------
 	// Start of end point selection 5
@@ -148,22 +155,13 @@ void abs_selection_custom()
 		switch(g_input_array[END_POINT])
 		{
 		case 0: abs_cscreen("End pnt ","ERROR   ","        "); break;
-		case 1: abs_cscreen("End pnt ","stop    ","        "); break;
-		case 2: abs_cscreen("End pnt ","RAMP 1  ","stop    "); break;
-		case 3: abs_cscreen("End pnt ","RAMP 2  ","stop    "); break;
-		case 4: abs_cscreen("End pnt ","RAMP 1  ","continue"); break;
-		case 5: abs_cscreen("End pnt ","RAMP 2  ","continue"); break;
-		case 6: abs_cscreen("End pnt ","RAMP 3  ","stop    "); break;
-		case 7: abs_cscreen("End pnt ","RAMP 4  ","stop    "); break;
-		case 8: abs_cscreen("End pnt ","RAMP 3  ","continue"); break;
-		case 9: abs_cscreen("End pnt ","RAMP 4  ","continue"); break;
+		case 1: abs_cscreen("End pnt ","Low Area","        "); break;
+		case 2: abs_cscreen("End pnt ","STOP    ","        "); break;
 		}
 	}
 	PlaySoundFile("! Click.rso");
 	while(nNxtButtonPressed == kEnterButton){}
 	eraseDisplay();
-
-	abs_ramp_interpret();
 }
 
 #endif /* !ABS_SELECTION_CUSTOM_H */
