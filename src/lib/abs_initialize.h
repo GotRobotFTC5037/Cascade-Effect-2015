@@ -76,7 +76,7 @@ void abs_initialize()
 	LogData=true;
 
 	abs_cscreen("Program ","Ready   ","        "); //set the screen to show the program feedback before the auto starts
-	nxtDisplayBigTextLine(5, "%1d%1d%1d%1d%1d%1d%1d%1d N ",g_input_array[1],g_input_array[2],g_input_array[3],g_input_array[4],g_input_array[5]);
+	nxtDisplayBigTextLine(5, "%1d%1d%1d%1d%1d%1d%1d%1d%1d%1d ",g_input_array[1],g_input_array[2],g_input_array[3],g_input_array[4],g_input_array[5],g_input_array[6],g_input_array[7]);
 
 	wait1Msec(200);
 	StartTask(abs_sensors);
