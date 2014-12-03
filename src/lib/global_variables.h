@@ -196,19 +196,11 @@ int g_optical_sensor = 0;
 *
 *
 */
-const int g_block_speed_down = -60;
-const int g_block_speed_up = 100;
+const int g_lift_speed_down = -60;
+const int g_lift_speed_up = 100;
 
-const int g_robot_lift_down = -40;
-const int g_robot_lift_up = 100;
-
-const int g_flag_speed_down = 90;
-const int g_flag_speed_right = 20;
-const int g_flag_speed_up = -90;
-const int g_flag_speed_left = -20;
-
-const int g_abdd_up = 10;
-const int g_abdd_down = 235;
+const int g_goal_claw_up = 226;
+const int g_goal_claw_down = 60;
 
 const int g_gyro_adjust = 5;//10;
 int g_original_gyro_val = 0;
