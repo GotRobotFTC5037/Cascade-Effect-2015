@@ -17,14 +17,35 @@
 
 #include "abs_drive.h"
 
-void abs_second_objective()
+void abs_second_objective(e_second_start_pos second_start_pos)
 {
-	switch(g_input_array[SECOND_OBJECTIVE])
+	if(g_input_array[SECOND_OBJECTIVE]==0) return;
+
+	switch(second_start_pos)
 	{
-		case 0: break; //STOP
+	case SECOND_CENTER:
+		switch(g_input_array[SECOND_OBJECTIVE])
+		{
 		case 1: break; //ROLLING GOAL 1
+		case 3: break; //ROLLING GOAL 2
+		}
+		break;
+	case SECOND_STOP:
+		break;
+	case SECOND_ROLLGOAL1:
+		switch(g_input_array[SECOND_OBJECTIVE])
+		{
 		case 2: break; //CENTER GOAL
 		case 3: break; //ROLLING GOAL 2
+		}
+		break;
+	case SECOND_ROLLGOAL2:
+		switch(g_input_array[SECOND_OBJECTIVE])
+		{
+		case 1: break; //ROLLING GOAL 1
+		case 2: break; //CENTER GOAL
+		}
+		break;
 	}
 }
 

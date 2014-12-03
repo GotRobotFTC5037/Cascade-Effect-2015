@@ -409,7 +409,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 	}
 	g_debug_time_2 = nPgmTime;
 
-	if(dist_method == E_OPTICAL) servo[optical_servo] = OPTICAL_SERVO_UP;
+	//if(dist_method == E_OPTICAL) servo[optical_servo] = OPTICAL_SERVO_UP;
 
 #if EOPD_ACTIVE == 0
 	if(dist_method==E_LIGHT) LSsetInactive(LEGOLS);
