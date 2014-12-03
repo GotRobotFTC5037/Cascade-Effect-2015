@@ -303,17 +303,17 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 	else if(dist_method == E_ANGLE)
 	{
 		int pre_dist = 0;
-		if(g_reset_angle_record == false) pre_dist = abs_get_angle_sensor_val(RELATIVE_BPU);
+		if(g_reset_angle_record == false) pre_dist = abs_get_angle_sensor_val(RELATIVE_TU);
 		else abs_reset_angle_sensor_val(SOFT_RESET);
 		g_reset_angle_record = true;
 
-		abs_dlog(__FILE__ ,"reset angle", speed_str, speed, dist_str, dist, rel_asu_str, abs_get_angle_sensor_val(RELATIVE_ASU), rel_bpu_str, abs_get_angle_sensor_val(RELATIVE_BPU));
+		abs_dlog(__FILE__ ,"reset angle", speed_str, speed, dist_str, dist, rel_asu_str, abs_get_angle_sensor_val(RELATIVE_ASU), rel_bpu_str, abs_get_angle_sensor_val(RELATIVE_TU));
 
-		while(abs_get_angle_sensor_val(RELATIVE_BPU) < (dist+pre_dist))
+		while(abs_get_angle_sensor_val(RELATIVE_TU) < (dist+pre_dist))
 		{
 			if(drive_type == GYRO)
 			{
-				abs_gyro_drive(adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU)),dir);
+				abs_gyro_drive(adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_TU)),dir);
 			}
 
 			/** No gyro correction*/
@@ -321,18 +321,18 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 			{
 				if(dir == FORWARD)
 				{
-					motor[left_motor] = adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU));
-					motor[right_motor] = adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU));
+					motor[left_motor] = adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_TU));
+					motor[right_motor] = adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_TU));
 				}
 				else
 				{
-					motor[left_motor] = -adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU));
-					motor[right_motor] = -adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU));
+					motor[left_motor] = -adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_TU));
+					motor[right_motor] = -adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_TU));
 				}
 			}
 		}
 
-		abs_dlog(__FILE__ ,"angle break", speed_str, speed, dist_str, dist, rel_asu_str, abs_get_angle_sensor_val(RELATIVE_ASU), rel_bpu_str, abs_get_angle_sensor_val(RELATIVE_BPU));
+		abs_dlog(__FILE__ ,"angle break", speed_str, speed, dist_str, dist, rel_asu_str, abs_get_angle_sensor_val(RELATIVE_ASU), rel_bpu_str, abs_get_angle_sensor_val(RELATIVE_TU));
 	}
 	//================
 	// OPTICAL
