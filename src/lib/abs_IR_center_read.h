@@ -16,9 +16,9 @@
 
 task abs_IR_center_read()
 {
-	int beginning_val = abs_get_angle_sensor_val(RAW_BPU);
+	int beginning_val = abs_get_angle_sensor_val(RAW_TU);
 
-	while(abs(abs_get_angle_sensor_val(RAW_BPU)-beginning_val)<g_IR_center_goal_dist){}
+	while(abs(abs_get_angle_sensor_val(RAW_TU)-beginning_val)<g_IR_center_goal_dist){}
 
 	switch(g_bearing_ac1)
 	{
