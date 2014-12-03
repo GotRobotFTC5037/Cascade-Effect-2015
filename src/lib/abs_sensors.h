@@ -31,15 +31,15 @@ task abs_sensors()
 	while(true)
 	{
 
-		nxtDisplayBigTextLine(1,"Gyro:%1d",g_const_heading);
-		switch(g_bearing_ac1)
-		{
-		case 5: nxtDisplayBigTextLine(3,"3"); break;
-		case 6: nxtDisplayBigTextLine(3,"2"); break;
-		case 7: nxtDisplayBigTextLine(3,"1"); break;
-		}
+		//nxtDisplayBigTextLine(1,"Gyro:%1d",g_const_heading);
+		//switch(g_bearing_ac1)
+		//{
+		//case 5: nxtDisplayBigTextLine(3,"3"); break;
+		//case 6: nxtDisplayBigTextLine(3,"2"); break;
+		//case 7: nxtDisplayBigTextLine(3,"1"); break;
+		//}
 		//	nxtDisplayBigTextLine(3,"IR:  %1d",g_bearing_ac1);
-		nxtDisplayBigTextLine(5,"Ang: %1d",abs_get_angle_sensor_val(RAW_BPU));
+		//nxtDisplayBigTextLine(5,"Ang: %1d",abs_get_angle_sensor_val(RAW_BPU));
 
 		//-------------------------
 		// HiTechnic IR Sensor
