@@ -26,14 +26,15 @@
 #endif
 
 //const tMUXSensor HTIRS2 = msensor_S3_1;     // HiTechnic Infrared sensor
-const tMUXSensor HTAC = msensor_S3_2;
-const tMUXSensor HTGYRO = msensor_S2_1;	   // HiTechnic GYRO sensor
-const tMUXSensor HTIRS2_2 = msensor_S3_3;     // HiTechnic Infrared sensor 2
+const tMUXSensor HTAC = msensor_S2_1;
+const tMUXSensor HTGYRO = msensor_S3_1;	   // HiTechnic GYRO sensor
+const tMUXSensor HTIRS2 = msensor_S2_2;     // HiTechnic Infrared sensor 2
+const tMUXSensor HTIRS2_2 = msensor_S2_3;     // HiTechnic Infrared sensor 2
 
 #if EOPD_ACTIVE == 1
-const tMUXSensor HTEOPD = msensor_S3_4;
+const tMUXSensor HTEOPD = msensor_S2_4;
 #else
-const tMUXSensor LEGOLS = msensor_S3_4;
+const tMUXSensor LEGOLS = msensor_S2_4;
 #endif
 
 /**
@@ -66,11 +67,6 @@ bool g_gyro_true = false;
 *     tells the robot where the left block grabber needs to be to be closed
 *  @def GRABBER_RIGHT_CLOSE
 *     tells the robot where the left block grabber needs to be to be closed
-*
-* 	@def OPTICAL_SERVO_DOWN
-* 		Tells the robot the poision of the optical senser servo when its down
-* 	@def OPTICAL_SERVO_UP
-* 		Tells the robot the poision of the optical senser servo when its up
 */
 #define INT_ANGLE_SENSOR_CIRCUMFERENCE_TU 13
 #define INT_ANGLE_SENSOR_CIRCUMFERENCE_BPU 18
@@ -85,8 +81,6 @@ bool g_gyro_true = false;
 #define GRABBER_LEFT_CLOSE 120
 #define GRABBER_RIGHT_CLOSE 131
 
-#define OPTICAL_SERVO_DOWN 255
-#define OPTICAL_SERVO_UP 127
 /**
  * @var g_angle_sensor_val
  *		Tells the robot the value of the raw angle sensor
@@ -341,6 +335,17 @@ typedef enum
 	END_POINT,
 } e_selection_values;
 
+
+/**
+*  @enum e_drive_type Tells the robot were the second movement will be starting from
+*/
+typedef enum
+{
+	SECOND_CENTER,
+	SECOND_ROLLGOAL1,
+	SECOND_ROLLGOAL2,
+	SECOND_STOP
+} e_second_start_pos;
 //=========================================================
 // auto sub selections
 //=========================================================
