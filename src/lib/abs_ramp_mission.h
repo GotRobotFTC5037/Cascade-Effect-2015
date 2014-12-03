@@ -21,10 +21,10 @@ void abs_ramp_mission()
 {
 	switch(g_input_array[FIRST_OBJECTIVE])
 	{
-		case 0: break; //STOP
-		case 1: break; //ROLLING GOAL 1
-		case 2: break; //CENTER GOAL
-		case 3: break; //ROLLING GOAL 2
+	case 0: break; //STOP
+	case 1: break; //ROLLING GOAL 1
+	case 2: break; //CENTER GOAL
+	case 3: break; //ROLLING GOAL 2
 	}
 }
 

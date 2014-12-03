@@ -20,14 +20,11 @@
 #include "abs_sensors.h"
 #include "abs_dlog.h"
 #include "abs_reset_angle_sensor.h"
-#include "abs_calibrate_optical.h"
 #include "abs_selection_program.h"
-#include "abs_control_light_sensor.h"
 
 void abs_initialize()
 {
 	disableDiagnosticsDisplay();
-	abs_control_light_sensor(INACTIVE);
 	memset(g_input_array,0,INPUT_ARRAY_SIZE);
 	abs_selection_program();
 	PlaySoundFile("! Click.rso");
