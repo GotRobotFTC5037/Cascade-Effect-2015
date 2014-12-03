@@ -86,8 +86,8 @@ task main()
 
 	//abs_turn(COUNTERCLOCKWISE, POINT, TURN, 20, 60);
 
-	while(true)
-	{}
+	//while(true)
+	//{}
 	//	if(nNxtButtonPressed == kLeftButton)
 	//	{
 	//		motor[right_motor] = 60;
@@ -130,6 +130,15 @@ task main()
 	//abs_drive(BACKWARD, E_DEGREES, 360, 100, true, NON_SENSOR);
 	//abs_turn(CLOCKWISE, POINT, TURN, 180, 60);
 	//abs_turn(COUNTERCLOCKWISE, POINT, TURN, 180, 60);
+
+	abs_drive(FORWARD, E_ANGLE, 335, 100, true, GYRO);
+	servo[goal_claw] = g_goal_claw_down
+	abs_turn(CLOCKWISE, POINT, TURN, 20, 60);
+	abs_drive(BACKWARD, E_ANGLE, 305, 100, true, GYRO);
+	abs_turn(CLOCKWISE, POINT, TURN, 40, 60);
+	abs_drive(BACKWARD, E_ANGLE, 15, 100, true, GYRO);
+	abs_turn(COUNTERCLOCKWISE, POINT, TURN, 60, 60);
+	abs_drive(BACKWARD, E_ANGLE, 61, 100, true, GYRO);
 
 	abs_dlog(__FILE__ ,"end auto", "End time:", nPgmTime);
 	Close(LogFileHandle, LogIoResult);
