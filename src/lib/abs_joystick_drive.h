@@ -37,11 +37,8 @@ void abs_joystick_drive()//(e_joystick_method joy_type)
 		speed2 = ((j2*j2) * 100/(128*128));
 	}
 
-	//if(joy1Btn(7))
-	//{
-	//	speed1 = speed1/6;
-	//	speed2 = speed2/6;
-	//}
+	if(joy1Btn(11)) speed1 = speed1/5;
+	if(joy1Btn(12))speed2 = speed2/5;
 	//else if(joy1Btn(5)){}
 	//else
 	//{

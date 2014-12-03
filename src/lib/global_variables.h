@@ -198,19 +198,11 @@ int g_optical_sensor = 0;
 *
 *
 */
-const int g_block_speed_down = -60;
-const int g_block_speed_up = 100;
+const int g_lift_speed_down = -60;
+const int g_lift_speed_up = 100;
 
-const int g_robot_lift_down = -40;
-const int g_robot_lift_up = 100;
-
-const int g_flag_speed_down = 90;
-const int g_flag_speed_right = 20;
-const int g_flag_speed_up = -90;
-const int g_flag_speed_left = -20;
-
-const int g_abdd_up = 10;
-const int g_abdd_down = 235;
+const int g_goal_claw_up = 226;
+const int g_goal_claw_down = 60;
 
 const int g_gyro_adjust = 5;//10;
 int g_original_gyro_val = 0;
@@ -342,81 +334,16 @@ typedef enum
 	SELECTION_VALUE_EMPTY,
 	STARTING_POINT,
 	STARTING_DELAY,
-	SCOREING_POINT,
-	END_DELAY,
+	FIRST_OBJECTIVE,
+	FIRST_OBJECTIVE_DELAY,
+	SECOND_OBJECTIVE,
+	SECOND_OBJECTIVE_DELAY,
 	END_POINT,
-	CORNOR_DELAY,
-	RAMP_DELAY
 } e_selection_values;
 
 //=========================================================
 // auto sub selections
 //=========================================================
-/**
-*  @enum e_direction Tells the robot to drive backwords or forwards onto the ramp
-*  @var e_direction::SUB_SELECTION_GRABBERS_OUT
-*     turn clockwise drive with the grabbers out
-*  @var e_direction::SUB_SELECTION_GRABBERS_IN
-*     turn counterclockwise drive with the grabbers in
-*	@var g_auto_grabber_selections
-*			Tells the robot is the grabbers are in or out
-*/
-
-typedef enum
-{
-	SUB_SELECTION_GRABBERS_OUT,
-	SUB_SELECTION_GRABBERS_IN
-} e_auto_sub_selection;
-
-e_auto_sub_selection g_auto_grabber_selections = SUB_SELECTION_GRABBERS_IN;
-/**
-* @enum e_auto_sub_selection_ramp_sides Tells the robot the side if the ramp it should drive on
-* @var e_auto_sub_selection_ramp_sides::SUB_SELECTION_RAMP_ALLY_SIDE
-*		Drive on the ally side
-* @var e_auto_sub_selection_ramp_sides::SUB_SELECTION_RAMP_OPP_SIDE
-*		Drive on opp side
-*/
-
-typedef enum
-{
-	SUB_SELECTION_RAMP_ALLY_SIDE,
-	SUB_SELECTION_RAMP_OPP_SIDE
-} e_auto_sub_selection_ramp_sides;
-
-/**
-* @var g_auto_sub_selection_ramp_side
-*		Tells the robot the if it should go on the ally or opp side
-*/
-e_auto_sub_selection_ramp_sides g_auto_sub_selection_ramp_side = SUB_SELECTION_RAMP_ALLY_SIDE;
-
-typedef enum
-{
-	SUB_SELECTION_IR_ALL,
-	SUB_SELECTION_IR_1_2,
-	SUB_SELECTION_IR_3_4
-} e_auto_sub_selection_IR_partial_types;
-
-/**
-* @enum e_auto_sub_selection_IR_partial_types Tells the robot what IR section to do
-* @var e_auto_sub_selection_IR_partial_types::SUB_SELECTION_IR_ALL
-*		Tells the robot the search for IR in all of the points
-* @var e_auto_sub_selection_IR_partial_types::SUB_SELECTION_IR_1_2
-*		Tells the robot to search for IR in point 1 and 2
-* @var e_auto_sub_selection_IR_partial_types::SUB_SELECTION_IR_3_4
-*		Tells the robot to search for IR in point 3 and 4
-*
-* @var g_auto_sub_selection_IR_partial
-*		Tells the robot the IR section
-*/
-e_auto_sub_selection_IR_partial_types g_auto_sub_selection_IR_partial = SUB_SELECTION_IR_ALL;
-
-/**
-*  @enum e_auto_sub_selection_ramp Tells the robot to drive onto the ramp and continue or stop
-*  @var e_auto_sub_selection_ramp::SUB_SELECTION_RAMP_STOP
-*     Stop on the ramp
-*  @var e_auto_sub_selection_ramp::SUB_SELECTION_RAMP_CONTINUED
-*     Continue on the ramp
-*/
 
 /**
 *  @enum e_drive_type Tells the robot its corection type
@@ -433,27 +360,6 @@ typedef enum
 	GYRO,
 	NON_SENSOR
 } e_drive_type;
-
-/**
-*  @enum e_drive_type Tells the robot if i should stop on the ramp or not
-*  @var e_auto_sub_selection_ramp::SUB_SELECTION_RAMP_STOP
-*     Tells the robot it should stop on the ramp
-*   @var e_auto_sub_selection_ramp::SUB_SELECTION_RAMP_CONTINUED
-*    Tells the robot it should not stop on the ramp
-*	@var g_auto_grabber_selection_ramp_options
-*		Tells the robot if it should continue on the ramp to the other side or not
-*/
-typedef enum
-{
-	SUB_SELECTION_RAMP_STOP,
-	SUB_SELECTION_RAMP_CONTINUED
-} e_auto_sub_selection_ramp;
-
-/**
-* @var g_auto_selection_ramp_continue_options
-*		Tells the robot if it should stop or continue on the ramp
-*/
-e_auto_sub_selection_ramp g_auto_selection_ramp_continue_options = SUB_SELECTION_RAMP_STOP;
 
 /**
 *  @enum e_gyro_val_type the type of gyro units to read
@@ -597,7 +503,7 @@ bool g_reset_angle_record = true;
 * 		 Tells the robot all of the different options for automus
 */
 
-#define INPUT_ARRAY_SIZE 8
+#define INPUT_ARRAY_SIZE 10
 
 int g_input_array[INPUT_ARRAY_SIZE];
 
@@ -688,10 +594,11 @@ int g_debug_time_2 = 0;
 
 int g_quick_mission = 1;
 int g_max_quick_missions = 6;
-int g_auto_ending_points = 9;
+int g_auto_ending_points = 2;
 int g_travel_dist = 0;
-int g_auto_starting_points = 6;
-int g_auto_missions = 10;
+int g_auto_starting_points = 2; //ramp or floor
+int g_first_objectives = 3;
+int g_second_objectives = 3;
 int g_drive_heading = 0;
 int g_ir_heading = 5;
 bool g_program_done = false;
@@ -829,15 +736,8 @@ typedef enum
 	RELATIVE_TURN,
 	CONSTANT_TURN
 } e_turn_types;
-/**
-* @var g_em_first_turn_type
-*		Tells the robot the the first turn of the end of auto
-*/
-e_turn_types g_em_first_turn_type = CONSTANT_TURN;
 
 /**
-* @var g_em_second_turn_type
-*		Tells the robot the the second turn of the end of auto
 * @var g_selection_turn
 *		Tells the robot the selected turn
 * @var g_cornor_delay
@@ -847,28 +747,20 @@ e_turn_types g_em_first_turn_type = CONSTANT_TURN;
 * @var g_drive_type
 *		Tells the robot if it should drive useing the gyro, encode or non
 */
-e_turn_types g_em_second_turn_type = CONSTANT_TURN;
 
 int g_selection_turn = 1;
 
 int g_end_point = 1;
 int g_start_point = 1;
 int g_mission_number = 1;
-int g_delay = 0;
-int g_end_delay = 0;
-int g_ramp_delay = 0;
-int g_cornor_delay = 0;
 int g_start_delay = 0;
 int g_gyro_cal_time = 5;
 bool g_stay_on_ramp = true;
 
 int g_dist_backwards = 0;
 
-int START_POINT_MAX_VAL = 4;
-int START_POINT_MIN_VAL = 0;
-
-int g_number_min_limit [] = {0,0,0,0,0,0,0};
-int g_number_max_limit [] = {0,6,30,7,30,9};
+int g_number_min_limit [] = {0,0,0,0,0,0,0,0};//warp here
+int g_number_max_limit [] = {0,g_auto_starting_points,30,g_first_objectives,30,g_second_objectives,30,g_auto_ending_points};
 //=============================================================
 // Gyro variables
 //=============================================================

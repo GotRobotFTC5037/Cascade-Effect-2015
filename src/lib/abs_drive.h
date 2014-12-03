@@ -139,7 +139,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 		int total_dist = 150;
 		int half_dist = 100;
 
-		if((g_start_point==1&&g_auto_sub_selection_IR_partial == SUB_SELECTION_IR_1_2)||(g_start_point==2&&g_auto_sub_selection_IR_partial == SUB_SELECTION_IR_3_4)) total_dist = 75;
+		total_dist = 75;
 
 		abs_reset_angle_sensor_val(SOFT_RESET);
 		abs_dlog(__FILE__ ,"reset angle", speed_str, speed, dist_str, dist, rel_asu_str, abs_get_angle_sensor_val(RELATIVE_ASU), rel_bpu_str, abs_get_angle_sensor_val(RELATIVE_BPU));

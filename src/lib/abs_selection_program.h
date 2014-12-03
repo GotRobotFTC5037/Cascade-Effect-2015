@@ -79,30 +79,6 @@ void abs_selection_program()
 		abs_selection_options();
 		abs_selection_program();
 	}
-	//---------------------------------------
-	// Start of gyro cal selection
-	//---------------------------------------
-
-	while(nNxtButtonPressed != kEnterButton)
-	{
-		abs_cscreen("GyroCal ","time    ","%1d       ",g_gyro_cal_time);
-		if(nNxtButtonPressed == kRightButton)
-		{
-			PlaySoundFile("! Click.rso");
-			while(nNxtButtonPressed == kRightButton){}
-			if(g_gyro_cal_time < 30) g_gyro_cal_time++;
-		}
-		if(nNxtButtonPressed == kLeftButton)
-		{
-			PlaySoundFile("! Click.rso");
-			while(nNxtButtonPressed == kLeftButton){}
-			if(g_gyro_cal_time > 0) g_gyro_cal_time--;
-		}
-	}
-	PlaySoundFile("! Click.rso");
-	while(nNxtButtonPressed == kEnterButton){}
-	eraseDisplay();
-	for(int i=1;i<6;i++)abs_dlog(__FILE__ ,"","",g_input_array[i]);
 }
 
 #endif /* !ABS_SELECTION_PROGRAM_H */

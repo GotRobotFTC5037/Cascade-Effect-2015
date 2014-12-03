@@ -15,7 +15,6 @@
 #define ABS_SELECTION_NUMBER_H
 
 #include "lib/abs_cscreen.h"
-#include "lib/abs_ramp_interpret.h"
 
 
 void abs_selection_number()
@@ -24,14 +23,14 @@ void abs_selection_number()
 	// number selection
 	//---------------------------------------
 
-	abs_cscreen("Number  ","00000   ","        ");
+	abs_cscreen("Number  ","0000000 ","        ");
 
-	while(g_graph_selection_tab<5)
+	while(g_graph_selection_tab<7)
 	{
 		g_graph_selection_tab++;
 		while(nNxtButtonPressed != kEnterButton)
 		{
-			nxtDisplayBigTextLine(3, "%1d%1d%1d%1d%1d%1d%1d%1d",g_input_array[1],g_input_array[2],g_input_array[3],g_input_array[4],g_input_array[5]);
+			nxtDisplayBigTextLine(3, "%1d%1d%1d%1d%1d%1d%1d%1d%1d%1d ",g_input_array[1],g_input_array[2],g_input_array[3],g_input_array[4],g_input_array[5],g_input_array[6],g_input_array[7]);
 			if(nNxtButtonPressed == kRightButton && g_input_array[g_graph_selection_tab] < g_number_max_limit[g_graph_selection_tab])
 			{
 				PlaySoundFile("! Click.rso");
@@ -51,12 +50,13 @@ void abs_selection_number()
 				case 3: nxtDisplayBigTextLine(5, "  ^     "); break;
 				case 4: nxtDisplayBigTextLine(5, "   ^    "); break;
 				case 5: nxtDisplayBigTextLine(5, "    ^   "); break;
+				case 6: nxtDisplayBigTextLine(5, "     ^  "); break;
+				case 7: nxtDisplayBigTextLine(5, "      ^ "); break;
 			}
 		}
 		while(nNxtButtonPressed == kEnterButton){}
 		PlaySoundFile("! Click.rso");
 	}
-	abs_ramp_interpret();
 }
 
 #endif /* !ABS_SELECTION_NUMBER_H */

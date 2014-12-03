@@ -29,11 +29,11 @@ void abs_initialize()
 	disableDiagnosticsDisplay();
 	abs_control_light_sensor(INACTIVE);
 	memset(g_input_array,0,INPUT_ARRAY_SIZE);
-	//abs_selection_program();
+	abs_selection_program();
 	PlaySoundFile("! Click.rso");
 	abs_cscreen("Gyros   ","Calbrtng","  lol   ");
 	HTGYROstartCal(HTGYRO);
-	g_drift = 0;//HTGYROreadRot(HTGYRO);//abs_gyro_cal(2);
+	g_drift = 0;//abs_gyro_cal(2);
 
 	if(!HTACreadAllAxes(HTAC, g_x_axis, g_y_axis, g_z_axis))
 	{
@@ -76,10 +76,7 @@ void abs_initialize()
 	LogData=true;
 
 	abs_cscreen("Program ","Ready   ","        "); //set the screen to show the program feedback before the auto starts
-	if(g_auto_selection_ramp_continue_options == SUB_SELECTION_RAMP_CONTINUED)
-		nxtDisplayBigTextLine(5, "%1d%1d%1d%1d%1d%1d%1d%1d Y ",g_input_array[1],g_input_array[2],g_input_array[3],g_input_array[4],g_input_array[5]);
-	else
-		nxtDisplayBigTextLine(5, "%1d%1d%1d%1d%1d%1d%1d%1d N ",g_input_array[1],g_input_array[2],g_input_array[3],g_input_array[4],g_input_array[5]);
+	nxtDisplayBigTextLine(5, "%1d%1d%1d%1d%1d%1d%1d%1d%1d%1d ",g_input_array[1],g_input_array[2],g_input_array[3],g_input_array[4],g_input_array[5],g_input_array[6],g_input_array[7]);
 
 	wait1Msec(200);
 	StartTask(abs_sensors);
@@ -101,8 +98,6 @@ void abs_initialize()
 	eraseDisplay();
 	g_start_time = nPgmTime;
 
-	//while(/*time1[T1]*/nPgmTime-g_start_time<g_start_delay*1000)	//wait for start delay, number option tab 2
-	//{abs_cscreen("Delay   ","","&1d       ",(g_start_delay*1000)-g_start_time);}
 	wait1Msec(g_start_delay * DELAY_MULTIPLICATION_FACTOR);
 
 	eraseDisplay();
