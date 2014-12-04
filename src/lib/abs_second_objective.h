@@ -23,6 +23,7 @@ void abs_second_objective(e_second_objective_pos second_start_pos)
 	if(g_input_array[SECOND_OBJECTIVE]==0)
 	{
 		wait1Msec(SECOND_OBJECTIVE_DELAY*DELAY_MULTIPLICATION_FACTOR);
+		abs_auto_end(SECOND_ROLLGOAL1);
 		return;
 	}
 
