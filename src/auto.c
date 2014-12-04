@@ -49,7 +49,6 @@
 #include "lib/compile_flags.h"
 #include "lib/global_variables.h"
 #include "lib/abs_initialize.h"
-#include "lib/abs_IR_center_read.h"
 #include "lib/abs_dlog.h"
 #include "lib/abs_stay_on_ramp.h"
 #include "lib/abs_drive.h"
@@ -80,48 +79,6 @@ task main()
 		PlayTone(200,20);
 		break;
 	}
-
-
-	//abs_second_objective(SECOND_ROLLGOAL1);
-
-	//switch()
-	//{
-
-	//}
-
-	//StartTask(abs_IR_center_read);
-
-	//abs_drive(FORWARD, E_ANGLE, 300, 80, true, GYRO);
-
-	//abs_drive(FORWARD, E_ANGLE, 243, 80, true, GYRO);
-	//abs_drive(BACKWARD, E_ANGLE, 12, 80, true, GYRO);
-
-	//abs_turn(COUNTERCLOCKWISE, POINT, TURN, 20, 60);
-
-	//while(true)
-	//{}
-	//	if(nNxtButtonPressed == kLeftButton)
-	//	{
-	//		motor[right_motor] = 60;
-	//		motor[left_motor] = 60;
-	//	}
-
-	//abs_turn(CLOCKWISE, POINT, TURN, 360, 60);
-	//abs_turn(COUNTERCLOCKWISE, POINT, TURN_TO, 0, 50);
-
-
-	//abs_drive(BACKWARD, E_TIME, 2000, 100, true, NON_SENSOR);
-	//abs_drive(FORWARD, E_DEGREES, 360, 100, true, NON_SENSOR);
-	//abs_drive(BACKWARD, E_DEGREES, 360, 100, true, NON_SENSOR);
-	//abs_turn(CLOCKWISE, POINT, TURN, 180, 60);
-	//abs_turn(COUNTERCLOCKWISE, POINT, TURN, 180, 60);
-
-	//abs_turn(CLOCKWISE, POINT, TURN, 20, 60);
-	//abs_drive(BACKWARD, E_ANGLE, 305, 100, true, GYRO);
-	//abs_turn(CLOCKWISE, POINT, TURN, 40, 60);
-	//abs_drive(BACKWARD, E_ANGLE, 15, 100, true, GYRO);
-	//abs_turn(COUNTERCLOCKWISE, POINT, TURN, 60, 60);
-	//abs_drive(BACKWARD, E_ANGLE, 61, 100, true, GYRO);
 
 	abs_dlog(__FILE__ ,"end auto", "End time:", nPgmTime);
 	Close(LogFileHandle, LogIoResult);

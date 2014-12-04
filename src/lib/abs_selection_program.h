@@ -79,6 +79,9 @@ void abs_selection_program()
 		abs_selection_options();
 		abs_selection_program();
 	}
+
+	if(g_input_array[FIRST_OBJECTIVE] == 2 || g_input_array[SECOND_OBJECTIVE] == 2) g_start_heading_forward = true;
+	else g_start_heading_forward = false;
 }
 
 #endif /* !ABS_SELECTION_PROGRAM_H */

@@ -604,6 +604,7 @@ int g_travel_dist = 0;
 int g_auto_starting_points = 2; //ramp or floor
 int g_first_objectives = 3;
 int g_second_objectives = 3;
+bool g_start_heading_forward = false;
 int g_drive_heading = 0;
 int g_ir_heading = 5;
 bool g_program_done = false;
