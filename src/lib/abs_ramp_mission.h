@@ -8,7 +8,7 @@
 *
 *  @return Returns nothing
 *
-*  @copyright Copyright 2013, Got Robot? FTC Team 5037
+*  @copyright Copyright 2014, got robot? FTC Team 5037
 *
 */
 
@@ -31,7 +31,8 @@ void abs_ramp_mission()
 		break; //STOP
 	case 1:
 
-
+		abs_drive(FORWARD, E_ANGLE, 335, 100, true, GYRO);
+		servo[goal_claw] = g_goal_claw_down;
 		wait1Msec(STARTING_DELAY*DELAY_MULTIPLICATION_FACTOR);
 		abs_second_objective(SECOND_ROLLGOAL1);
 		break; //ROLLING GOAL 1
