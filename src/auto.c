@@ -54,7 +54,6 @@
 #include "lib/abs_drive.h"
 #include "lib/abs_ramp_mission.h"
 #include "lib/abs_floor_mission.h"
-#include "abs_second_objective.h"
 #define DRIVE_TYPE = TANK
 
 //========================================
@@ -74,10 +73,6 @@ task main()
 	case 1: abs_ramp_mission(); break;
 	case 2: abs_floor_mission(); break;
 	}
-
-	wait1Msec(STARTING_DELAY*1000);
-
-	abs_second_objective(SECOND_ROLLGOAL1);
 
 	//switch()
 	//{

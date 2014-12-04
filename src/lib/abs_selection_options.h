@@ -27,16 +27,12 @@ void abs_selection_options()
 		{
 			PlaySoundFile("! Click.rso");
 			while(nNxtButtonPressed == kRightButton){}
-			if(g_stay_on_ramp == true) g_stay_on_ramp = false;
 		}
 		if(nNxtButtonPressed == kLeftButton)
 		{
 			PlaySoundFile("! Click.rso");
 			while(nNxtButtonPressed == kLeftButton){}
-			if(g_stay_on_ramp == false) g_stay_on_ramp = true;
 		}
-		if(g_stay_on_ramp == true) abs_cscreen("Stay on ","ramp    ","true    ");
-		else abs_cscreen("Stay on ","ramp    ","false   ");
 	}
 	PlaySoundFile("! Click.rso");
 	while(nNxtButtonPressed == kEnterButton){}

@@ -414,35 +414,35 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 #if EOPD_ACTIVE == 0
 	if(dist_method==E_LIGHT) LSsetInactive(LEGOLS);
 #endif
-	if(dist_record==true)
-	{
-		if(g_start_point==1)
-		{
-			if(g_end_point == 3) g_dist_backwards = abs_get_angle_sensor_val(RELATIVE_BPU) - 6;//was 9
-			else if(g_end_point == 2) g_dist_backwards = 194 - abs_get_angle_sensor_val(RELATIVE_BPU);
-		}
-		else if(g_start_point==2)
-		{
-			if(g_mission_number==1)
-			{
-				//subtract 5 to account for drift of stop in ir
-				if(g_end_point == 2) g_dist_backwards = abs_get_angle_sensor_val(RAW_BPU) - 5 - 5;
-				else if(g_end_point == 3) g_dist_backwards = 196 - abs_get_angle_sensor_val(RAW_BPU);
-			}
-			else
-			{
-				if(g_end_point == 2) g_dist_backwards = abs_get_angle_sensor_val(RAW_BPU) - 5;
-				else if(g_end_point == 3) g_dist_backwards = 196 - abs_get_angle_sensor_val(RAW_BPU);
-			}
-			abs_dlog(__FILE__,"Raw values", "raw ASU", abs_get_angle_sensor_val(RAW_ASU), "raw BPU", abs_get_angle_sensor_val(RAW_BPU));
-		}
-		else if(g_start_point==3)
-		{
-			if(g_end_point==2)	g_dist_backwards = 170 - abs_get_angle_sensor_val(RELATIVE_BPU);
-			else if(g_end_point==3) g_dist_backwards = 75 + abs_get_angle_sensor_val(RELATIVE_BPU);
-		}
-		//dist_record=false;
-	}
+	//if(dist_record==true)
+	//{
+	//	if(g_start_point==1)
+	//	{
+	//		if(g_end_point == 3) g_dist_backwards = abs_get_angle_sensor_val(RELATIVE_BPU) - 6;//was 9
+	//		else if(g_end_point == 2) g_dist_backwards = 194 - abs_get_angle_sensor_val(RELATIVE_BPU);
+	//	}
+	//	else if(g_start_point==2)
+	//	{
+	//		if(g_mission_number==1)
+	//		{
+	//			//subtract 5 to account for drift of stop in ir
+	//			if(g_end_point == 2) g_dist_backwards = abs_get_angle_sensor_val(RAW_BPU) - 5 - 5;
+	//			else if(g_end_point == 3) g_dist_backwards = 196 - abs_get_angle_sensor_val(RAW_BPU);
+	//		}
+	//		else
+	//		{
+	//			if(g_end_point == 2) g_dist_backwards = abs_get_angle_sensor_val(RAW_BPU) - 5;
+	//			else if(g_end_point == 3) g_dist_backwards = 196 - abs_get_angle_sensor_val(RAW_BPU);
+	//		}
+	//		abs_dlog(__FILE__,"Raw values", "raw ASU", abs_get_angle_sensor_val(RAW_ASU), "raw BPU", abs_get_angle_sensor_val(RAW_BPU));
+	//	}
+	//	else if(g_start_point==3)
+	//	{
+	//		if(g_end_point==2)	g_dist_backwards = 170 - abs_get_angle_sensor_val(RELATIVE_BPU);
+	//		else if(g_end_point==3) g_dist_backwards = 75 + abs_get_angle_sensor_val(RELATIVE_BPU);
+	//	}
+	//	//dist_record=false;
+	//}
 
 	int rel_asu = abs_get_angle_sensor_val(RELATIVE_ASU);
 	int rel_bpu = abs_get_angle_sensor_val(RELATIVE_BPU);

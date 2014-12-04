@@ -17,6 +17,8 @@
 
 #define EOPD_ACTIVE 1
 
+//0 = wait for start
+//1 = wait 3 seconds
 #define WAIT 0
 
 // 1 = Left
