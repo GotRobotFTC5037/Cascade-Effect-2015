@@ -30,7 +30,7 @@ task abs_gyro_read()
 		g_sacred_const_heading += (g_raw_gyro - (g_drift)) * (float)(g_curr_time-g_prev_time)/1000;
 		g_rel_heading += (g_raw_gyro - (g_drift)) * (float)(g_curr_time-g_prev_time)/1000;
 
-		g_const_heading += (g_raw_gyro - (g_drift) * (float)(g_curr_time-g_prev_time)/1000;
+		g_const_heading += (g_raw_gyro - (g_drift) * (float)(g_curr_time-g_prev_time)/1000);
 
 		g_prev_time = g_curr_time;
 

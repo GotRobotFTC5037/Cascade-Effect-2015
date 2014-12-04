@@ -55,7 +55,6 @@
 #include "lib/abs_turn.h"
 #include "lib/abs_ramp_mission.h"
 #include "lib/abs_floor_mission.h"
-#include "abs_second_objective.h"
 #define DRIVE_TYPE = TANK
 
 //========================================
