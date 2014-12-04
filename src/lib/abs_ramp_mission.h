@@ -25,19 +25,17 @@ void abs_ramp_mission()
 	{
 	case 0:
 
-
 		wait1Msec(STARTING_DELAY*DELAY_MULTIPLICATION_FACTOR);
 		abs_second_objective(SECOND_STOP);
 		break; //STOP
 	case 1:
 
-		abs_drive(FORWARD, E_ANGLE, 335, 100, true, GYRO);
+		abs_drive(BACKWARD, E_ANGLE, 215, 40, true, GYRO);
 		servo[goal_claw] = g_goal_claw_down;
 		wait1Msec(STARTING_DELAY*DELAY_MULTIPLICATION_FACTOR);
 		abs_second_objective(SECOND_ROLLGOAL1);
 		break; //ROLLING GOAL 1
 	case 2:
-
 
 		wait1Msec(STARTING_DELAY*DELAY_MULTIPLICATION_FACTOR);
 		abs_second_objective(SECOND_CENTER);
