@@ -38,7 +38,7 @@ void abs_selection_quick()
 		switch(g_quick_mission)
 		{
 		case 1:
-			abs_cscreen("Mission ","Hit And ","Run     ");
+			abs_cscreen("Mission ","Hit And ","Run    1");
 			g_input_array[STARTING_POINT] = 1;					//RAMP
 			g_input_array[STARTING_DELAY] = 0;
 			g_input_array[FIRST_OBJECTIVE] = 2;					//CENTER GOAL
@@ -48,7 +48,7 @@ void abs_selection_quick()
 			g_input_array[END_POINT] = 1;								//LOW AREA
 			break;
 		case 2:
-			abs_cscreen("Mission ","Back To ","P       ");
+			abs_cscreen("Mission ","Back To ","P      2");
 			g_input_array[STARTING_POINT] = 1;					//RAMP
 			g_input_array[STARTING_DELAY] = 0;
 			g_input_array[FIRST_OBJECTIVE] = 1;					//ROLLING GOAL 1
@@ -58,7 +58,7 @@ void abs_selection_quick()
 			g_input_array[END_POINT] = 1;								//LOW AREA
 			break;
 		case 3:
-			abs_cscreen("Mission ","Hit 45  ","Zone    ");
+			abs_cscreen("Mission ","Hit 45  ","Zone   3");
 			g_input_array[STARTING_POINT] = 1;					//RAMP
 			g_input_array[STARTING_DELAY] = 0;
 			g_input_array[FIRST_OBJECTIVE] = 2;					//CENTER GOAL
@@ -68,7 +68,7 @@ void abs_selection_quick()
 			g_input_array[END_POINT] = 1;								//LOW AREA
 			break;
 		case 4:
-			abs_cscreen("Mission ","Common  ","45      ");
+			abs_cscreen("Mission ","Common  ","45     4");
 			g_input_array[STARTING_POINT] = 1;					//RAMP
 			g_input_array[STARTING_DELAY] = 0;
 			g_input_array[FIRST_OBJECTIVE] = 1;					//ROLLING GOAL 1
@@ -78,7 +78,7 @@ void abs_selection_quick()
 			g_input_array[END_POINT] = 1;								//LOW AREA
 			break;
 		case 5:
-			abs_cscreen("Mission ","Park Hit","P       ");
+			abs_cscreen("Mission ","Park Hit","P      5");
 			g_input_array[STARTING_POINT] = 2;					//FLOOR
 			g_input_array[STARTING_DELAY] = 0;
 			g_input_array[FIRST_OBJECTIVE] = 2;					//CENTER GOAL
@@ -88,7 +88,7 @@ void abs_selection_quick()
 			g_input_array[END_POINT] = 1;								//LOW AREA
 			break;
 		case 6:	//======================================| NEEDS TO BE WORKED ON, SECONDARY MOVEMENT STYLE |======================================//
-			abs_cscreen("Mission ","Park Hit","45      ");
+			abs_cscreen("Mission ","Park Hit","45     6");
 			g_input_array[STARTING_POINT] = 1;					//FLOOR
 			g_input_array[STARTING_DELAY] = 0;
 			g_input_array[FIRST_OBJECTIVE] = 2;					//CENTER GOAL
