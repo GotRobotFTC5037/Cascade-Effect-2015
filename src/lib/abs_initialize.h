@@ -87,7 +87,7 @@ void abs_initialize()
 
 #else
 	while(nNxtButtonPressed == kEnterButton){}
-	if(nNxtButtonPressed != kEnterButton) wait1Msec(5000);
+	if(nNxtButtonPressed != kEnterButton) wait1Msec(3000);
 #endif
 
 	abs_dlog(__FILE__ ,"auto start","timestamp",nPgmTime);
@@ -95,7 +95,7 @@ void abs_initialize()
 	eraseDisplay();
 	g_start_time = nPgmTime;
 
-	wait1Msec(g_start_delay * DELAY_MULTIPLICATION_FACTOR);
+	wait1Msec(STARTING_DELAY * DELAY_MULTIPLICATION_FACTOR);
 
 	eraseDisplay();
 }

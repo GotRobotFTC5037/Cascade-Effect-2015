@@ -345,7 +345,7 @@ typedef enum
 	SECOND_ROLLGOAL1,
 	SECOND_ROLLGOAL2,
 	SECOND_STOP
-} e_second_start_pos;
+} e_second_objective_pos;
 //=========================================================
 // auto sub selections
 //=========================================================
@@ -637,14 +637,6 @@ int g_selection_value = 0;
 #define TURN_SPEED_COEFFICIENT 5
 /**
  *
- * @var g_optical_delta_value
- *	the difference in optical between black and white that we are looking for
- * @var g_calibrated_optical_threshold_val
- *	a configurable threshold for detecting the white line
- * @var g_end_ramp_lift_speed
- *	the speed to lift the block lifter before entering the ramp
- * @var g_shift_due_to_ir
- *	flag indicating that the robot jerked because of detecting IR from starting position 2
  * @var g_good_gyro
  *	flag indicating that the gyro has not given a bad reading
  * @def GYRO_VALUE_QUEUE_SIZE
@@ -696,20 +688,6 @@ bool g_gyro_ran = false;
 //=============================================================
 
 /**
-* @var g_end_point
-*		Tells the robot its end posion
-* @var g_start_point
-*		Tells the robot its starting posion
-* @var g_mission_number
-*		 Tells the robot its mission number
-* @var g_delay
-*		 Tells the robot how long it needs to delay
-* @var g_end_delay
-*		Tells the robot how long it needs to delay after it it delivers a block
-* @var g_ramp_delay
-*		Tells the robot how long it needs to delay before entering the ramp
-* @var g_start_delay
-*		Tells the robot how long it needs to delay before it does anything
 * @var g_gyro_cal_time
 *		Tells the robot how long to calibrate
 *
@@ -742,25 +720,7 @@ typedef enum
 	CONSTANT_TURN
 } e_turn_types;
 
-/**
-* @var g_selection_turn
-*		Tells the robot the selected turn
-* @var g_cornor_delay
-*		Tells the robot the time it should wait at the cornor
-* @var g_stay_on_ramp
-*		Tells the robot if it should push back an a robot if it pushes on it
-* @var g_drive_type
-*		Tells the robot if it should drive useing the gyro, encode or non
-*/
-
-int g_selection_turn = 1;
-
-int g_end_point = 1;
-int g_start_point = 1;
-int g_mission_number = 1;
-int g_start_delay = 0;
 int g_gyro_cal_time = 5;
-bool g_stay_on_ramp = true;
 
 int g_dist_backwards = 0;
 

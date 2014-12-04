@@ -16,15 +16,36 @@
 #define ABS_RAMP_MISSION_H
 
 #include "abs_drive.h"
+#include "abs_turn.h"
+#include "abs_second_objective.h"
 
 void abs_ramp_mission()
 {
 	switch(g_input_array[FIRST_OBJECTIVE])
 	{
-	case 0: break; //STOP
-	case 1: break; //ROLLING GOAL 1
-	case 2: break; //CENTER GOAL
-	case 3: break; //ROLLING GOAL 2
+	case 0:
+
+
+		wait1Msec(STARTING_DELAY*DELAY_MULTIPLICATION_FACTOR);
+		abs_second_objective(SECOND_STOP);
+		break; //STOP
+	case 1:
+
+
+		wait1Msec(STARTING_DELAY*DELAY_MULTIPLICATION_FACTOR);
+		abs_second_objective(SECOND_ROLLGOAL1);
+		break; //ROLLING GOAL 1
+	case 2:
+
+
+		wait1Msec(STARTING_DELAY*DELAY_MULTIPLICATION_FACTOR);
+		abs_second_objective(SECOND_CENTER);
+		break; //CENTER GOAL
+	case 3:
+
+		wait1Msec(STARTING_DELAY*DELAY_MULTIPLICATION_FACTOR);
+		abs_second_objective(SECOND_ROLLGOAL2);
+		break; //ROLLING GOAL 2
 	}
 }
 
