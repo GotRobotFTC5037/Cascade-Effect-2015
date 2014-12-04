@@ -52,6 +52,7 @@
 #include "lib/abs_dlog.h"
 #include "lib/abs_stay_on_ramp.h"
 #include "lib/abs_drive.h"
+#include "lib/abs_turn.h"
 #include "lib/abs_ramp_mission.h"
 #include "lib/abs_floor_mission.h"
 #include "abs_second_objective.h"
@@ -77,7 +78,7 @@ task main()
 
 	wait1Msec(STARTING_DELAY*1000);
 
-	abs_second_objective(SECOND_ROLLGOAL1);
+	//abs_second_objective(SECOND_ROLLGOAL1);
 
 	//switch()
 	//{
@@ -111,8 +112,6 @@ task main()
 	//abs_turn(CLOCKWISE, POINT, TURN, 180, 60);
 	//abs_turn(COUNTERCLOCKWISE, POINT, TURN, 180, 60);
 
-	abs_drive(FORWARD, E_ANGLE, 335, 100, true, GYRO);
-	servo[goal_claw] = g_goal_claw_down
 	abs_turn(CLOCKWISE, POINT, TURN, 20, 60);
 	abs_drive(BACKWARD, E_ANGLE, 305, 100, true, GYRO);
 	abs_turn(CLOCKWISE, POINT, TURN, 40, 60);
