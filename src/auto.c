@@ -1,4 +1,5 @@
 #pragma config(Hubs,  S1, HTMotor,  HTMotor,  HTMotor,  HTServo)
+#pragma config(Sensor, S1,     ,               sensorI2CMuxController)
 #pragma config(Sensor, S2,     SENSOR_MUX,     sensorI2CCustom)
 #pragma config(Sensor, S3,     GYRO_MUX,       sensorI2CCustom)
 #pragma config(Sensor, S4,     angle_sensor,   sensorI2CCustom)
@@ -69,13 +70,17 @@ task main()
 
 	abs_initialize();
 
+	wait1Msec(STARTING_DELAY*1000);
+
 	switch(g_input_array[STARTING_POINT])
 	{
-	case 1: abs_ramp_mission(); break;
+	case 1: abs_ramp_mission();	break;
 	case 2: abs_floor_mission(); break;
+	default:
+		PlayTone(200,20);
+		break;
 	}
 
-	wait1Msec(STARTING_DELAY*1000);
 
 	//abs_second_objective(SECOND_ROLLGOAL1);
 
@@ -111,12 +116,12 @@ task main()
 	//abs_turn(CLOCKWISE, POINT, TURN, 180, 60);
 	//abs_turn(COUNTERCLOCKWISE, POINT, TURN, 180, 60);
 
-	abs_turn(CLOCKWISE, POINT, TURN, 20, 60);
-	abs_drive(BACKWARD, E_ANGLE, 305, 100, true, GYRO);
-	abs_turn(CLOCKWISE, POINT, TURN, 40, 60);
-	abs_drive(BACKWARD, E_ANGLE, 15, 100, true, GYRO);
-	abs_turn(COUNTERCLOCKWISE, POINT, TURN, 60, 60);
-	abs_drive(BACKWARD, E_ANGLE, 61, 100, true, GYRO);
+	//abs_turn(CLOCKWISE, POINT, TURN, 20, 60);
+	//abs_drive(BACKWARD, E_ANGLE, 305, 100, true, GYRO);
+	//abs_turn(CLOCKWISE, POINT, TURN, 40, 60);
+	//abs_drive(BACKWARD, E_ANGLE, 15, 100, true, GYRO);
+	//abs_turn(COUNTERCLOCKWISE, POINT, TURN, 60, 60);
+	//abs_drive(BACKWARD, E_ANGLE, 61, 100, true, GYRO);
 
 	abs_dlog(__FILE__ ,"end auto", "End time:", nPgmTime);
 	Close(LogFileHandle, LogIoResult);

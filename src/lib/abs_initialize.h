@@ -79,6 +79,7 @@ void abs_initialize()
 	StartTask(abs_sensors);
 
 	abs_reset_angle_sensor_val(HARD_RESET);
+	servo[goal_claw] = g_goal_claw_up;
 
 	PlayTone(700, 10);
 
