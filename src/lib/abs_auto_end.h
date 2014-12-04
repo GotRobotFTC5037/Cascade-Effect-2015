@@ -34,7 +34,16 @@ void abs_auto_end(e_second_objective_pos second_start_pos)
 	case SECOND_ROLLGOAL1:
 		switch(g_input_array[END_POINT])
 		{
-		case 1: break;								//LOW AREA
+		case 1:
+
+			abs_turn(CLOCKWISE, POINT, TURN, 20, 60);
+			abs_drive(FORWARD, E_ANGLE, 305, 100, true, GYRO);
+			abs_turn(CLOCKWISE, POINT, TURN, 40, 60);
+			abs_drive(FORWARD, E_ANGLE, 15, 100, true, GYRO);
+			abs_turn(COUNTERCLOCKWISE, POINT, TURN, 60, 60);
+			abs_drive(FORWARD, E_ANGLE, 61, 100, true, GYRO);
+
+			break;								//LOW AREA
 		}
 		break;
 	case SECOND_ROLLGOAL2:

@@ -40,7 +40,7 @@ void abs_ramp_mission()
 		}
 		else
 		{
-			abs_drive(BACKWARD, E_ANGLE, 215, 40, true, GYRO);
+			abs_drive(BACKWARD, E_ANGLE, 500, 40, true, GYRO);
 			servo[goal_claw] = g_goal_claw_down;
 		}
 		wait1Msec(STARTING_DELAY*DELAY_MULTIPLICATION_FACTOR);
