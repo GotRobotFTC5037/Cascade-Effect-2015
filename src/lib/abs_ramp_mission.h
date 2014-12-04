@@ -34,16 +34,17 @@ void abs_ramp_mission()
 		if(g_start_heading_forward==true)
 		{
 			StartTask(abs_IR_center_read);
-			abs_drive(FORWARD, E_ANGLE, 480, 40, true, GYRO);
+			abs_drive(FORWARD, E_ANGLE, 490, 30, true, GYRO);
 			abs_turn(CLOCKWISE, POINT, TURN, 180, 60);
 			servo[goal_claw] = g_goal_claw_down;
 		}
 		else
 		{
-			abs_drive(BACKWARD, E_ANGLE, 500, 40, true, GYRO);
+			abs_drive(BACKWARD, E_ANGLE, 510, 30, true, GYRO);
 			servo[goal_claw] = g_goal_claw_down;
+			wait1Msec(500);
 		}
-		wait1Msec(STARTING_DELAY*DELAY_MULTIPLICATION_FACTOR);
+		//wait1Msec(STARTING_DELAY*DELAY_MULTIPLICATION_FACTOR);
 		abs_second_objective(SECOND_ROLLGOAL1);
 		break; //ROLLING GOAL 1
 	case 2:

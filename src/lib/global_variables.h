@@ -68,7 +68,7 @@ bool g_gyro_true = false;
 *  @def GRABBER_RIGHT_CLOSE
 *     tells the robot where the left block grabber needs to be to be closed
 */
-#define INT_ANGLE_SENSOR_CIRCUMFERENCE_TU 13
+#define INT_ANGLE_SENSOR_CIRCUMFERENCE_TU 4//13
 #define INT_ANGLE_SENSOR_CIRCUMFERENCE_BPU 18
 #define FLOAT_ANGLE_SENSOR_CIRCUMFERENCE_BPU 17.6
 #define FLOAT_ANGLE_SENSOR_CIRCUMFERENCE_TU 13.3
