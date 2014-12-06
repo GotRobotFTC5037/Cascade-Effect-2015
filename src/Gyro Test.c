@@ -46,83 +46,41 @@
 // Custom include
 //-----------------------
 
-#include "lib/global_variables.h"
 #include "lib/compile_flags.h"
+#include "lib/global_variables.h"
 #include "lib/abs_initialize.h"
-#include "lib/abs_IR_center_read.h"
-#include "lib/abs_dlog.h"
-#include "lib/abs_stay_on_ramp.h"
-#include "lib/abs_drive.h"
-#include "lib/abs_turn.h"
-#include "lib/abs_ramp_mission.h"
-#include "lib/abs_floor_mission.h"
-#define DRIVE_TYPE TANK
+#include "abs_move_utils.h"
+#include "abs_gyro_drive.h"
+#define DRIVE_TYPE = TANK
 
 //========================================
 // Main program
 //========================================
 task main()
 {
-	Delete(LogFileName, LogIoResult);
-	OpenWrite(LogFileHandle, LogIoResult, LogFileName, LogFileSize);
-
-	abs_dlog(__FILE__ ,"Program start"," Start time:", nPgmTime);
-
-	abs_initialize();
-
-	wait1Msec(STARTING_DELAY*1000);
-
-	switch(g_input_array[STARTING_POINT])
+	disableDiagnosticsDisplay();
+	abs_cscreen("Gyros   ","Calbrtng","        ");
+	HTGYROstartCal(HTGYRO);
+	g_drift = 0;
+	if(g_gyro_noise>10)
 	{
-	case 1: abs_ramp_mission();	break;
-	case 2: abs_floor_mission(); break;
-	default:
-		PlayTone(200,20);
-		break;
+		g_error = ERR_GYRO_CAL;
+		g_error = ERROR_LETHAL;
 	}
+	if(HTSMUXreadPowerStatus(GYRO_MUX))
+	{
+		g_error = ERR_GYRO_MUX;
+		g_error = ERROR_LETHAL;
+	}
+	abs_cscreen("Program ","Ready   ","        ");
+	wait1Msec(200);
+	StartTask(abs_sensors);
+	PlayTone(700, 10);
 
-
-	//abs_second_objective(SECOND_ROLLGOAL1);
-
-	//switch()
-	//{
-
-	//}
-
-	//StartTask(abs_IR_center_read);
-
-	//abs_drive(FORWARD, E_ANGLE, 300, 80, true, GYRO);
-
-	//abs_drive(FORWARD, E_ANGLE, 243, 80, true, GYRO);
-	//abs_drive(BACKWARD, E_ANGLE, 12, 80, true, GYRO);
-
-	//abs_turn(COUNTERCLOCKWISE, POINT, TURN, 20, 60);
-
-	//while(true)
-	//{}
-	//	if(nNxtButtonPressed == kLeftButton)
-	//	{
-	//		motor[right_motor] = 60;
-	//		motor[left_motor] = 60;
-	//	}
-
-	//abs_turn(CLOCKWISE, POINT, TURN, 360, 60);
-	//abs_turn(COUNTERCLOCKWISE, POINT, TURN_TO, 0, 50);
-
-
-	//abs_drive(BACKWARD, E_TIME, 2000, 100, true, NON_SENSOR);
-	//abs_drive(FORWARD, E_DEGREES, 360, 100, true, NON_SENSOR);
-	//abs_drive(BACKWARD, E_DEGREES, 360, 100, true, NON_SENSOR);
-	//abs_turn(CLOCKWISE, POINT, TURN, 180, 60);
-	//abs_turn(COUNTERCLOCKWISE, POINT, TURN, 180, 60);
-
-	//abs_turn(CLOCKWISE, POINT, TURN, 20, 60);
-	//abs_drive(BACKWARD, E_ANGLE, 305, 100, true, GYRO);
-	//abs_turn(CLOCKWISE, POINT, TURN, 40, 60);
-	//abs_drive(BACKWARD, E_ANGLE, 15, 100, true, GYRO);
-	//abs_turn(COUNTERCLOCKWISE, POINT, TURN, 60, 60);
-	//abs_drive(BACKWARD, E_ANGLE, 61, 100, true, GYRO);
-
-	abs_dlog(__FILE__ ,"end auto", "End time:", nPgmTime);
-	Close(LogFileHandle, LogIoResult);
+	int error = 0 - g_rel_heading;
+	int speed = 100;
+	while(true)
+	{
+	abs_gyro_drive(100, FORWARD);
+	}
 }

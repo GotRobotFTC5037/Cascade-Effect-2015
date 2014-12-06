@@ -37,11 +37,11 @@ void abs_auto_end(e_second_objective_pos second_start_pos)
 		case 1:
 
 			abs_turn(CLOCKWISE, POINT, TURN, 20, 60);
-			abs_drive(FORWARD, E_ANGLE, 305, 100, true, GYRO);
+			abs_drive(FORWARD, E_ANGLE, 305, 100, true, CORRECTION_DRIVE_TYPE);
 			abs_turn(CLOCKWISE, POINT, TURN, 40, 60);
-			abs_drive(FORWARD, E_ANGLE, 15, 100, true, GYRO);
+			abs_drive(FORWARD, E_ANGLE, 15, 100, true, CORRECTION_DRIVE_TYPE);
 			abs_turn(COUNTERCLOCKWISE, POINT, TURN, 60, 60);
-			abs_drive(FORWARD, E_ANGLE, 61, 100, true, GYRO);
+			abs_drive(FORWARD, E_ANGLE, 61, 100, true, CORRECTION_DRIVE_TYPE);
 
 			break;								//LOW AREA
 		}
