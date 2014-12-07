@@ -21,16 +21,16 @@ void abs_floor_mission()
 {
 	switch(g_input_array[FIRST_OBJECTIVE])
 	{
-	case 0: break; //STOP
-	case 1:
+	case STOP: break; //STOP
+	case ROLLGOAL1:
 	motor(left_motor)=100;
 	motor(right_motor)=100;
 	wait10Msec(9999);
 		//abs_drive(FORWARD, E_ANGLE, 335, 100, true, NON_SENSOR);
 		servo[goal_claw] = g_goal_claw_down;
 		break; //ROLLING GOAL 1
-	case 2: break; //CENTER GOAL
-	case 3: break; //ROLLING GOAL 2
+	case CENTER_GOAL: break; //CENTER GOAL
+	case ROLLGOAL2: break; //ROLLING GOAL 2
 	}
 }
 

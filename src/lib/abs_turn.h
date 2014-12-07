@@ -28,10 +28,10 @@
 //=======================================
 void abs_turn(e_direction dir, e_turn_method turn_method, e_turn_stopping_method e_stop, int degree, int speed)
 {
-        if(dir == COUNTERCLOCKWISE)
-                abs_dlog(__FILE__ ,"enter CC","speed", speed, "degree", degree, "g_rel_heading", g_rel_heading, "g_const_heading", g_const_heading);
-        else
-                abs_dlog(__FILE__ ,"enter C", "speed", speed, "degree", degree, "g_rel_heading", g_rel_heading, "g_const_heading", g_const_heading);
+	if(dir == COUNTERCLOCKWISE)
+		abs_dlog(__FILE__ ,"enter CC","speed", speed, "degree", degree, "g_rel_heading", g_rel_heading, "g_const_heading", g_const_heading);
+	else
+		abs_dlog(__FILE__ ,"enter C", "speed", speed, "degree", degree, "g_rel_heading", g_rel_heading, "g_const_heading", g_const_heading);
 
 	int i = 0;
 	g_rel_heading = 0;
@@ -57,6 +57,8 @@ void abs_turn(e_direction dir, e_turn_method turn_method, e_turn_stopping_method
 		//-------------------------
 		// swing turn
 		//-------------------------
+
+		g_rel_heading = 0;
 		while(abs(g_rel_heading) < abs(degree))
 		{
 			int turn_speed = adjusted_turn_speed(speed, abs(degree), abs(g_rel_heading));

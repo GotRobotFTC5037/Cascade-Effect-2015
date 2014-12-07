@@ -17,36 +17,43 @@
 
 #include "abs_drive.h"
 
-void abs_auto_end(e_second_objective_pos second_start_pos)
+void abs_auto_end(e_scoring_options second_start_pos)
 {
-	if(g_input_array[END_POINT]==0) return;
+	if(g_input_array[END_POINT]==STOP) return;
 
 	switch(second_start_pos)
 	{
-	case SECOND_CENTER:
-		switch(g_input_array[END_POINT])
-		{
-		case 1: break;								//LOW AREA
-		}
-		break;
-	case SECOND_STOP:
-		break;
-	case SECOND_ROLLGOAL1:
+	case CENTER_GOAL:
 		switch(g_input_array[END_POINT])
 		{
 		case 1:
 
-			abs_turn(CLOCKWISE, POINT, TURN, 35, 60);
-			abs_drive(FORWARD, E_ANGLE, 400, 100, true, GYRO);
+
+
+
+		break;								//LOW AREA
+		}
+		break;
+	case STOP:
+		break;
+	case ROLLGOAL1:
+		switch(g_input_array[END_POINT])
+		{
+		case PARKING_ZONE:
+
+			abs_turn(CLOCKWISE, POINT, TURN, 25, 50);
+			abs_drive(FORWARD, E_ANGLE, 600, 100, true, NON_SENSOR);//GYRO);
+
 			abs_turn(CLOCKWISE, POINT, TURN, 40, 60);
-			abs_drive(FORWARD, E_ANGLE, 15, 100, true, GYRO);
+			abs_drive(FORWARD, E_ANGLE, 15, 50, true, NON_SENSOR);//GYRO);
+
 			//abs_turn(COUNTERCLOCKWISE, POINT, TURN, 60, 60);
 			//abs_drive(FORWARD, E_ANGLE, 61, 100, true, GYRO);
 
 			break;								//LOW AREA
 		}
 		break;
-	case SECOND_ROLLGOAL2:
+	case ROLLGOAL2:
 		switch(g_input_array[END_POINT])
 		{
 		case 1: break;								//LOW AREA

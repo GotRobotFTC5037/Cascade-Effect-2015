@@ -280,13 +280,13 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 			{
 				if(dir == FORWARD)
 				{
-					motor[left_motor] = adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_TU));
-					motor[right_motor] = adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_TU));
+					motor[left_motor] = speed;//adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_TU));
+					motor[right_motor] = speed;//adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_TU));
 				}
 				else
 				{
-					motor[left_motor] = -adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_TU));
-					motor[right_motor] = -adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_TU));
+					motor[left_motor] = -speed;//adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_TU));
+					motor[right_motor] = -speed;//adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_TU));
 				}
 			}
 		}
@@ -370,9 +370,9 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 
 	//if(dist_method == E_OPTICAL) servo[optical_servo] = OPTICAL_SERVO_UP;
 
-#if EOPD_ACTIVE == 0
-	if(dist_method==E_LIGHT) LSsetInactive(LEGOLS);
-#endif
+//#if EOPD_ACTIVE == 0
+//	if(dist_method==E_LIGHT) LSsetInactive(LEGOLS);
+//#endif
 	//if(dist_record==true)
 	//{
 	//	if(g_start_point==1)
