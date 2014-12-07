@@ -382,6 +382,8 @@ typedef enum
 	NON_SENSOR
 } e_drive_type;
 
+
+#define CORRECTION_DRIVE_TYPE NON_SENSOR
 /**
 *  @enum e_gyro_val_type the type of gyro units to read
 *  @var e_gyro_val_type::RAW
