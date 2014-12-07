@@ -26,7 +26,7 @@ task abs_sensors()
 
 	g_prev_time = nPgmTime;
 
-	StartTask(abs_gyro_read);
+	//StartTask(abs_gyro_read);
 
 	short gyro_read;
 
