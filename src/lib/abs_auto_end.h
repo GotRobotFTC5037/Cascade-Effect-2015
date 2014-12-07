@@ -41,11 +41,11 @@ void abs_auto_end(e_scoring_options second_start_pos)
 		{
 		case PARKING_ZONE:
 
-			abs_turn(CLOCKWISE, POINT, TURN, 25, 50);
-			abs_drive(FORWARD, E_ANGLE, 600, 100, true, NON_SENSOR);//GYRO);
+			abs_turn(CLOCKWISE, POINT, TURN, 32, 50);
+			abs_drive(FORWARD, E_ANGLE, 530, 100, true, NON_SENSOR);//GYRO);
 
-			abs_turn(CLOCKWISE, POINT, TURN, 40, 60);
-			abs_drive(FORWARD, E_ANGLE, 15, 50, true, NON_SENSOR);//GYRO);
+			abs_turn(CLOCKWISE, POINT, TURN, 45, 60);
+			abs_drive(FORWARD, E_ANGLE, 80, 100, true, NON_SENSOR);//GYRO);
 
 			//abs_turn(COUNTERCLOCKWISE, POINT, TURN, 60, 60);
 			//abs_drive(FORWARD, E_ANGLE, 61, 100, true, GYRO);

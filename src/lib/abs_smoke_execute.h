@@ -16,7 +16,8 @@
 #define ABS_SMOKE_EXECUTE_H
 
 #include "abs_get_angle_sensor_val.h"
-#include "lib/abs_smoke_test_view.h"
+#include "abs_smoke_test_view.h"
+#include "abs_reset_angle_sensor.h"
 
 void abs_smoke_execute(int test_num)
 {
@@ -66,7 +67,7 @@ void abs_smoke_execute(int test_num)
 			{
 				motor[right_motor] = -80;
 				motor[left_motor] = -80;
-				abs_smoke_test_view(test_num,-80,0);
+				abs_smoke_test_view(test_num,-80,abs_get_angle_sensor_val(RELATIVE_TU));
 				PlaySoundFile("! Click.rso");
 				while(nNxtButtonPressed==kLeftButton){}
 			}
@@ -74,11 +75,11 @@ void abs_smoke_execute(int test_num)
 			{
 				motor[right_motor] = 80;
 				motor[left_motor] = 80;
-				abs_smoke_test_view(test_num,80,0);
+				abs_smoke_test_view(test_num,80,abs_get_angle_sensor_val(RELATIVE_TU));
 				PlaySoundFile("! Click.rso");
 				while(nNxtButtonPressed==kRightButton){}
 			}
-			abs_smoke_test_view(test_num,0,0);
+			abs_smoke_test_view(test_num,0,abs_get_angle_sensor_val(RELATIVE_TU));
 			motor[right_motor] = 0;
 			motor[left_motor] = 0;
 			break;
@@ -157,6 +158,18 @@ void abs_smoke_execute(int test_num)
 			servo[impellar2] = 127;
 			break;
 		case 8:
+		if(nNxtButtonPressed==kLeftButton)
+			{
+				servo[shutter] = g_shutter_closed;
+				PlaySoundFile("! Click.rso");
+				while(nNxtButtonPressed==kLeftButton){ abs_smoke_test_view(test_num,g_shutter_closed,0); }
+			}
+			else if(nNxtButtonPressed==kRightButton)
+			{
+				servo[shutter] = g_shutter_open;
+				PlaySoundFile("! Click.rso");
+				while(nNxtButtonPressed==kRightButton){ abs_smoke_test_view(test_num,g_shutter_open,0); }
+			}
 			break;
 		case 9:
 			break;

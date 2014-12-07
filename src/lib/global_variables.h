@@ -195,8 +195,8 @@ int g_optical_sensor = 0;
 const int g_lift_speed_down = -60;
 const int g_lift_speed_up = 100;
 
-const int g_shutter_open = 0;
-const int g_shutter_closed = 255;
+const int g_shutter_open = 255;
+const int g_shutter_closed = 127;
 
 const int g_goal_claw_up = 226;
 const int g_goal_claw_down = 60;
@@ -214,7 +214,7 @@ const int g_optical_threshold = 100;//305;
 //const int g_optical_threshold = 30;
 //#endif
 
-const int g_IR_center_goal_dist = 64;
+const int g_IR_center_goal_dist = 125;
 
 const int g_optical_move_min_dist = 70;
 

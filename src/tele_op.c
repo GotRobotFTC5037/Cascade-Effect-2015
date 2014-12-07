@@ -5,7 +5,7 @@
 #pragma config(Sensor, S4,     angle_sensor,   sensorI2CCustom)
 #pragma config(Motor,  mtr_S1_C1_1,     right_motor,   tmotorTetrix, openLoop, reversed)
 #pragma config(Motor,  mtr_S1_C1_2,     left_motor,    tmotorTetrix, openLoop)
-#pragma config(Motor,  mtr_S1_C2_1,     lift1,         tmotorTetrix, openLoop)
+#pragma config(Motor,  mtr_S1_C2_1,     lift1,         tmotorTetrix, openLoop, encoder)
 #pragma config(Motor,  mtr_S1_C2_2,     lift2,         tmotorTetrix, openLoop)
 #pragma config(Motor,  mtr_S1_C3_1,     brush,         tmotorTetrix, openLoop)
 #pragma config(Motor,  mtr_S1_C3_2,     shoulder,      tmotorTetrix, openLoop, encoder)

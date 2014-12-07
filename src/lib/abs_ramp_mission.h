@@ -34,7 +34,7 @@ void abs_ramp_mission()
 		if(g_start_heading_forward==true)
 		{
 			StartTask(abs_IR_center_read);
-			abs_drive(FORWARD, E_ANGLE, 390, 35, true, NON_SENSOR);//GYRO);
+			abs_drive(FORWARD, E_ANGLE, 460, 35, true, NON_SENSOR);//GYRO);
 			abs_turn(CLOCKWISE, POINT, TURN, 180, 60);
 			abs_drive(BACKWARD, E_ANGLE, 100, 35, true, NON_SENSOR);//GYRO);
 			servo[goal_claw] = g_goal_claw_down;
@@ -45,11 +45,10 @@ void abs_ramp_mission()
 		}
 		else
 		{
-			abs_drive(BACKWARD, E_ANGLE, 480, 30, true, NON_SENSOR);//GYRO);
+			abs_drive(BACKWARD, E_ANGLE, 510, 30, true, NON_SENSOR);//GYRO);
 			servo[goal_claw] = g_goal_claw_down;
 			wait1Msec(500);
 		}
-		wait1Msec(STARTING_DELAY*DELAY_MULTIPLICATION_FACTOR);
 		abs_second_objective(ROLLGOAL1);
 		break;
 	case CENTER_GOAL:
