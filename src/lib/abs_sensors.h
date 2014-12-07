@@ -28,8 +28,11 @@ task abs_sensors()
 
 	StartTask(abs_gyro_read);
 
-	while(true)
+	short gyro_read;
+
+	for(gyro_read = 0; true;)
 	{
+	(gyro_read % 10 == 0) ? gyro_read=0 : gyro_read++;
 
 		//nxtDisplayBigTextLine(1,"Gyro:%1d",g_const_heading);
 		//switch(g_bearing_ac1)
@@ -126,6 +129,20 @@ task abs_sensors()
 		//-------------------------
 		// HiTechnic Gyro
 		//-------------------------
+		if(gyro_read==0)
+		{
+			g_curr_time=nPgmTime;
+			g_raw_gyro = abs_get_gyro_sensor_val(RAW);
+			g_sacred_const_heading += (g_raw_gyro - (g_drift)) * (float)(g_curr_time-g_prev_time)/1000;
+			g_rel_heading += (g_raw_gyro - (g_drift)) * (float)(g_curr_time-g_prev_time)/1000;
+
+			g_const_heading += (g_raw_gyro - (g_drift) * (float)(g_curr_time-g_prev_time)/1000);
+
+			g_prev_time = g_curr_time;
+
+			g_recont_heading = g_const_heading % 360;
+			if(g_recont_heading<0) g_recont_heading += 360;
+		}
 		/*
 		g_curr_time=nPgmTime;
 		g_raw_gyro = abs_get_gyro_sensor_val(RAW);

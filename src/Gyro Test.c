@@ -58,6 +58,10 @@
 //========================================
 task main()
 {
+	int gyro_readings[200];
+	int time_stamps[200];
+	LogData=false;
+
 	disableDiagnosticsDisplay();
 	abs_cscreen("Gyros   ","Calbrtng","        ");
 	HTGYROstartCal(HTGYRO);
@@ -77,10 +81,8 @@ task main()
 	StartTask(abs_sensors);
 	PlayTone(700, 10);
 
-	int error = 0 - g_rel_heading;
-	int speed = 100;
 	while(true)
 	{
-	abs_gyro_drive(100, FORWARD);
+		abs_gyro_drive(100, FORWARD);
 	}
 }

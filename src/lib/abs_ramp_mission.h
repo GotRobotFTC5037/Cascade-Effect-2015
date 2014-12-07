@@ -39,7 +39,7 @@ void abs_ramp_mission()
 	case 2:
 		StartTask(abs_IR_center_read);
 		abs_drive(FORWARD, E_ANGLE, 400, 40, true, CORRECTION_DRIVE_TYPE);
-		abs_turn(COUNTERCLOCKWISE, TURN, GYRO, 90, 40);
+		abs_turn(COUNTERCLOCKWISE, POINT, TURN, 90, 40);
 
 		wait1Msec(STARTING_DELAY*DELAY_MULTIPLICATION_FACTOR);
 		abs_second_objective(SECOND_CENTER);
