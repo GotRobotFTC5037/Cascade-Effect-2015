@@ -15,8 +15,6 @@
 
 #define DEBUG_MODE 0
 
-#define EOPD_ACTIVE 1
-
 //0 = wait for start
 //1 = wait 3 seconds
 #define WAIT 1

@@ -7,8 +7,8 @@
 #pragma config(Motor,  mtr_S1_C1_2,     left_motor,    tmotorTetrix, openLoop)
 #pragma config(Motor,  mtr_S1_C2_1,     lift1,         tmotorTetrix, openLoop)
 #pragma config(Motor,  mtr_S1_C2_2,     lift2,         tmotorTetrix, openLoop)
-#pragma config(Motor,  mtr_S1_C3_1,     motorH,        tmotorTetrix, openLoop)
-#pragma config(Motor,  mtr_S1_C3_2,     motorI,        tmotorTetrix, openLoop)
+#pragma config(Motor,  mtr_S1_C3_1,     brush,         tmotorTetrix, openLoop)
+#pragma config(Motor,  mtr_S1_C3_2,     shoulder,      tmotorTetrix, openLoop, encoder)
 #pragma config(Servo,  srvo_S1_C4_1,    servo1,               tServoNone)
 #pragma config(Servo,  srvo_S1_C4_2,    servo2,               tServoNone)
 #pragma config(Servo,  srvo_S1_C4_3,    goal_claw,            tServoStandard)
@@ -55,6 +55,7 @@
 #include "lib/abs_turn.h"
 #include "lib/abs_ramp_mission.h"
 #include "lib/abs_floor_mission.h"
+#include "lib/abs_sensors.h"
 #define DRIVE_TYPE = TANK
 
 //========================================
@@ -69,12 +70,14 @@ task main()
 
 	abs_initialize();
 
+	disableDiagnosticsDisplay();
+
 	wait1Msec(STARTING_DELAY*1000);
 
 	switch(g_input_array[STARTING_POINT])
 	{
-	case 1: abs_ramp_mission();	break;
-	case 2: abs_floor_mission(); break;
+	case START_RAMP: abs_ramp_mission();	break;
+	case START_FLOOR: abs_floor_mission(); break;
 	default:
 		PlayTone(200,20);
 		break;

@@ -28,14 +28,14 @@
 //const tMUXSensor HTIRS2 = msensor_S3_1;     // HiTechnic Infrared sensor
 const tMUXSensor HTAC = msensor_S2_1;
 const tMUXSensor HTGYRO = msensor_S3_1;	   // HiTechnic GYRO sensor
-const tMUXSensor HTIRS2 = msensor_S2_2;     // HiTechnic Infrared sensor 2
+const tMUXSensor HTIRS2 = msensor_S2_4;     // HiTechnic Infrared sensor 2
 const tMUXSensor HTIRS2_2 = msensor_S2_3;     // HiTechnic Infrared sensor 2
 
-#if EOPD_ACTIVE == 1
-const tMUXSensor HTEOPD = msensor_S2_4;
-#else
-const tMUXSensor LEGOLS = msensor_S2_4;
-#endif
+//#if EOPD_ACTIVE == 1
+//const tMUXSensor HTEOPD = msensor_S2_4;
+//#else
+//const tMUXSensor LEGOLS = msensor_S2_4;
+//#endif
 
 /**
 * @var g_gyro_true
@@ -68,7 +68,7 @@ bool g_gyro_true = false;
 *  @def GRABBER_RIGHT_CLOSE
 *     tells the robot where the left block grabber needs to be to be closed
 */
-#define INT_ANGLE_SENSOR_CIRCUMFERENCE_TU 4//13
+#define INT_ANGLE_SENSOR_CIRCUMFERENCE_TU 13
 #define INT_ANGLE_SENSOR_CIRCUMFERENCE_BPU 18
 #define FLOAT_ANGLE_SENSOR_CIRCUMFERENCE_BPU 17.6
 #define FLOAT_ANGLE_SENSOR_CIRCUMFERENCE_TU 13.3
@@ -195,6 +195,9 @@ int g_optical_sensor = 0;
 const int g_lift_speed_down = -60;
 const int g_lift_speed_up = 100;
 
+const int g_shutter_open = 0;
+const int g_shutter_closed = 255;
+
 const int g_goal_claw_up = 226;
 const int g_goal_claw_down = 60;
 
@@ -205,11 +208,11 @@ const int g_ground_arm_up = 0;
 
 const int g_ground_arm_down = 120;
 
-#if EOPD_ACTIVE == 1
+//#if EOPD_ACTIVE == 1
 const int g_optical_threshold = 100;//305;
-#else
-const int g_optical_threshold = 30;
-#endif
+//#else
+//const int g_optical_threshold = 30;
+//#endif
 
 const int g_IR_center_goal_dist = 64;
 
@@ -339,13 +342,26 @@ typedef enum
 /**
 *  @enum e_drive_type Tells the robot were the second movement will be starting from
 */
+//typedef enum
+//{
+//	SECOND_CENTER,
+//	SECOND_ROLLGOAL1,
+//	SECOND_ROLLGOAL2,
+//	SECOND_STOP
+//} e_second_objective_pos;
+
 typedef enum
 {
-	SECOND_CENTER,
-	SECOND_ROLLGOAL1,
-	SECOND_ROLLGOAL2,
-	SECOND_STOP
-} e_second_objective_pos;
+	SCORE_ERROR,
+	ROLLGOAL1,
+	CENTER_GOAL,
+	ROLLGOAL2,
+	START_RAMP,
+	START_FLOOR,
+	PARKING_ZONE,
+	STOP
+} e_scoring_options;
+
 //=========================================================
 // auto sub selections
 //=========================================================
@@ -647,11 +663,11 @@ int g_selection_value = 0;
  * @var g_gyro_ran
  *	flag indicating that we have performed at least one gyro read
  */
-#if EOPD_ACTIVE == 1
+//#if EOPD_ACTIVE == 1
 const int g_optical_delta_value = 100;
-#else
-const int g_optical_delta_value = 2;
-#endif
+//#else
+//const int g_optical_delta_value = 2;
+//#endif
 int g_calibrated_optical_threshold_val = 0;
 int g_end_ramp_lift_speed = 40;
 bool g_shift_due_to_ir = false;

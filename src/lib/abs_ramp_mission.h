@@ -24,35 +24,40 @@ void abs_ramp_mission()
 {
 	switch(g_input_array[FIRST_OBJECTIVE])
 	{
-	case 0:
+	case STOP:
 
 		wait1Msec(STARTING_DELAY*DELAY_MULTIPLICATION_FACTOR);
-		abs_second_objective(SECOND_STOP);
+		abs_second_objective(STOP);
 		break; //STOP
-	case 1:
+	case ROLLGOAL1:
 
 		if(g_start_heading_forward==true)
 		{
 			StartTask(abs_IR_center_read);
-			abs_drive(FORWARD, E_ANGLE, 490, 30, true, GYRO);
+			abs_drive(FORWARD, E_ANGLE, 390, 35, true, NON_SENSOR);//GYRO);
 			abs_turn(CLOCKWISE, POINT, TURN, 180, 60);
+			abs_drive(BACKWARD, E_ANGLE, 100, 35, true, NON_SENSOR);//GYRO);
 			servo[goal_claw] = g_goal_claw_down;
+			wait1Msec(500);
+			if(g_center_goal_pos==0) g_input_array[SECOND_OBJECTIVE] = STOP;
+
+			while(true){nxtDisplayBigTextLine(2,"%2d",g_center_goal_pos);}
 		}
 		else
 		{
-			abs_drive(BACKWARD, E_ANGLE, 510, 30, true, GYRO);
+			abs_drive(BACKWARD, E_ANGLE, 480, 30, true, NON_SENSOR);//GYRO);
 			servo[goal_claw] = g_goal_claw_down;
 			wait1Msec(500);
 		}
-		//wait1Msec(STARTING_DELAY*DELAY_MULTIPLICATION_FACTOR);
-		abs_second_objective(SECOND_ROLLGOAL1);
-		break; //ROLLING GOAL 1
-	case 2:
+		wait1Msec(STARTING_DELAY*DELAY_MULTIPLICATION_FACTOR);
+		abs_second_objective(ROLLGOAL1);
+		break;
+	case CENTER_GOAL:
 
 		wait1Msec(STARTING_DELAY*DELAY_MULTIPLICATION_FACTOR);
-		abs_second_objective(SECOND_CENTER);
-		break; //CENTER GOAL
-	case 3:
+		abs_second_objective(CENTER_GOAL);
+		break;
+	case ROLLGOAL2:
 
 		if(g_start_heading_forward==true)
 		{
@@ -61,8 +66,8 @@ void abs_ramp_mission()
 		{
 		}
 		wait1Msec(STARTING_DELAY*DELAY_MULTIPLICATION_FACTOR);
-		abs_second_objective(SECOND_ROLLGOAL2);
-		break; //ROLLING GOAL 2
+		abs_second_objective(ROLLGOAL2);
+		break;
 	}
 }
 

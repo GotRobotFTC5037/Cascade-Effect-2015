@@ -18,97 +18,102 @@
 #include "abs_drive.h"
 #include "abs_auto_end.h"
 
-void abs_second_objective(e_second_objective_pos second_start_pos)
+void abs_second_objective(e_scoring_options second_start_pos)
 {
-	if(g_input_array[SECOND_OBJECTIVE]==0)
+	if(g_input_array[SECOND_OBJECTIVE]==STOP)
 	{
-		//wait1Msec(SECOND_OBJECTIVE_DELAY*DELAY_MULTIPLICATION_FACTOR);
-		abs_auto_end(SECOND_ROLLGOAL1);
-		return;
+		wait1Msec(SECOND_OBJECTIVE_DELAY*DELAY_MULTIPLICATION_FACTOR);
+		abs_auto_end(g_input_array[FIRST_OBJECTIVE]);
 	}
 
 	switch(second_start_pos)
 	{
-	case SECOND_CENTER:
+	case CENTER_GOAL:
 		switch(g_input_array[SECOND_OBJECTIVE])
 		{
-		case 0: //STOP
+		case STOP:
 			switch(g_input_array[FIRST_OBJECTIVE])
 			{
-			case 1:
-
+			case ROLLGOAL1:
 				wait1Msec(SECOND_OBJECTIVE_DELAY*DELAY_MULTIPLICATION_FACTOR);
-				abs_auto_end(SECOND_ROLLGOAL1);
+				abs_auto_end(ROLLGOAL1);
 				break;
-			case 2:
+			case CENTER_GOAL:
 				wait1Msec(SECOND_OBJECTIVE_DELAY*DELAY_MULTIPLICATION_FACTOR);
-				abs_auto_end(SECOND_CENTER);
+				abs_auto_end(CENTER_GOAL);
 				break;
-			case 3:
+			case ROLLGOAL2:
 				wait1Msec(SECOND_OBJECTIVE_DELAY*DELAY_MULTIPLICATION_FACTOR);
-				abs_auto_end(SECOND_ROLLGOAL2);
+				abs_auto_end(ROLLGOAL2);
 				break;
 			}
 			break;
-		case 1: //ROLLING GOAL 1
+		case ROLLGOAL1: //ROLLING GOAL 1
+
+			nxtDisplayBigTextLine(2,"%2d",g_center_goal_pos);
+
+			while(true){}
 
 			wait1Msec(SECOND_OBJECTIVE_DELAY*DELAY_MULTIPLICATION_FACTOR);
-			abs_auto_end(SECOND_ROLLGOAL1);
+			abs_auto_end(ROLLGOAL1);
 			break;
-		case 3: //ROLLING GOAL 2
+		case ROLLGOAL2: //ROLLING GOAL 2
 
 			wait1Msec(SECOND_OBJECTIVE_DELAY*DELAY_MULTIPLICATION_FACTOR);
-			abs_auto_end(SECOND_ROLLGOAL2);
+			abs_auto_end(ROLLGOAL2);
 			break;
 		}
 		break;
-	case SECOND_STOP:
+	case STOP:
 		switch(g_input_array[SECOND_OBJECTIVE])
 		{
-		case 1: //ROLLING GOAL 1
+		case ROLLGOAL1: //ROLLING GOAL 1
 
 			wait1Msec(SECOND_OBJECTIVE_DELAY*DELAY_MULTIPLICATION_FACTOR);
-			abs_auto_end(SECOND_ROLLGOAL1);
+			abs_auto_end(ROLLGOAL1);
 			break;
-		case 2: //CENTER GOAL
+		case CENTER_GOAL: //CENTER GOAL
 
 			wait1Msec(SECOND_OBJECTIVE_DELAY*DELAY_MULTIPLICATION_FACTOR);
-			abs_auto_end(SECOND_CENTER);
+			abs_auto_end(CENTER_GOAL);
 			break;
-		case 3:
+		case ROLLGOAL2:
 
 			wait1Msec(SECOND_OBJECTIVE_DELAY*DELAY_MULTIPLICATION_FACTOR);
-			abs_auto_end(SECOND_ROLLGOAL2);
+			abs_auto_end(ROLLGOAL2);
 			break; //ROLLING GOAL 2
 		}
 		break;
-	case SECOND_ROLLGOAL1:
+	case ROLLGOAL1:
 		switch(g_input_array[SECOND_OBJECTIVE])
 		{
-		case 2: //CENTER GOAL
+		case CENTER_GOAL: //CENTER GOAL
 
 			wait1Msec(SECOND_OBJECTIVE_DELAY*DELAY_MULTIPLICATION_FACTOR);
-			abs_auto_end(SECOND_CENTER);
+
+
+
+			abs_auto_end(CENTER_GOAL);
 			break;
-		case 3: //ROLLING GOAL 2
+		case ROLLGOAL2: //ROLLING GOAL 2
 
 			wait1Msec(SECOND_OBJECTIVE_DELAY*DELAY_MULTIPLICATION_FACTOR);
-			abs_auto_end(SECOND_ROLLGOAL2);
+			abs_auto_end(ROLLGOAL2);
 			break;
 		}
 		break;
-	case SECOND_ROLLGOAL2:
+	case ROLLGOAL2:
 		switch(g_input_array[SECOND_OBJECTIVE])
 		{
-		case 1: //ROLLING GOAL 1
+		case ROLLGOAL1: //ROLLING GOAL 1
 
 			wait1Msec(SECOND_OBJECTIVE_DELAY*DELAY_MULTIPLICATION_FACTOR);
-			abs_auto_end(SECOND_ROLLGOAL1);
+			abs_auto_end(ROLLGOAL1);
 			break;
-		case 2: //CENTER GOAL
+		case CENTER_GOAL: //CENTER GOAL
 
 			wait1Msec(SECOND_OBJECTIVE_DELAY*DELAY_MULTIPLICATION_FACTOR);
-			abs_auto_end(SECOND_CENTER);
+			abs_auto_end(CENTER_GOAL);
 			break;
 		}
 		break;

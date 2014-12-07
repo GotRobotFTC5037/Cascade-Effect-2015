@@ -30,15 +30,15 @@ task abs_sensors()
 
 	while(true)
 	{
-
 		//nxtDisplayBigTextLine(1,"Gyro:%1d",g_const_heading);
-		//switch(g_bearing_ac1)
-		//{
-		//case 5: nxtDisplayBigTextLine(3,"3"); break;
-		//case 6: nxtDisplayBigTextLine(3,"2"); break;
-		//case 7: nxtDisplayBigTextLine(3,"1"); break;
-		//}
-		//	nxtDisplayBigTextLine(3,"IR:  %1d",g_bearing_ac1);
+		switch(g_bearing_ac1)
+		{
+		case 5: nxtDisplayBigTextLine(1,"3"); break;
+		case 6: nxtDisplayBigTextLine(1,"2"); break;
+		case 7: nxtDisplayBigTextLine(1,"1"); break;
+		}
+		nxtDisplayBigTextLine(3,"%1d",g_ir_bearing1);
+		nxtDisplayBigTextLine(5,"%1d",g_bearing_ac1);
 		//nxtDisplayBigTextLine(5,"Ang: %1d",abs_get_angle_sensor_val(RAW_BPU));
 
 		//-------------------------
@@ -51,6 +51,7 @@ task abs_sensors()
 		//-----------------------------------
 		// code for the peaks of IR sensor
 		//-----------------------------------
+
 		if (g_bearing_ac1!=0)								// we have a valid IR signal
 		{
 			int maximum = -1;
@@ -80,6 +81,7 @@ task abs_sensors()
 				}
 			}
 			g_ir_bearing1 = (float)((peak-2)*50) + offset;		// direction is the total of the peak bias plus the adjacent bias
+
 			//nxtDisplayBigTextLine(3, "%2d", g_ir_bearing1);
 		}
 		//-------------------------
@@ -122,64 +124,8 @@ task abs_sensors()
 			}
 			g_ir_bearing2 = (float)((peak-2)*50) + offset;		// direction is the total of the peak bias plus the adjacent bias
 			//nxtDisplayBigTextLine(3, "%2d", g_ir_bearing1);
+			wait1Msec(20);
 		}
-		//-------------------------
-		// HiTechnic Gyro
-		//-------------------------
-		/*
-		g_curr_time=nPgmTime;
-		g_raw_gyro = abs_get_gyro_sensor_val(RAW);
-		g_sacred_const_heading += (g_raw_gyro - (g_drift+(g_delta_drift*(float)(g_curr_time-g_prev_time)))) * (float)(g_curr_time-g_prev_time)/1000;
-		g_rel_heading += (g_raw_gyro - (g_drift+(g_delta_drift*(float)(g_curr_time-g_prev_time)))) * (float)(g_curr_time-g_prev_time)/1000;
-
-		g_const_heading += (g_raw_gyro - (g_drift+(g_delta_drift*(float)(g_curr_time-g_prev_time)))) * (float)(g_curr_time-g_prev_time)/1000;
-
-		//abs_dlog(__FILE__ ,"heading"," g_const_heading: %d ", g_const_heading," g_rel_heading: %d ", g_rel_heading);
-		//wait1Msec(100);
-		g_prev_time = g_curr_time;
-
-		g_recont_heading = g_const_heading % 360;
-		if(g_recont_heading<0) g_recont_heading += 360;
-		*/
-		//-------------------------
-		// HiTechnic accelermoeter
-		//-------------------------
-
-		HTACreadAllAxes(HTAC, g_x_axis, g_y_axis, g_z_axis);
-		g_accelermoeter_sensor = g_x_axis;
-
-		if(g_sensor_reference_drive == true)
-		{
-			g_accelermoeter_reads++;
-			g_accelermoeter_array[g_accelermoeter_reads%50]=g_accelermoeter_sensor;
-			for(int i=0;i<30;i++)
-			{
-				g_accelermoeter_total_value = g_accelermoeter_array[i];
-			}
-			g_accelermoeter_average = g_accelermoeter_total_value/50;
-		}
-		else
-		{
-			g_accelermoeter_reads = 0;
-			g_accelermoeter_total_value = 0;
-			g_accelermoeter_average = 0;
-			memset(g_accelermoeter_array,0,30);
-		}
-		//-------------------------
-		// EOPD Sensor
-		//-------------------------
-#if EOPD_ACTIVE == 1
-		HTEOPDsetLongRange(HTEOPD);
-		g_EOPD_sensor = HTEOPDreadRaw(HTEOPD);
-		g_optical_sensor = g_EOPD_sensor;
-#else
-		//-------------------------
-		// Light Sensor
-		//-------------------------
-		g_light_sensor = LSvalNorm(LEGOLS);
-		g_optical_sensor = g_light_sensor;
-#endif
-		wait1Msec(20);
 	}
 }
 #endif

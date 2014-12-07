@@ -101,8 +101,60 @@ void abs_smoke_execute(int test_num)
 			motor[brush] = 0;
 			break;
 		case 5:
+			if(nNxtButtonPressed==kLeftButton)
+			{
+				motor[right_motor] = -40;
+				motor[left_motor] = 40;
+				abs_smoke_test_view(test_num,60,0);
+				PlaySoundFile("! Click.rso");
+				while(nNxtButtonPressed==kLeftButton){}
+			}
+			else if(nNxtButtonPressed==kRightButton)
+			{
+				motor[right_motor] = 40;
+				motor[left_motor] = -40;
+				abs_smoke_test_view(test_num,-40,0);
+				PlaySoundFile("! Click.rso");
+				while(nNxtButtonPressed==kRightButton){}
+			}
+			abs_smoke_test_view(test_num,0,0);
+			motor[right_motor] = 0;
+			motor[left_motor] = 0;
 			break;
 		case 6:
+			if(nNxtButtonPressed==kLeftButton)
+			{
+				motor[shoulder] = 40;
+				PlaySoundFile("! Click.rso");
+				while(nNxtButtonPressed==kLeftButton){ abs_smoke_test_view(test_num,40,nMotorEncoder(shoulder)); }
+			}
+			else if(nNxtButtonPressed==kRightButton)
+			{
+				motor[shoulder] = -40;
+				PlaySoundFile("! Click.rso");
+				while(nNxtButtonPressed==kRightButton){ abs_smoke_test_view(test_num,-40,nMotorEncoder(shoulder)); }
+			}
+			abs_smoke_test_view(test_num,0,nMotorEncoder(shoulder));
+			motor[shoulder] = 0;
+			break;
+		case 7:
+			if(nNxtButtonPressed==kLeftButton)
+			{
+				servo[impellar1] = 255;
+				servo[impellar2] = 0;
+				PlaySoundFile("! Click.rso");
+				while(nNxtButtonPressed==kLeftButton){ abs_smoke_test_view(test_num,255,0); }
+			}
+			else if(nNxtButtonPressed==kRightButton)
+			{
+				servo[impellar1] = 0;
+				servo[impellar2] = 255;
+				PlaySoundFile("! Click.rso");
+				while(nNxtButtonPressed==kRightButton){ abs_smoke_test_view(test_num,0,255); }
+			}
+			abs_smoke_test_view(test_num,127,127);
+			servo[impellar1] = 127;
+			servo[impellar2] = 127;
 			break;
 		case 8:
 			break;
@@ -113,6 +165,7 @@ void abs_smoke_execute(int test_num)
 	}
 	PlaySoundFile("! Click.rso");
 	while(nNxtButtonPressed==kEnterButton){}
+	nMotorEncoder(shoulder) = 0;
 }
 
 #endif /* !ABS_SMOKE_EXECUTE_H */
