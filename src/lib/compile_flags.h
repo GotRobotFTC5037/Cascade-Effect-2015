@@ -23,4 +23,9 @@
 // 2 = Right
 #define ENCODER_SIDE_USED 1
 
+// 0 = Default
+// 1 = NON_SENSOR
+// 2 = GYRO
+
+
 #endif /* !COMPILE_FLAGS_H */

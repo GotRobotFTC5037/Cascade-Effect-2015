@@ -26,7 +26,7 @@ void abs_floor_mission()
 	motor(left_motor)=100;
 	motor(right_motor)=100;
 	wait10Msec(9999);
-		//abs_drive(FORWARD, E_ANGLE, 335, 100, true, NON_SENSOR);
+		//abs_drive(FORWARD, E_ANGLE, 335, 100, true, CORRECTION_DRIVE_TYPE);
 		servo[goal_claw] = g_goal_claw_down;
 		break; //ROLLING GOAL 1
 	case CENTER_GOAL: break; //CENTER GOAL
