@@ -141,7 +141,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 
 		total_dist = 75;
 
-		abs_reset_angle_sensor_val(SOFT_RESET);
+		abs_reset_angle_sensor_val(HARD_RESET);//was soft reset
 		abs_dlog(__FILE__ ,"reset angle", speed_str, speed, dist_str, dist, rel_asu_str, abs_get_angle_sensor_val(RELATIVE_ASU), rel_bpu_str, abs_get_angle_sensor_val(RELATIVE_BPU));
 
 		if(dir == FORWARD)
@@ -186,48 +186,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 			//g_screen_state = S_TIME_SHOW;
 			g_debug_time_1 = nPgmTime;
 		}
-		else if(dir == BACKWARD)
-		{
-			while(abs_get_angle_sensor_val(RELATIVE_BPU) < total_dist)
-			{
-				if(abs_get_angle_sensor_val(RELATIVE_BPU) < half_dist)
-				{
-					if(!((g_bearing_ac1 <= dist + 1) || (g_bearing_ac1 == 0)))
-					{
-						abs_dlog(__FILE__,"IR break", speed_str, speed, dist_str, dist, bearing_ac2_str, g_bearing_ac2, rel_bpu_str, abs_get_angle_sensor_val(RELATIVE_BPU));
-						break;
-					}
-				}
-				else
-				{
-					if(!((g_bearing_ac1 <= dist) || (g_bearing_ac1 == 0)))
-					{
-						abs_dlog(__FILE__,"IR break", speed_str, speed, dist_str, dist, bearing_ac2_str, g_bearing_ac2, rel_bpu_str, abs_get_angle_sensor_val(RELATIVE_BPU));
-						break;
-					}
-				}
-
-				/** No gyro correction*/
-				/** Drive */
-				if(drive_type == GYRO)
-				{
-					abs_gyro_drive(speed,dir);
-				}
-				else
-				{
-					motor[left_motor] = -speed;
-					motor[right_motor] = -speed;
-				}
-			}
-		}
-	}
-	//------------------------
-	// IR stopping method 2
-	//------------------------
-	//drive useing the second ir
-	else if(dist_method == E_IR_DETECT2)
-	{
-		abs_reset_angle_sensor_val(SOFT_RESET);
+		abs_reset_angle_sensor_val(HARD_RESET);//was soft reset
 		abs_dlog(__FILE__ ,"reset angle", speed_str, speed, dist_str, dist, rel_asu_str, abs_get_angle_sensor_val(RELATIVE_ASU), rel_bpu_str, abs_get_angle_sensor_val(RELATIVE_BPU));
 
 		if(dir == FORWARD)
@@ -304,7 +263,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 	{
 		int pre_dist = 0;
 		if(g_reset_angle_record == false) pre_dist = abs_get_angle_sensor_val(RELATIVE_TU);
-		else abs_reset_angle_sensor_val(SOFT_RESET);
+		abs_reset_angle_sensor_val(HARD_RESET);//was soft reset
 		g_reset_angle_record = true;
 
 		abs_dlog(__FILE__ ,"reset angle", speed_str, speed, dist_str, dist, rel_asu_str, abs_get_angle_sensor_val(RELATIVE_ASU), rel_bpu_str, abs_get_angle_sensor_val(RELATIVE_TU));
@@ -321,13 +280,13 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 			{
 				if(dir == FORWARD)
 				{
-					motor[left_motor] = adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_TU));
-					motor[right_motor] = adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_TU));
+					motor[left_motor] = speed;//adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_TU));
+					motor[right_motor] = speed;//adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_TU));
 				}
 				else
 				{
-					motor[left_motor] = -adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_TU));
-					motor[right_motor] = -adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_TU));
+					motor[left_motor] = -speed;//adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_TU));
+					motor[right_motor] = -speed;//adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_TU));
 				}
 			}
 		}
@@ -340,7 +299,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 	else if(dist_method == E_OPTICAL)
 	{
 		bool optical_fail = false;
-		abs_reset_angle_sensor_val(SOFT_RESET);
+		abs_reset_angle_sensor_val(HARD_RESET);//was soft reset
 
 		abs_dlog(__FILE__ ,"reset angle", speed_str, speed, dist_str, dist, rel_asu_str, abs_get_angle_sensor_val(RELATIVE_ASU), rel_bpu_str, abs_get_angle_sensor_val(RELATIVE_BPU));
 
@@ -411,9 +370,9 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 
 	//if(dist_method == E_OPTICAL) servo[optical_servo] = OPTICAL_SERVO_UP;
 
-#if EOPD_ACTIVE == 0
-	if(dist_method==E_LIGHT) LSsetInactive(LEGOLS);
-#endif
+//#if EOPD_ACTIVE == 0
+//	if(dist_method==E_LIGHT) LSsetInactive(LEGOLS);
+//#endif
 	//if(dist_record==true)
 	//{
 	//	if(g_start_point==1)

@@ -14,12 +14,19 @@
 #ifndef ABS_GYRO_READ_H
 #define ABS_GYRO_READ_H
 
+int const_gyro_array[5];
+int rel_gyro_array[5];
+int sacred_const_gyro_array[5];
+
 task abs_gyro_read()
 {
-	time1(T1)=0;
+	memset(const_gyro_array,0,5);
+	memset(rel_gyro_array,0,5);
+	memset(sacred_const_gyro_array,0,5);
+
 	while(true)
 	{
-		wait1Msec(200);
+		wait1Msec(100);
 
 		//-------------------------
 		// HiTechnic Gyro

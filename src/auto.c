@@ -7,8 +7,8 @@
 #pragma config(Motor,  mtr_S1_C1_2,     left_motor,    tmotorTetrix, openLoop)
 #pragma config(Motor,  mtr_S1_C2_1,     lift1,         tmotorTetrix, openLoop)
 #pragma config(Motor,  mtr_S1_C2_2,     lift2,         tmotorTetrix, openLoop)
-#pragma config(Motor,  mtr_S1_C3_1,     motorH,        tmotorTetrix, openLoop)
-#pragma config(Motor,  mtr_S1_C3_2,     motorI,        tmotorTetrix, openLoop)
+#pragma config(Motor,  mtr_S1_C3_1,     brush,         tmotorTetrix, openLoop)
+#pragma config(Motor,  mtr_S1_C3_2,     shoulder,      tmotorTetrix, openLoop, encoder)
 #pragma config(Servo,  srvo_S1_C4_1,    servo1,               tServoNone)
 #pragma config(Servo,  srvo_S1_C4_2,    servo2,               tServoNone)
 #pragma config(Servo,  srvo_S1_C4_3,    goal_claw,            tServoStandard)
@@ -49,7 +49,6 @@
 #include "lib/global_variables.h"
 #include "lib/compile_flags.h"
 #include "lib/abs_initialize.h"
-#include "lib/abs_IR_center_read.h"
 #include "lib/abs_dlog.h"
 #include "lib/abs_stay_on_ramp.h"
 #include "lib/abs_drive.h"
@@ -70,58 +69,18 @@ task main()
 
 	abs_initialize();
 
+	disableDiagnosticsDisplay();
+
 	wait1Msec(STARTING_DELAY*1000);
 
 	switch(g_input_array[STARTING_POINT])
 	{
-	case 1: abs_ramp_mission();	break;
-	case 2: abs_floor_mission(); break;
+	case START_RAMP: abs_ramp_mission();	break;
+	case START_FLOOR: abs_floor_mission(); break;
 	default:
 		PlayTone(200,20);
 		break;
 	}
-
-
-	//abs_second_objective(SECOND_ROLLGOAL1);
-
-	//switch()
-	//{
-
-	//}
-
-	//StartTask(abs_IR_center_read);
-
-	//abs_drive(FORWARD, E_ANGLE, 300, 80, true, GYRO);
-
-	//abs_drive(FORWARD, E_ANGLE, 243, 80, true, GYRO);
-	//abs_drive(BACKWARD, E_ANGLE, 12, 80, true, GYRO);
-
-	//abs_turn(COUNTERCLOCKWISE, POINT, TURN, 20, 60);
-
-	//while(true)
-	//{}
-	//	if(nNxtButtonPressed == kLeftButton)
-	//	{
-	//		motor[right_motor] = 60;
-	//		motor[left_motor] = 60;
-	//	}
-
-	//abs_turn(CLOCKWISE, POINT, TURN, 360, 60);
-	//abs_turn(COUNTERCLOCKWISE, POINT, TURN_TO, 0, 50);
-
-
-	//abs_drive(BACKWARD, E_TIME, 2000, 100, true, NON_SENSOR);
-	//abs_drive(FORWARD, E_DEGREES, 360, 100, true, NON_SENSOR);
-	//abs_drive(BACKWARD, E_DEGREES, 360, 100, true, NON_SENSOR);
-	//abs_turn(CLOCKWISE, POINT, TURN, 180, 60);
-	//abs_turn(COUNTERCLOCKWISE, POINT, TURN, 180, 60);
-
-	//abs_turn(CLOCKWISE, POINT, TURN, 20, 60);
-	//abs_drive(BACKWARD, E_ANGLE, 305, 100, true, GYRO);
-	//abs_turn(CLOCKWISE, POINT, TURN, 40, 60);
-	//abs_drive(BACKWARD, E_ANGLE, 15, 100, true, GYRO);
-	//abs_turn(COUNTERCLOCKWISE, POINT, TURN, 60, 60);
-	//abs_drive(BACKWARD, E_ANGLE, 61, 100, true, GYRO);
 
 	abs_dlog(__FILE__ ,"end auto", "End time:", nPgmTime);
 	Close(LogFileHandle, LogIoResult);

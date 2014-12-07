@@ -35,13 +35,14 @@ task abs_sensors()
 	(gyro_read % 10 == 0) ? gyro_read=0 : gyro_read++;
 
 		//nxtDisplayBigTextLine(1,"Gyro:%1d",g_const_heading);
-		//switch(g_bearing_ac1)
-		//{
-		//case 5: nxtDisplayBigTextLine(3,"3"); break;
-		//case 6: nxtDisplayBigTextLine(3,"2"); break;
-		//case 7: nxtDisplayBigTextLine(3,"1"); break;
-		//}
-		//	nxtDisplayBigTextLine(3,"IR:  %1d",g_bearing_ac1);
+		switch(g_bearing_ac1)
+		{
+		case 5: nxtDisplayBigTextLine(1,"3"); break;
+		case 6: nxtDisplayBigTextLine(1,"2"); break;
+		case 7: nxtDisplayBigTextLine(1,"1"); break;
+		}
+		nxtDisplayBigTextLine(3,"%1d",g_ir_bearing1);
+		nxtDisplayBigTextLine(5,"%1d",g_bearing_ac1);
 		//nxtDisplayBigTextLine(5,"Ang: %1d",abs_get_angle_sensor_val(RAW_BPU));
 
 		//-------------------------
@@ -54,6 +55,7 @@ task abs_sensors()
 		//-----------------------------------
 		// code for the peaks of IR sensor
 		//-----------------------------------
+
 		if (g_bearing_ac1!=0)								// we have a valid IR signal
 		{
 			int maximum = -1;
@@ -83,6 +85,7 @@ task abs_sensors()
 				}
 			}
 			g_ir_bearing1 = (float)((peak-2)*50) + offset;		// direction is the total of the peak bias plus the adjacent bias
+
 			//nxtDisplayBigTextLine(3, "%2d", g_ir_bearing1);
 		}
 		//-------------------------
@@ -125,6 +128,7 @@ task abs_sensors()
 			}
 			g_ir_bearing2 = (float)((peak-2)*50) + offset;		// direction is the total of the peak bias plus the adjacent bias
 			//nxtDisplayBigTextLine(3, "%2d", g_ir_bearing1);
+			wait1Msec(20);
 		}
 		//-------------------------
 		// HiTechnic Gyro
