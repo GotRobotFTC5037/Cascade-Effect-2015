@@ -35,7 +35,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 	/** logging constants */
 	const string speed_str = "speed";
 	const string dist_str = "dist";
-	const string rel_bpu_str = "rel BPU";
+	const string rel_bpu_str = "rel TU";
 	const string rel_asu_str = "rel ASU";
 	const string bearing_ac2_str = "g_bearing_ac2";
 
@@ -45,19 +45,19 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 	switch(dist_method)
 	{
 	case E_IR_DETECT:
-		abs_dlog(__FILE__ , "IR enter", speed_str, speed, dist_str, dist, bearing_ac2_str, g_bearing_ac2, rel_bpu_str, abs_get_angle_sensor_val(RELATIVE_BPU));
+		abs_dlog(__FILE__ , "IR enter", speed_str, speed, dist_str, dist, bearing_ac2_str, g_bearing_ac2, rel_bpu_str, abs_get_angle_sensor_val(RELATIVE_TU));
 		break;
 	case E_IR_DETECT2:
-		abs_dlog(__FILE__ , "IR2 enter", speed_str, speed, dist_str, dist, bearing_ac2_str, g_bearing_ac2, rel_bpu_str, abs_get_angle_sensor_val(RELATIVE_BPU));
+		abs_dlog(__FILE__ , "IR2 enter", speed_str, speed, dist_str, dist, bearing_ac2_str, g_bearing_ac2, rel_bpu_str, abs_get_angle_sensor_val(RELATIVE_TU));
 		break;
 	case E_ANGLE:
-		abs_dlog(__FILE__ , "angle enter", speed_str, speed, dist_str, dist, rel_asu_str, abs_get_angle_sensor_val(RELATIVE_ASU), rel_bpu_str, abs_get_angle_sensor_val(RELATIVE_BPU));
+		abs_dlog(__FILE__ , "angle enter", speed_str, speed, dist_str, dist, rel_asu_str, abs_get_angle_sensor_val(RELATIVE_ASU), rel_bpu_str, abs_get_angle_sensor_val(RELATIVE_TU));
 		break;
 	case E_TIME:
-		abs_dlog(__FILE__ , "time enter", speed_str, speed, dist_str, dist, "time", time1[T1], rel_bpu_str, abs_get_angle_sensor_val(RELATIVE_BPU));
+		abs_dlog(__FILE__ , "time enter", speed_str, speed, dist_str, dist, "time", time1[T1], rel_bpu_str, abs_get_angle_sensor_val(RELATIVE_TU));
 		break;
 	case E_OPTICAL:
-		abs_dlog(__FILE__ , "Optical enter", speed_str, speed, dist_str, dist, "g_calibrated_optical_threshold_val", g_calibrated_optical_threshold_val, rel_bpu_str, abs_get_angle_sensor_val(RELATIVE_BPU));
+		abs_dlog(__FILE__ , "Optical enter", speed_str, speed, dist_str, dist, "g_calibrated_optical_threshold_val", g_calibrated_optical_threshold_val, rel_bpu_str, abs_get_angle_sensor_val(RELATIVE_TU));
 		break;
 	}
 	int i = 0;

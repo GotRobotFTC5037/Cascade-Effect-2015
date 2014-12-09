@@ -25,6 +25,14 @@ long abs_get_angle_sensor_val(e_angle_val_type angle_val)
 	}
 	else if(angle_val == RELATIVE_BPU)
 	{
+		return abs(HTANGreadAccumulatedAngle(angle_sensor) - g_angle_sensor_val)/INT_ANGLE_SENSOR_CIRCUMFERENCE_BPU;
+	}
+	else if(angle_val == RAW_BPU)
+	{
+		return abs(HTANGreadAccumulatedAngle(angle_sensor))/INT_ANGLE_SENSOR_CIRCUMFERENCE_BPU;
+	}
+	else if(angle_val == RELATIVE_TU)
+	{
 		return abs(HTANGreadAccumulatedAngle(angle_sensor) - g_angle_sensor_val)/INT_ANGLE_SENSOR_CIRCUMFERENCE_TU;
 	}
 	else

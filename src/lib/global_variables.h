@@ -192,13 +192,33 @@ int g_optical_sensor = 0;
 *
 *
 */
+const int g_lift_min_speed = 30;
+const int g_max_lift = 15850;
+const int g_low_lift = 0;
+const int g_mid_lift = 5600;
+const int g_tall_lift = 11800;
+const int g_center_lift = 14166;
+const int g_lift_range = 100;
+
+const int g_shoulder_max = 7870;
+const int g_shoulder_tall = 7300;
+const int g_shoulder_low = 6309;
+const int g_shoulder_mid = 6700;
+const int g_shoulder_min_speed = 20;
+const int g_shoulder_center = 5000;
+
+const int g_min_lift = 1636;
+const int g_low_min_lift = 1636;
+const int g_tall_min_lift =	5006;
+//const int g_mid_min_lift =
+
 const int g_lift_speed_down = -60;
 const int g_lift_speed_up = 100;
 
-const int g_shutter_open = 0;
-const int g_shutter_closed = 255;
+const int g_shutter_open = 255;
+const int g_shutter_closed = 127;
 
-const int g_goal_claw_up = 226;
+const int g_goal_claw_up = 225;
 const int g_goal_claw_down = 60;
 
 const int g_gyro_adjust = 5;//10;
@@ -214,7 +234,7 @@ const int g_optical_threshold = 100;//305;
 //const int g_optical_threshold = 30;
 //#endif
 
-const int g_IR_center_goal_dist = 64;
+const int g_IR_center_goal_dist = 125;
 
 const int g_optical_move_min_dist = 70;
 
