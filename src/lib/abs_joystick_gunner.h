@@ -16,8 +16,19 @@
 
 task abs_joystick_gunner()
 {
+	int shutter_state = g_shutter_closed;
+	bool shutter_button_pressed = false;
+	bool lift_move_dir_up = false;
+	int lift_active = 1;
+	int shoulder_state = 0;
+	bool shoulder_active = false;
+	int shoulder_min = 0;
+
 	while(true)
 	{
+		nxtDisplayBigTextLine(1,"%3d",nMotorEncoder(lift1));
+		nxtDisplayBigTextLine(3,"%3d",((((g_shoulder_mid-nMotorEncoder(shoulder))*100)/g_shoulder_max)+g_shoulder_min_speed));//nMotorEncoder(shoulder));
+		nxtDisplayBigTextLine(5,"%3d",(((nMotorEncoder(lift1)-0)*100)/g_max_lift)+g_lift_min_speed);//(((nMotorEncoder(lift1)-0)*100)/g_max_lift));
 		//-----------------------------
 		// flag motor control
 		//-----------------------------
@@ -43,8 +54,46 @@ task abs_joystick_gunner()
 		// shoulder
 		//-----------------------------
 
-		if(abs(joystick.joy2_y2)>10) motor[shoulder] = (joystick.joy2_y2*100)/127;
-		else motor[shoulder] = 0;
+		if(abs(joystick.joy2_y2)>10)
+		{
+			if(joy2Btn(12)) motor[shoulder] = (joystick.joy2_y2*100)/127;
+			else motor[shoulder] = ((joystick.joy2_y2*100)/127)/2;
+			shoulder_active = false;
+		}
+		if(joy2Btn(2))
+		{
+			shoulder_active = true;
+			shoulder_state = g_shoulder_low;
+			shoulder_min = g_min_lift;
+		}
+		else if(joy2Btn(3))
+		{
+			shoulder_active = true;
+			shoulder_state = g_shoulder_mid;
+			shoulder_min = g_min_lift;
+		}
+		else if(joy2Btn(4))
+		{
+			shoulder_active = true;
+			shoulder_state = g_shoulder_tall;
+			shoulder_min = g_tall_min_lift;
+		}
+		else if(joy2Btn(6))
+		{
+			shoulder_active = true;
+			shoulder_state = g_shoulder_center;
+			shoulder_min = g_tall_min_lift;
+		}
+
+		if(shoulder_active&&nMotorEncoder(lift1)>shoulder_min)
+		{
+			if(nMotorEncoder(shoulder)<shoulder_state) motor[shoulder] = ((((shoulder_state-nMotorEncoder(shoulder))*100)/g_shoulder_max)+g_shoulder_min_speed);
+			else shoulder_active = false;
+		}
+		else if(abs(joystick.joy2_y2)<10)
+		{
+			motor[shoulder] = 0;
+		}
 
 		//-----------------------------
 		// ball lift buttons
@@ -53,75 +102,148 @@ task abs_joystick_gunner()
 		if(joystick.joy2_y1>10)
 		{
 			if(joy2Btn(11)) int lift_speed = 100;
-			else lift_speed = g_lift_speed_up;
+			else
+			{
+				if(nMotorEncoder(lift1)<g_max_lift) lift_speed = g_lift_speed_up;
+				else lift_speed = 0;
+			}
 			motor[lift1] = lift_speed;
 			motor[lift2] = lift_speed;
+
+			lift_active = 1;
 		}
 		else if(joystick.joy2_y1<-10)
 		{
 			if(joy2Btn(11)) int lift_speed = -100;
-			else lift_speed = g_lift_speed_down;
+			else
+			{
+				if(nMotorEncoder(lift1)>0) lift_speed = -((((nMotorEncoder(lift1)-0)*100)/g_max_lift)+g_lift_min_speed);
+				else lift_speed = 0;
+			}
 			motor[lift1] = lift_speed;
 			motor[lift2] = lift_speed;
-		}/*
-		else if(joy2Btn(6))
-		{
-		//CENTER GOAL SCORING POSISION
+
+			lift_active = 1;
 		}
-		else if(joy2Btn(8))
+		else if(joy2Btn(6))  //CENTER GOAL SCORING POSISION
 		{
-		//BALL LIFT AT FLOOR, INTAKE POSITION
+			lift_active = 6;
+			if(nMotorEncoder(lift1)>g_center_lift) lift_move_dir_up = false;
+			else lift_move_dir_up = true;
 		}
-		else if(joy2Btn(4))//Y
+		else if(lift_active == 6)
 		{
-		//TALL ROLLING GOAL SCORING POSITION
+			if(!lift_move_dir_up&&nMotorEncoder(lift1)>g_center_lift)
+			{
+				motor[lift1] = -((((nMotorEncoder(lift1)-g_center_lift)*100)/g_max_lift)+g_lift_min_speed);
+				motor[lift2] = -((((nMotorEncoder(lift1)-g_center_lift)*100)/g_max_lift)+g_lift_min_speed);
+			}
+			else if(lift_move_dir_up&&nMotorEncoder(lift1)<g_center_lift)
+			{
+				motor[lift1] = g_lift_speed_up;
+				motor[lift2] = g_lift_speed_up;
+			}
+			else lift_active = 1;
 		}
-		else if(joy2Btn(3))//B
+		else if(joy2Btn(8)) lift_active = 8; //BALL LIFT AT FLOOR, INTAKE POSITION
+		else if(lift_active == 8)
 		{
-		//MID ROLLING GOAL SCORING POSITION
+			if(nMotorEncoder(lift1)>0)
+			{
+				motor[lift1] = -((((nMotorEncoder(lift1)-0)*100)/g_max_lift)+g_lift_min_speed);
+				motor[lift2] = -((((nMotorEncoder(lift1)-0)*100)/g_max_lift)+g_lift_min_speed);
+			}
+			else lift_active = 1;
 		}
-		else if(joy2Btn(2))//A
+		else if(joy2Btn(4)) //Y //TALL ROLLING GOAL SCORING POSITION
 		{
-		//LOW ROLLING GOAL SCORING POSITION
-		}*/
+			lift_active = 4;
+			if(nMotorEncoder(lift1)>g_tall_lift) lift_move_dir_up = false;
+			else lift_move_dir_up = true;
+		}
+		else if(lift_active == 4)
+		{
+			if(!lift_move_dir_up&&nMotorEncoder(lift1)>g_tall_lift)
+			{
+				motor[lift1] = -((((nMotorEncoder(lift1)-g_tall_lift)*100)/g_max_lift)+g_lift_min_speed);
+				motor[lift2] = -((((nMotorEncoder(lift1)-g_tall_lift)*100)/g_max_lift)+g_lift_min_speed);
+			}
+			else if(lift_move_dir_up&&nMotorEncoder(lift1)<g_tall_lift)
+			{
+				motor[lift1] = g_lift_speed_up;
+				motor[lift2] = g_lift_speed_up;
+			}
+			else lift_active = 1;
+		}
+		else if(joy2Btn(3)) //B //MID ROLLING GOAL SCORING POSITION
+		{
+			lift_active = 3;
+			if(nMotorEncoder(lift1)>g_mid_lift) lift_move_dir_up = false;
+			else lift_move_dir_up = true;
+		}
+		else if(lift_active == 3)
+		{
+			if(!lift_move_dir_up&&nMotorEncoder(lift1)>g_mid_lift)
+			{
+				motor[lift1] = -((((nMotorEncoder(lift1)-g_mid_lift)*100)/g_max_lift)+g_lift_min_speed);
+				motor[lift2] = -((((nMotorEncoder(lift1)-g_mid_lift)*100)/g_max_lift)+g_lift_min_speed);
+			}
+			else if(lift_move_dir_up&&nMotorEncoder(lift1)<g_mid_lift)
+			{
+				motor[lift1] = g_lift_speed_up;
+				motor[lift2] = g_lift_speed_up;
+			}
+			else lift_active = 1;
+		}
+		else if(joy2Btn(2)) //A //LOW ROLLING GOAL SCORING POSITION
+		{
+			lift_active = 2;
+			if(nMotorEncoder(lift1)>g_low_lift) lift_move_dir_up = false;
+			else lift_move_dir_up = true;
+		}
+		else if(lift_active == 2)
+		{
+			if(!lift_move_dir_up&&nMotorEncoder(lift1)>g_low_lift)
+			{
+				motor[lift1] = -((((nMotorEncoder(lift1)-g_low_lift)*100)/g_max_lift)+g_lift_min_speed);
+				motor[lift2] = -((((nMotorEncoder(lift1)-g_low_lift)*100)/g_max_lift)+g_lift_min_speed);
+			}
+			else if(lift_move_dir_up&&nMotorEncoder(lift1)<g_low_lift)
+			{
+				motor[lift1] = g_lift_speed_up;
+				motor[lift2] = g_lift_speed_up;
+			}
+			else lift_active = 1;
+		}
 		else
 		{
 			motor[lift1] = 0;
 			motor[lift2] = 0;
 		}
-
 		//-----------------------------
 		// intake
 		//-----------------------------
 
-		static bool last_intake_true = false;
-
-		if(joy2Btn(5))
+		if(joy1Btn(2))
 		{
-			last_intake_true = true;
-			motor[brush] = 60;
+			motor[brush] = -60;
+		}
+		else if(joy1Btn(4))
+		{
+			servo[impellar1] = 255;
+			servo[impellar2] = 0;
+		}
+		else if(joy2Btn(5))
+		{
+			motor[brush] = 40;
 			servo[impellar1] = 0;
 			servo[impellar2] = 255;
 		}
-		else if(joy2Btn(7))
+		else
 		{
-			last_intake_true = false;
 			motor[brush] = 0;
 			servo[impellar1] = 127;
 			servo[impellar2] = 127;
-		}
-		else if(joy1Btn(2))
-		{
-			motor[brush] = -60;
-			//servo[impellar1] = 255;
-			//servo[impellar2] = 0;
-		}
-		else if(!joy2Btn(5)&&!joy2Btn(7))
-		{
-			if(last_intake_true) motor[brush] = 60;
-			else motor[brush] = 0;
-			//servo[impellar1] = 127;
-			//servo[impellar2] = 127;
 		}
 
 		//-----------------------------
@@ -132,8 +254,6 @@ task abs_joystick_gunner()
 		//-----------------------------
 		// shutter
 		//-----------------------------
-		static int shutter_state = g_shutter_closed;
-		static bool shutter_button_pressed = false;
 
 		if(!joy2Btn(1))shutter_button_pressed = false;
 		else if(shutter_button_pressed == false)
