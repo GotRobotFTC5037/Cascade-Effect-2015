@@ -14,6 +14,23 @@
 #ifndef ABS_JOYSTICK_GUNNER_H
 #define ABS_JOYSTICK_GUNNER_H
 
+task abs_intake_dance()
+{
+	while(true)
+	{
+		while(nMotorEncoder(lift1)<g_jog_lift)
+		{
+			motor[lift1] = g_lift_speed_up;
+			motor[lift2] = g_lift_speed_up;
+		}
+		while(nMotorEncoder(lift1)>0)
+		{
+			motor[lift1] = -((((nMotorEncoder(lift1)-0)*100)/g_max_lift)+g_lift_min_speed);
+			motor[lift2] = -((((nMotorEncoder(lift1)-0)*100)/g_max_lift)+g_lift_min_speed);
+		}
+	}
+}
+
 task abs_joystick_gunner()
 {
 	int shutter_state = g_shutter_closed;
@@ -23,11 +40,12 @@ task abs_joystick_gunner()
 	int shoulder_state = 0;
 	bool shoulder_active = false;
 	int shoulder_min = 0;
+	bool shoulder_return = false;
 
 	while(true)
 	{
-		nxtDisplayBigTextLine(1,"%3d",nMotorEncoder(lift1));
-		nxtDisplayBigTextLine(3,"%3d",((((g_shoulder_mid-nMotorEncoder(shoulder))*100)/g_shoulder_max)+g_shoulder_min_speed));//nMotorEncoder(shoulder));
+		nxtDisplayBigTextLine(1,"%3d", nMotorEncoder(lift1));
+		nxtDisplayBigTextLine(3,"%3d", nMotorEncoder(shoulder));//((((g_shoulder_mid-nMotorEncoder(shoulder))*100)/g_shoulder_max)+g_shoulder_min_speed));//nMotorEncoder(shoulder));
 		nxtDisplayBigTextLine(5,"%3d",(((nMotorEncoder(lift1)-0)*100)/g_max_lift)+g_lift_min_speed);//(((nMotorEncoder(lift1)-0)*100)/g_max_lift));
 		//-----------------------------
 		// flag motor control
@@ -54,41 +72,72 @@ task abs_joystick_gunner()
 		// shoulder
 		//-----------------------------
 
-		if(abs(joystick.joy2_y2)>10)
+		if(joystick.joy2_y2>10)
 		{
 			if(joy2Btn(12)) motor[shoulder] = (joystick.joy2_y2*100)/127;
+			else if(nMotorEncoder(shoulder)>g_shoulder_max) motor[shoulder] = 0;
 			else motor[shoulder] = ((joystick.joy2_y2*100)/127)/2;
 			shoulder_active = false;
+			shoulder_return = false;
+		}
+		else if(joystick.joy2_y2<-10)
+		{
+			if(joy2Btn(12)) motor[shoulder] = (joystick.joy2_y2*100)/127;
+			else if(nMotorEncoder(shoulder)<0) motor[shoulder] = 0;
+			else motor[shoulder] = -((((nMotorEncoder(shoulder))*100)/g_shoulder_max)+g_shoulder_min_speed);//((joystick.joy2_y2*100)/127)/2;
+				shoulder_active = false;
+			shoulder_return = false;
 		}
 		if(joy2Btn(2))
 		{
 			shoulder_active = true;
 			shoulder_state = g_shoulder_low;
 			shoulder_min = g_min_lift;
+			shoulder_return = false;
 		}
 		else if(joy2Btn(3))
 		{
 			shoulder_active = true;
 			shoulder_state = g_shoulder_mid;
 			shoulder_min = g_min_lift;
+			shoulder_return = false;
 		}
 		else if(joy2Btn(4))
 		{
 			shoulder_active = true;
 			shoulder_state = g_shoulder_tall;
 			shoulder_min = g_tall_min_lift;
+			shoulder_return = false;
 		}
 		else if(joy2Btn(6))
 		{
 			shoulder_active = true;
 			shoulder_state = g_shoulder_center;
+			shoulder_min = g_center_min_lift;
+			shoulder_return = false;
+		}
+		else if(joy2Btn(8))
+		{
+			shoulder_active = true;
 			shoulder_min = g_tall_min_lift;
+			shoulder_return = true;
+			shutter_state = g_shutter_closed;
 		}
 
-		if(shoulder_active&&nMotorEncoder(lift1)>shoulder_min)
+		else if(shoulder_active&&nMotorEncoder(lift1)>shoulder_min&&!shoulder_return)
 		{
 			if(nMotorEncoder(shoulder)<shoulder_state) motor[shoulder] = ((((shoulder_state-nMotorEncoder(shoulder))*100)/g_shoulder_max)+g_shoulder_min_speed);
 			else shoulder_active = false;
+		}
+		else if(shoulder_active&&shoulder_return)
+		{
+			if(nMotorEncoder(shoulder)>50) motor[shoulder] = -((((nMotorEncoder(shoulder))*100)/g_shoulder_max)+g_shoulder_min_speed);
+			else
+			{
+				motor[shoulder] = 0;
+				shoulder_active = false;
+				shoulder_return = false;
+			}
 		}
 		else if(abs(joystick.joy2_y2)<10)
 		{
@@ -98,6 +147,12 @@ task abs_joystick_gunner()
 		//-----------------------------
 		// ball lift buttons
 		//-----------------------------
+
+		if(TSreadState(LEGOTOUCH)==true)
+		{
+			nMotorEncoder(lift1) = 0;
+			shutter_state = g_shutter_closed;
+		}
 
 		if(joystick.joy2_y1>10)
 		{
@@ -145,13 +200,31 @@ task abs_joystick_gunner()
 			}
 			else lift_active = 1;
 		}
+		else if(joy2Btn(7))  //JOG INTAKE
+		{
+			lift_active = 7;
+			StartTask(abs_intake_dance);
+		}
+		else if(lift_active == 7)
+		{
+			StopTask(abs_intake_dance);
+			lift_active = 1;
+		}
 		else if(joy2Btn(8)) lift_active = 8; //BALL LIFT AT FLOOR, INTAKE POSITION
 		else if(lift_active == 8)
 		{
-			if(nMotorEncoder(lift1)>0)
+			if(shoulder_return&&nMotorEncoder(lift1)<g_min_lift)
 			{
-				motor[lift1] = -((((nMotorEncoder(lift1)-0)*100)/g_max_lift)+g_lift_min_speed);
-				motor[lift2] = -((((nMotorEncoder(lift1)-0)*100)/g_max_lift)+g_lift_min_speed);
+				motor[lift1] = 0;
+				motor[lift2] = 0;
+			}
+			else if(nMotorEncoder(lift1)>0)
+			{
+				if(nMotorEncoder(shoulder) < g_shoulder_lower_min)
+				{
+					motor[lift1] = -((((nMotorEncoder(lift1)-0)*100)/g_max_lift)+g_lift_min_speed);
+					motor[lift2] = -((((nMotorEncoder(lift1)-0)*100)/g_max_lift)+g_lift_min_speed);
+				}
 			}
 			else lift_active = 1;
 		}
@@ -235,7 +308,7 @@ task abs_joystick_gunner()
 		}
 		else if(joy2Btn(5))
 		{
-			motor[brush] = 40;
+			motor[brush] = 20;
 			servo[impellar1] = 0;
 			servo[impellar2] = 255;
 		}

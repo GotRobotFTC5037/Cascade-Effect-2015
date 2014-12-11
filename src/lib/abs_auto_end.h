@@ -16,6 +16,8 @@
 #define ABS_AUTO_END_H
 
 #include "abs_drive.h"
+#include "abs_auto_pipe_score.h"
+#include "abs_auto_pipe_lower.h"
 
 void abs_auto_end(e_scoring_options second_start_pos)
 {
@@ -41,14 +43,17 @@ void abs_auto_end(e_scoring_options second_start_pos)
 		{
 		case PARKING_ZONE:
 
-			abs_turn(CLOCKWISE, POINT, TURN, 32, 50);
-			abs_drive(FORWARD, E_ANGLE, 530, 100, true, NON_SENSOR);//GYRO);
+			StopTask(abs_auto_pipe_score);
+			StartTask(abs_auto_pipe_lower);
+			abs_turn(CLOCKWISE, POINT, TURN, 30, 40);
+			abs_drive(FORWARD, E_ANGLE, 460, 100, true, GYRO);
 
-			abs_turn(CLOCKWISE, POINT, TURN, 45, 60);
-			abs_drive(FORWARD, E_ANGLE, 80, 100, true, NON_SENSOR);//GYRO);
+			abs_turn(COUNTERCLOCKWISE, POINT, TURN, 200, 60);
+			abs_drive(BACKWARD, E_ANGLE, 30, 100, true, GYRO);
 
-			//abs_turn(COUNTERCLOCKWISE, POINT, TURN, 60, 60);
-			//abs_drive(FORWARD, E_ANGLE, 61, 100, true, GYRO);
+
+			//abs_turn(CLOCKWISE, POINT, TURN, 45, 60);
+			//abs_drive(FORWARD, E_ANGLE, 85, 100, true, NON_SENSOR);//GYRO);
 
 			break;								//LOW AREA
 		}
