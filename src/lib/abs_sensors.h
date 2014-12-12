@@ -42,8 +42,7 @@ task abs_sensors()
 		case 7: nxtDisplayBigTextLine(1,"1"); break;
 		}
 		nxtDisplayBigTextLine(3,"%1d",g_ir_bearing1);
-		nxtDisplayBigTextLine(5,"%1d",g_bearing_ac1);
-		//nxtDisplayBigTextLine(5,"Ang: %1d",abs_get_angle_sensor_val(RAW_BPU));
+		nxtDisplayBigTextLine(5,"%3d %3d",HTEOPDreadRaw(HTEOPD),HTEOPDreadProcessed(HTEOPD));
 
 		//-------------------------
 		// HiTechnic IR Sensor

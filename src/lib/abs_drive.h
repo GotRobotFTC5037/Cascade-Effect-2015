@@ -141,7 +141,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 
 		total_dist = 75;
 
-		abs_reset_angle_sensor_val(HARD_RESET);//was soft reset
+		abs_reset_angle_sensor_val(SOFT_RESET);//was soft reset
 		abs_dlog(__FILE__ ,"reset angle", speed_str, speed, dist_str, dist, rel_asu_str, abs_get_angle_sensor_val(RELATIVE_ASU), rel_bpu_str, abs_get_angle_sensor_val(RELATIVE_BPU));
 
 		if(dir == FORWARD)
@@ -186,7 +186,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 			//g_screen_state = S_TIME_SHOW;
 			g_debug_time_1 = nPgmTime;
 		}
-		abs_reset_angle_sensor_val(HARD_RESET);//was soft reset
+		abs_reset_angle_sensor_val(SOFT_RESET);//was soft reset
 		abs_dlog(__FILE__ ,"reset angle", speed_str, speed, dist_str, dist, rel_asu_str, abs_get_angle_sensor_val(RELATIVE_ASU), rel_bpu_str, abs_get_angle_sensor_val(RELATIVE_BPU));
 
 		if(dir == FORWARD)
@@ -263,7 +263,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 	{
 		int pre_dist = 0;
 		if(g_reset_angle_record == false) pre_dist = abs_get_angle_sensor_val(RELATIVE_TU);
-		abs_reset_angle_sensor_val(HARD_RESET);//was soft reset
+		abs_reset_angle_sensor_val(SOFT_RESET);//was soft reset
 		g_reset_angle_record = true;
 
 		abs_dlog(__FILE__ ,"reset angle", speed_str, speed, dist_str, dist, rel_asu_str, abs_get_angle_sensor_val(RELATIVE_ASU), rel_bpu_str, abs_get_angle_sensor_val(RELATIVE_TU));
@@ -299,7 +299,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 	else if(dist_method == E_OPTICAL)
 	{
 		bool optical_fail = false;
-		abs_reset_angle_sensor_val(HARD_RESET);//was soft reset
+		abs_reset_angle_sensor_val(SOFT_RESET);//was soft reset
 
 		abs_dlog(__FILE__ ,"reset angle", speed_str, speed, dist_str, dist, rel_asu_str, abs_get_angle_sensor_val(RELATIVE_ASU), rel_bpu_str, abs_get_angle_sensor_val(RELATIVE_BPU));
 

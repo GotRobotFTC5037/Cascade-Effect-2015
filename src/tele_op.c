@@ -39,6 +39,7 @@
 #include "lib/xander/hitechnic-irseeker-v2.h"
 #include "lib/xander/hitechnic-gyro.h"
 #include "lib/xander/hitechnic-angle.h"
+#include "lib/xander/lego-touch.h"
 
 //-----------------------
 // custom functions includes
