@@ -42,8 +42,7 @@ task abs_sensors()
 		case 7: nxtDisplayBigTextLine(1,"1"); break;
 		}
 		nxtDisplayBigTextLine(3,"%1d",g_ir_bearing1);
-		nxtDisplayBigTextLine(5,"%1d",g_bearing_ac1);
-		//nxtDisplayBigTextLine(5,"Ang: %1d",abs_get_angle_sensor_val(RAW_BPU));
+		nxtDisplayBigTextLine(5,"%3d %3d",HTEOPDreadRaw(HTEOPD),HTEOPDreadProcessed(HTEOPD));
 
 		//-------------------------
 		// HiTechnic IR Sensor
@@ -186,20 +185,6 @@ task abs_sensors()
 			g_accelermoeter_average = 0;
 			memset(g_accelermoeter_array,0,30);
 		}
-		//-------------------------
-		// EOPD Sensor
-		//-------------------------
-#if EOPD_ACTIVE == 1
-		HTEOPDsetLongRange(HTEOPD);
-		g_EOPD_sensor = HTEOPDreadRaw(HTEOPD);
-		g_optical_sensor = g_EOPD_sensor;
-#else
-		//-------------------------
-		// Light Sensor
-		//-------------------------
-		g_light_sensor = LSvalNorm(LEGOLS);
-		g_optical_sensor = g_light_sensor;
-#endif
 		wait1Msec(20);
 	}
 }

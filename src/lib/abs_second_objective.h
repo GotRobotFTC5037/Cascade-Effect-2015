@@ -22,7 +22,6 @@ void abs_second_objective(e_scoring_options second_start_pos)
 {
 	if(g_input_array[SECOND_OBJECTIVE]==STOP)
 	{
-		wait1Msec(SECOND_OBJECTIVE_DELAY*DELAY_MULTIPLICATION_FACTOR);
 		abs_auto_end(g_input_array[FIRST_OBJECTIVE]);
 	}
 
@@ -50,9 +49,8 @@ void abs_second_objective(e_scoring_options second_start_pos)
 			break;
 		case ROLLGOAL1: //ROLLING GOAL 1
 
-			nxtDisplayBigTextLine(2,"%2d",g_center_goal_pos);
 
-			while(true){}
+			while(true){nxtDisplayBigTextLine(2,"%2d",g_center_goal_pos);}
 
 			wait1Msec(SECOND_OBJECTIVE_DELAY*DELAY_MULTIPLICATION_FACTOR);
 			abs_auto_end(ROLLGOAL1);

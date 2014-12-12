@@ -27,6 +27,9 @@ void abs_initialize()
 	disableDiagnosticsDisplay();
 	memset(g_input_array,0,INPUT_ARRAY_SIZE);
 	servo[goal_claw] = g_goal_claw_up;
+	servo[shutter] = g_shutter_open;
+	nMotorEncoder(shoulder) = 0;
+	nMotorEncoder(lift1) = 0;
 	abs_selection_program();
 	PlaySoundFile("! Click.rso");
 	abs_cscreen("Gyros   ","Calbrtng","  lol   ");
@@ -81,6 +84,7 @@ void abs_initialize()
 	//StartTask(abs_gyro_read);
 
 	abs_reset_angle_sensor_val(HARD_RESET);
+	HTEOPDsetLongRange(HTEOPD);
 
 	PlayTone(700, 10);
 
@@ -93,11 +97,12 @@ void abs_initialize()
 #endif
 
 	abs_dlog(__FILE__ ,"auto start","timestamp",nPgmTime);
+	servo[shutter] = g_shutter_closed;
 
 	eraseDisplay();
 	g_start_time = nPgmTime;
 
-	wait1Msec(STARTING_DELAY * DELAY_MULTIPLICATION_FACTOR);
+	//wait1Msec(STARTING_DELAY * DELAY_MULTIPLICATION_FACTOR);
 
 	eraseDisplay();
 }

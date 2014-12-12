@@ -28,8 +28,10 @@
 //const tMUXSensor HTIRS2 = msensor_S3_1;     // HiTechnic Infrared sensor
 const tMUXSensor HTAC = msensor_S2_1;
 const tMUXSensor HTGYRO = msensor_S3_1;	   // HiTechnic GYRO sensor
-const tMUXSensor HTIRS2 = msensor_S2_4;     // HiTechnic Infrared sensor 2
-const tMUXSensor HTIRS2_2 = msensor_S2_3;     // HiTechnic Infrared sensor 2
+const tMUXSensor HTIRS2_2 = msensor_S2_4;     // HiTechnic Infrared sensor 2
+const tMUXSensor HTIRS2 = msensor_S2_3;     // HiTechnic Infrared sensor 2
+const tMUXSensor LEGOTOUCH = msensor_S3_2;
+const tMUXSensor HTEOPD = msensor_S2_2;
 
 //#if EOPD_ACTIVE == 1
 //const tMUXSensor HTEOPD = msensor_S2_4;
@@ -192,13 +194,36 @@ int g_optical_sensor = 0;
 *
 *
 */
+bool g_auto_lift_done = false;
+
+const int g_lift_min_speed = 10;
+const int g_max_lift = 10000;
+const int g_low_lift = 0;
+const int g_mid_lift = 2500;
+const int g_tall_lift = 5850;
+const int g_center_lift = 6800;
+const int g_jog_lift = 200;
+
+const int g_shoulder_max = 8000;
+const int g_shoulder_tall = 7650;
+const int g_shoulder_low = 6209;
+const int g_shoulder_mid = 6900;
+const int g_shoulder_min_speed = 18;
+const int g_shoulder_center = 4600;
+const int g_shoulder_lower_min = 6500;
+
+const int g_min_lift = 500;
+const int g_low_min_lift = 500;
+const int g_tall_min_lift =	600;
+const int g_center_min_lift = 3000;
+
 const int g_lift_speed_down = -60;
 const int g_lift_speed_up = 100;
 
-const int g_shutter_open = 0;
-const int g_shutter_closed = 255;
+const int g_shutter_open = 255;
+const int g_shutter_closed = 127;
 
-const int g_goal_claw_up = 226;
+const int g_goal_claw_up = 225;
 const int g_goal_claw_down = 60;
 
 const int g_gyro_adjust = 5;//10;
@@ -214,7 +239,7 @@ const int g_optical_threshold = 100;//305;
 //const int g_optical_threshold = 30;
 //#endif
 
-const int g_IR_center_goal_dist = 64;
+const int g_IR_center_goal_dist = 125;
 
 const int g_optical_move_min_dist = 70;
 
@@ -338,7 +363,6 @@ typedef enum
 	END_POINT,
 } e_selection_values;
 
-
 /**
 *  @enum e_drive_type Tells the robot were the second movement will be starting from
 */
@@ -361,6 +385,11 @@ typedef enum
 	PARKING_ZONE,
 	STOP
 } e_scoring_options;
+
+//typedef enum
+//{
+
+//}
 
 //=========================================================
 // auto sub selections
@@ -622,7 +651,6 @@ int g_travel_dist = 0;
 int g_auto_starting_points = 2; //ramp or floor
 int g_first_objectives = 3;
 int g_second_objectives = 3;
-bool g_start_heading_forward = false;
 int g_drive_heading = 0;
 int g_ir_heading = 5;
 bool g_program_done = false;

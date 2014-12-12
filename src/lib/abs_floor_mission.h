@@ -23,11 +23,20 @@ void abs_floor_mission()
 	{
 	case STOP: break; //STOP
 	case ROLLGOAL1:
-	motor(left_motor)=100;
-	motor(right_motor)=100;
-	wait10Msec(9999);
-		//abs_drive(FORWARD, E_ANGLE, 335, 100, true, CORRECTION_DRIVE_TYPE);
+		abs_drive(BACKWARD, E_ANGLE, 60, 50, true, GYRO);
+		abs_turn(CLOCKWISE, POINT, TURN, 38, 40);
+		abs_drive(BACKWARD, E_ANGLE, 475, 50, true, GYRO);
+
+		abs_turn(COUNTERCLOCKWISE, POINT, TURN, 38, 40);
+
+		StartTask(abs_auto_pipe_score);
+		abs_drive(BACKWARD, E_ANGLE, 45, 15, true, GYRO);
 		servo[goal_claw] = g_goal_claw_down;
+		wait1Msec(500);
+		while(!g_auto_lift_done){}
+		wait1Msec(1000);
+
+		abs_second_objective(ROLLGOAL1);
 		break; //ROLLING GOAL 1
 	case CENTER_GOAL: break; //CENTER GOAL
 	case ROLLGOAL2: break; //ROLLING GOAL 2
