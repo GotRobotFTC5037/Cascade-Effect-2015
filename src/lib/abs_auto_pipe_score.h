@@ -39,6 +39,7 @@ task abs_auto_pipe_score()
 
 		if(lift_done&&shoulder_done)
 		{
+			wait1Msec(200);
 			servo[shutter] = g_shutter_open;
 			g_auto_lift_done = true;
 		}

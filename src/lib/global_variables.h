@@ -205,10 +205,10 @@ const int g_center_lift = 6800;
 const int g_jog_lift = 200;
 
 const int g_shoulder_max = 8000;
-const int g_shoulder_tall = 7650;
+const int g_shoulder_tall = 7620;//was 7650
 const int g_shoulder_low = 6209;
 const int g_shoulder_mid = 6900;
-const int g_shoulder_min_speed = 18;
+const int g_shoulder_min_speed = 24;//was 18
 const int g_shoulder_center = 4600;
 const int g_shoulder_lower_min = 6500;
 

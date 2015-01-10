@@ -24,10 +24,10 @@ void abs_floor_mission()
 	case STOP: break; //STOP
 	case ROLLGOAL1:
 		abs_drive(BACKWARD, E_ANGLE, 60, 50, true, GYRO);
-		abs_turn(CLOCKWISE, POINT, TURN, 38, 40);
-		abs_drive(BACKWARD, E_ANGLE, 475, 50, true, GYRO);
+		abs_turn(CLOCKWISE, POINT, TURN, 37, 34);
+		abs_drive(BACKWARD, E_ANGLE, 474, 50, true, GYRO);
 
-		abs_turn(COUNTERCLOCKWISE, POINT, TURN, 38, 40);
+		abs_turn(COUNTERCLOCKWISE, POINT, TURN, 38, 38);
 
 		StartTask(abs_auto_pipe_score);
 		abs_drive(BACKWARD, E_ANGLE, 45, 15, true, GYRO);

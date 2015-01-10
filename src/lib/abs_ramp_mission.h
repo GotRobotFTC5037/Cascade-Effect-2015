@@ -32,9 +32,9 @@ void abs_ramp_mission()
 		break; //STOP
 	case ROLLGOAL1:
 			StartTask(abs_IR_center_read);
-			abs_drive(BACKWARD, E_ANGLE, 430, 30, false, GYRO);
+			abs_drive(BACKWARD, E_ANGLE, 430, 30, false, NON_SENSOR);//GYRO);
 			StartTask(abs_auto_pipe_score);
-			abs_drive(BACKWARD, E_ANGLE, 45, 10, true, GYRO);
+			abs_drive(BACKWARD, E_ANGLE, 45, 10, true, NON_SENSOR);//GYRO);
 			servo[goal_claw] = g_goal_claw_down;
 			wait1Msec(500);
 			while(!g_auto_lift_done){}

@@ -49,6 +49,7 @@ void abs_auto_end(e_scoring_options second_start_pos)
 			abs_drive(FORWARD, E_ANGLE, 460, 100, true, GYRO);
 
 			abs_turn(COUNTERCLOCKWISE, POINT, TURN, 200, 60);
+			servo[goal_claw] = g_goal_claw_up;
 			abs_drive(BACKWARD, E_ANGLE, 30, 100, true, GYRO);
 
 
