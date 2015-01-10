@@ -30,9 +30,6 @@ void abs_auto_end(e_scoring_options second_start_pos)
 		{
 		case 1:
 
-
-
-
 		break;								//LOW AREA
 		}
 		break;
