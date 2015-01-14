@@ -40,9 +40,10 @@ task abs_sensors()
 		case 5: nxtDisplayBigTextLine(1,"3"); break;
 		case 6: nxtDisplayBigTextLine(1,"2"); break;
 		case 7: nxtDisplayBigTextLine(1,"1"); break;
+		//----------------------------; break;
 		}
 		nxtDisplayBigTextLine(3,"%1d",g_ir_bearing1);
-		nxtDisplayBigTextLine(5,"%3d %3d",HTEOPDreadRaw(HTEOPD),HTEOPDreadProcessed(HTEOPD));
+		//nxtDisplayBigTextLine(5,"%3d %3d",HTEOPDreadRaw(HTEOPD),HTEOPDreadProcessed(HTEOPD));
 
 		//-------------------------
 		// HiTechnic IR Sensor
@@ -52,8 +53,7 @@ task abs_sensors()
 
 		HTIRS2readAllACStrength(HTIRS2, g_acs1[0], g_acs1[1], g_acs1[2], g_acs1[3], g_acs1[4]);
 		//-----------------------------------
-		// code for the peaks of IR sensor
-		//-----------------------------------
+		// code for the peaks of IR sen-------
 
 		if (g_bearing_ac1!=0)								// we have a valid IR signal
 		{

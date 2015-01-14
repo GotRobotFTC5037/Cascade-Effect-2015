@@ -26,7 +26,7 @@ void abs_smoke_test_view(int test_num,int test_value1, int test_value2)
 	case 6: abs_cscreen("Shoulder","        ","%1d   %1d",test_value1,test_value2); break;
 	case 7: abs_cscreen("Impelars","        ","%1d   %1d",test_value1,test_value2); break;
 	case 8: abs_cscreen("shutter ","        ","%1d       ",test_value1); break;
-	case 9: abs_cscreen("N/A     ","        ","%1d       ",test_value1); break;
+	case 9: abs_cscreen("AutoLift","Tall    ","%1d       ",test_value1); break;
 	default: abs_cscreen("ERROR   ","        ","        "); break;
 	}
 }

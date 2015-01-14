@@ -31,7 +31,7 @@ const tMUXSensor HTGYRO = msensor_S3_1;	   // HiTechnic GYRO sensor
 const tMUXSensor HTIRS2_2 = msensor_S2_4;     // HiTechnic Infrared sensor 2
 const tMUXSensor HTIRS2 = msensor_S2_3;     // HiTechnic Infrared sensor 2
 const tMUXSensor LEGOTOUCH = msensor_S3_2;
-const tMUXSensor HTEOPD = msensor_S2_2;
+const tMUXSensor LEGOUS = msensor_S2_2;
 
 //#if EOPD_ACTIVE == 1
 //const tMUXSensor HTEOPD = msensor_S2_4;
@@ -205,12 +205,15 @@ const int g_center_lift = 6800;
 const int g_jog_lift = 200;
 
 const int g_shoulder_max = 8000;
-const int g_shoulder_tall = 7650;
+const int g_shoulder_tall = 7620;//was 7650
 const int g_shoulder_low = 6209;
 const int g_shoulder_mid = 6900;
-const int g_shoulder_min_speed = 18;
+const int g_shoulder_min_speed = 24;//was 18
 const int g_shoulder_center = 4600;
 const int g_shoulder_lower_min = 6500;
+
+const int g_brush_out_speed = -100;
+const int g_brush_in_speed = 60;
 
 const int g_min_lift = 500;
 const int g_low_min_lift = 500;

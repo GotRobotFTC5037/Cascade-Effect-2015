@@ -14,8 +14,11 @@
 #ifndef ABS_JOYSTICK_GUNNER_H
 #define ABS_JOYSTICK_GUNNER_H
 
+bool currently_dancing = false;
+
 task abs_intake_dance()
 {
+	currently_dancing = true;
 	while(true)
 	{
 		while(nMotorEncoder(lift1)<g_jog_lift)
@@ -44,9 +47,9 @@ task abs_joystick_gunner()
 
 	while(true)
 	{
-		nxtDisplayBigTextLine(1,"%3d", nMotorEncoder(lift1));
-		nxtDisplayBigTextLine(3,"%3d", nMotorEncoder(shoulder));//((((g_shoulder_mid-nMotorEncoder(shoulder))*100)/g_shoulder_max)+g_shoulder_min_speed));//nMotorEncoder(shoulder));
-		nxtDisplayBigTextLine(5,"%3d",(((nMotorEncoder(lift1)-0)*100)/g_max_lift)+g_lift_min_speed);//(((nMotorEncoder(lift1)-0)*100)/g_max_lift));
+		nxtDisplayBigTextLine(1,"%3d", g_bearing_ac1);
+		//nxtDisplayBigTextLine(3,"%3d", nMotorEncoder(shoulder));//((((g_shoulder_mid-nMotorEncoder(shoulder))*100)/g_shoulder_max)+g_shoulder_min_speed));//nMotorEncoder(shoulder));
+		//nxtDisplayBigTextLine(5,"%3d",(((nMotorEncoder(lift1)-0)*100)/g_max_lift)+g_lift_min_speed);//(((nMotorEncoder(lift1)-0)*100)/g_max_lift));
 		//-----------------------------
 		// flag motor control
 		//-----------------------------
@@ -148,11 +151,7 @@ task abs_joystick_gunner()
 		// ball lift buttons
 		//-----------------------------
 
-		if(TSreadState(LEGOTOUCH)==true)
-		{
-			nMotorEncoder(lift1) = 0;
-			shutter_state = g_shutter_closed;
-		}
+		if(TSreadState(LEGOTOUCH)==true) nMotorEncoder(lift1) = 0;
 
 		if(joystick.joy2_y1>10)
 		{
@@ -183,6 +182,7 @@ task abs_joystick_gunner()
 		else if(joy2Btn(6))  //CENTER GOAL SCORING POSISION
 		{
 			lift_active = 6;
+			shutter_state = g_shutter_closed;
 			if(nMotorEncoder(lift1)>g_center_lift) lift_move_dir_up = false;
 			else lift_move_dir_up = true;
 		}
@@ -203,11 +203,13 @@ task abs_joystick_gunner()
 		else if(joy2Btn(7))  //JOG INTAKE
 		{
 			lift_active = 7;
-			StartTask(abs_intake_dance);
+			shutter_state = g_shutter_closed;
+			if(!currently_dancing) StartTask(abs_intake_dance);
 		}
 		else if(lift_active == 7)
 		{
 			StopTask(abs_intake_dance);
+			currently_dancing = false;
 			lift_active = 1;
 		}
 		else if(joy2Btn(8)) lift_active = 8; //BALL LIFT AT FLOOR, INTAKE POSITION
@@ -231,6 +233,7 @@ task abs_joystick_gunner()
 		else if(joy2Btn(4)) //Y //TALL ROLLING GOAL SCORING POSITION
 		{
 			lift_active = 4;
+			shutter_state = g_shutter_closed;
 			if(nMotorEncoder(lift1)>g_tall_lift) lift_move_dir_up = false;
 			else lift_move_dir_up = true;
 		}
@@ -251,6 +254,7 @@ task abs_joystick_gunner()
 		else if(joy2Btn(3)) //B //MID ROLLING GOAL SCORING POSITION
 		{
 			lift_active = 3;
+			shutter_state = g_shutter_closed;
 			if(nMotorEncoder(lift1)>g_mid_lift) lift_move_dir_up = false;
 			else lift_move_dir_up = true;
 		}
@@ -271,6 +275,7 @@ task abs_joystick_gunner()
 		else if(joy2Btn(2)) //A //LOW ROLLING GOAL SCORING POSITION
 		{
 			lift_active = 2;
+			shutter_state = g_shutter_closed;
 			if(nMotorEncoder(lift1)>g_low_lift) lift_move_dir_up = false;
 			else lift_move_dir_up = true;
 		}
@@ -299,7 +304,7 @@ task abs_joystick_gunner()
 
 		if(joy1Btn(2))
 		{
-			motor[brush] = -60;
+			motor[brush] = g_brush_out_speed;
 		}
 		else if(joy1Btn(4))
 		{
@@ -308,7 +313,12 @@ task abs_joystick_gunner()
 		}
 		else if(joy2Btn(5))
 		{
-			motor[brush] = 20;
+			motor[brush] = g_brush_in_speed;
+			servo[impellar1] = 0;
+			servo[impellar2] = 255;
+		}
+		else if(shutter_state == g_shutter_open)
+		{
 			servo[impellar1] = 0;
 			servo[impellar2] = 255;
 		}

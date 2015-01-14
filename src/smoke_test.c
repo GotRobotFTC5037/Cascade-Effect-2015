@@ -51,7 +51,7 @@
 int test_value1 = 0;
 int test_value2 = 0;
 int test_num = 1;
-int total_tests_num = 8;
+int total_tests_num = 9;
 
 //==================================
 // main program
@@ -59,6 +59,9 @@ int total_tests_num = 8;
 task main()
 {
 	disableDiagnosticsDisplay();
+
+	nMotorEncoder(lift1) = 0;
+	nMotorEncoder(shoulder) = 0;
 
 	abs_cscreen("        ","        ","        ");
 	nxtDisplayBigTextLine(7, "        ");

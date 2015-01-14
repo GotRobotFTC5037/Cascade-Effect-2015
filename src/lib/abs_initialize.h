@@ -84,7 +84,6 @@ void abs_initialize()
 	//StartTask(abs_gyro_read);
 
 	abs_reset_angle_sensor_val(HARD_RESET);
-	HTEOPDsetLongRange(HTEOPD);
 
 	PlayTone(700, 10);
 
