@@ -47,9 +47,9 @@ task abs_joystick_gunner()
 
 	while(true)
 	{
-		nxtDisplayBigTextLine(1,"%3d", nMotorEncoder(lift1));
-		nxtDisplayBigTextLine(3,"%3d", nMotorEncoder(shoulder));//((((g_shoulder_mid-nMotorEncoder(shoulder))*100)/g_shoulder_max)+g_shoulder_min_speed));//nMotorEncoder(shoulder));
-		nxtDisplayBigTextLine(5,"%3d",(((nMotorEncoder(lift1)-0)*100)/g_max_lift)+g_lift_min_speed);//(((nMotorEncoder(lift1)-0)*100)/g_max_lift));
+		nxtDisplayBigTextLine(1,"%3d", g_bearing_ac1);
+		//nxtDisplayBigTextLine(3,"%3d", nMotorEncoder(shoulder));//((((g_shoulder_mid-nMotorEncoder(shoulder))*100)/g_shoulder_max)+g_shoulder_min_speed));//nMotorEncoder(shoulder));
+		//nxtDisplayBigTextLine(5,"%3d",(((nMotorEncoder(lift1)-0)*100)/g_max_lift)+g_lift_min_speed);//(((nMotorEncoder(lift1)-0)*100)/g_max_lift));
 		//-----------------------------
 		// flag motor control
 		//-----------------------------
@@ -304,7 +304,7 @@ task abs_joystick_gunner()
 
 		if(joy1Btn(2))
 		{
-			motor[brush] = -60;
+			motor[brush] = g_brush_out_speed;
 		}
 		else if(joy1Btn(4))
 		{
@@ -313,7 +313,12 @@ task abs_joystick_gunner()
 		}
 		else if(joy2Btn(5))
 		{
-			motor[brush] = 20;
+			motor[brush] = g_brush_in_speed;
+			servo[impellar1] = 0;
+			servo[impellar2] = 255;
+		}
+		else if(shutter_state == g_shutter_open)
+		{
 			servo[impellar1] = 0;
 			servo[impellar2] = 255;
 		}

@@ -38,7 +38,7 @@
 #include "lib/xander/hitechnic-gyro.h"
 #include "lib/xander/hitechnic-angle.h"
 #include "lib/xander/hitechnic-accelerometer.h"
-#include "lib/xander/hitechnic-eopd.h"
+#include "lib/xander/lego-ultrasound.h"
 
 //-----------------------
 // Custom include
