@@ -44,43 +44,42 @@
 // Custom include
 //-----------------------
 
-#include "lib/compile_flags.h"
 #include "lib/global_variables.h"
+#include "lib/compile_flags.h"
 #include "lib/abs_initialize.h"
-#include "abs_move_utils.h"
-#include "abs_gyro_drive.h"
-#define DRIVE_TYPE = TANK
+#include "lib/abs_dlog.h"
+#include "lib/abs_stay_on_ramp.h"
+#include "lib/abs_drive.h"
+#include "lib/abs_turn.h"
+#include "lib/abs_ramp_mission.h"
+#include "lib/abs_floor_mission.h"
+#define DRIVE_TYPE TANK
 
 //========================================
 // Main program
 //========================================
 task main()
 {
-	//int gyro_readings[200];
-	//int time_stamps[200];
-	//LogData=false;
+	/*Delete(LogFileName, LogIoResult);
+	OpenWrite(LogFileHandle, LogIoResult, LogFileName, LogFileSize);
+
+	abs_dlog(__FILE__ ,"Program start"," Start time:", nPgmTime);
+
+	abs_initialize();
 
 	disableDiagnosticsDisplay();
-	abs_cscreen("Gyros   ","Calbrtng","        ");
-	HTGYROstartCal(HTGYRO);
-	g_drift = 0;
-	if(g_gyro_noise>10)
-	{
-		g_error = ERR_GYRO_CAL;
-		g_error = ERROR_LETHAL;
-	}
-	if(HTSMUXreadPowerStatus(GYRO_MUX))
-	{
-		g_error = ERR_GYRO_MUX;
-		g_error = ERROR_LETHAL;
-	}
-	abs_cscreen("Program ","Ready   ","        ");
-	wait1Msec(200);
-	StartTask(abs_sensors);
-	PlayTone(700, 10);
 
-	while(true)
+	wait1Msec(STARTING_DELAY*1000);
+
+	switch(g_input_array[STARTING_POINT])
 	{
-		abs_gyro_drive(100, FORWARD);
+	case START_RAMP: abs_ramp_mission();	break;
+	case START_FLOOR: abs_floor_mission(); break;
+	default:
+		PlayTone(200,20);
+		break;
 	}
+
+	abs_dlog(__FILE__ ,"end auto", "End time:", nPgmTime);
+	Close(LogFileHandle, LogIoResult);*/
 }
