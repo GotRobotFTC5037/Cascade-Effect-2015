@@ -21,6 +21,8 @@
 
 void abs_smoke_execute(int test_num)
 {
+	int shoulder_done = false;
+	int lift_done = false;
 	while(nNxtButtonPressed!=kEnterButton)
 	{
 		switch(test_num)
@@ -158,7 +160,7 @@ void abs_smoke_execute(int test_num)
 			servo[impellar2] = 127;
 			break;
 		case 8:
-		if(nNxtButtonPressed==kLeftButton)
+			if(nNxtButtonPressed==kLeftButton)
 			{
 				servo[shutter] = g_shutter_closed;
 				PlaySoundFile("! Click.rso");
@@ -172,6 +174,31 @@ void abs_smoke_execute(int test_num)
 			}
 			break;
 		case 9:
+
+			if(nMotorEncoder(lift1)<g_tall_lift)
+			{
+				motor[lift1] = g_lift_speed_up;
+				motor[lift2] = g_lift_speed_up;
+			}
+			else
+			{
+				motor[lift1] = 0;
+				motor[lift2] = 0;
+				lift_done = true;
+			}
+			if(nMotorEncoder(lift1)>g_min_lift&&nMotorEncoder(shoulder)<g_shoulder_tall)
+				motor[shoulder] = ((((g_shoulder_tall-nMotorEncoder(shoulder))*100)/g_shoulder_max)+g_shoulder_min_speed);
+			else
+			{
+				shoulder_done = true;
+				motor[shoulder] = 0;
+			}
+
+			if(shoulder_done&&lift_done)
+			{
+				wait1Msec(800);
+				servo[shutter] = g_shutter_open;
+			}
 			break;
 		default: abs_cscreen("ERROR   ","Test 2 B","added   "); break;
 		}
