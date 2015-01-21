@@ -32,13 +32,13 @@ void abs_ramp_mission()
 		break; //STOP
 	case ROLLGOAL1:
 		StartTask(abs_IR_center_read);
-		abs_drive(BACKWARD, E_ANGLE, 430, 99, false, GYRO);
-		//StartTask(abs_auto_pipe_score);
-		abs_drive(BACKWARD, E_ANGLE, 45, 79, true, GYRO);
-		while(true)
+		abs_drive(BACKWARD, E_ANGLE, 475, 50, false, GYRO, DONT_SLOW_DOWN);
+		StartTask(abs_auto_pipe_score);
+		abs_drive(BACKWARD, E_ANGLE, 45, 30, true, GYRO, SLOW_DOWN);
+		/*while(true)
 		{
 			nxtDisplayBigTextLine(2,"%2d %2d", g_bearing_ac1, g_center_goal_pos);
-		}
+		}*/
 		servo[goal_claw] = g_goal_claw_down;
 		wait1Msec(500);
 		while(!g_auto_lift_done){}

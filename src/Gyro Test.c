@@ -49,11 +49,7 @@
 #include "lib/abs_initialize.h"
 #include "abs_move_utils.h"
 #include "abs_gyro_drive.h"
-#define DRIVE_TYPE = TANK
-
-//========================================
-// Main program
-//========================================
+#include "lib/abs_drive.h"
 task main()
 {
 	//int gyro_readings[200];
@@ -79,8 +75,6 @@ task main()
 	StartTask(abs_sensors);
 	PlayTone(700, 10);
 
-	while(true)
-	{
-		abs_gyro_drive(100, FORWARD);
-	}
+	abs_drive(BACKWARD, E_ANGLE, 500, 100, true, GYRO, SLOW_DOWN);
+	while(true){}
 }
