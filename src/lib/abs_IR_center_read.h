@@ -33,5 +33,6 @@ task abs_IR_center_read()
 	case 7: g_center_goal_pos = 1; break;
 	default: g_center_goal_pos = 0; break;
 	}
+	abs_dlog(__FILE__ ,"IR"," Pos", g_center_goal_pos);
 }
 #endif /*ABS_IR_CENTER_READ_H*/

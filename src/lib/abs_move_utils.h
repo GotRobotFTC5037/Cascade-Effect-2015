@@ -137,17 +137,17 @@ typedef enum
 //Tells the robot to turn and then slowdown when it approches its desination
 int adjusted_speed(int speed, int max_move_dist, int current, int coefficient, int percentage)
 {
-	int reduced_speed;
+	/*int reduced_speed;
 	if (max_move_dist - current >= 50)
 	{
 		reduced_speed = (speed/100)*((max_move_dist - current)*2);
 	}
-
-	/*float percent_of_speed = coefficient * sqrt(abs(max_move_dist-current)) + percentage;
+*/
+	float percent_of_speed = coefficient * sqrt(abs(max_move_dist-current)) + percentage;
 	int reduced_speed = (int)percent_of_speed * speed / 100;
 
 	if(reduced_speed > speed) { reduced_speed = speed; }
-	*/
+
 	return max(reduced_speed, MIN_DRIVE_SPEED);
 }
 /**
@@ -157,7 +157,7 @@ int adjusted_speed(int speed, int max_move_dist, int current, int coefficient, i
 *
 * Z = Current dist
 */
-#define adjusted_drive_speed(X, Y, Z) adjusted_speed(X, Y, Z, DRIVE_SPEED_COEFFICIENT, DRIVE_SPEED_PERCENTAGE_DROP)
+#define adjusted_drive_speed(X, Y, Z) adjusted_speed((X),(Y),(Z), DRIVE_SPEED_COEFFICIENT, DRIVE_SPEED_PERCENTAGE_DROP)
 
 
 /**
@@ -167,6 +167,6 @@ int adjusted_speed(int speed, int max_move_dist, int current, int coefficient, i
 *
 * Z = Current degrees
 */
-#define adjusted_turn_speed(X, Y, Z) adjusted_speed(X, Y, Z, TURN_SPEED_COEFFICIENT, TURN_SPEED_PERCENTAGE_DROP)
+#define adjusted_turn_speed(X, Y, Z) adjusted_speed((X),(Y),(Z), TURN_SPEED_COEFFICIENT, TURN_SPEED_PERCENTAGE_DROP)
 
 #endif /* !ABS_TURN_UTILS */

@@ -689,7 +689,7 @@ int g_selection_value = 0;
 
 #define MIN_DRIVE_SPEED 15
 #define MIN_TURN_SPEED 15
-#define DRIVE_SPEED_PERCENTAGE_DROP 25`
+#define DRIVE_SPEED_PERCENTAGE_DROP 25
 #define DRIVE_SPEED_COEFFICIENT 30
 #define TURN_SPEED_PERCENTAGE_DROP 50
 #define TURN_SPEED_COEFFICIENT 5
@@ -820,7 +820,9 @@ long g_curr_time = 0;
 long g_prev_time = 0;
 int g_raw_gyro = 0;
 int g_recont_heading = 0; //this is the recalculated const gyro heading
+int g_sonar = 0;
 
+bool force_done = false;
 /**
 * Sensor variables
 *

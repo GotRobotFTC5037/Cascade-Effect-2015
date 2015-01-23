@@ -42,31 +42,34 @@ void abs_auto_end(e_scoring_options second_start_pos)
 
 			StopTask(abs_auto_pipe_score);
 			StartTask(abs_auto_pipe_lower);
-			abs_turn(CLOCKWISE, POINT, TURN, 26, 40);
+			/*if(!force_done)*/
+			abs_turn(CLOCKWISE, POINT, TURN, 29, 40);
 			abs_drive(FORWARD, E_ANGLE, 460, 100, true, GYRO, DONT_SLOW_DOWN);
 
 			abs_turn(CLOCKWISE, POINT, TURN, 150, 70);
 			PlayTone(200, 20);
 			servo[goal_claw] = g_goal_claw_up;
-			abs_drive(BACKWARD, E_ANGLE, 100, 100, true, GYRO, SLOW_DOWN);
+			abs_drive(BACKWARD, E_ANGLE, 80, 100, true, GYRO, DONT_SLOW_DOWN);
 			switch (g_center_goal_pos)
 			{
 			case 1:
-				abs_drive(FORWARD, E_ANGLE, 205, 50, true, GYRO, SLOW_DOWN);
+				abs_drive(FORWARD, E_ANGLE, 170, 50, true, GYRO, DONT_SLOW_DOWN);
 				abs_turn(CLOCKWISE, POINT, TURN, 88, 70);
-				abs_drive(BACKWARD, E_ANGLE, 250, 50, true, GYRO, SLOW_DOWN);
+				abs_drive(BACKWARD, E_ANGLE, 220, 50, true, GYRO, DONT_SLOW_DOWN);
 				break;
 
-			case 2:
+				/*case 2:
 
-				break;
+				break;*/
 
 			case 3:
 
+				abs_drive(FORWARD, E_ANGLE, 250, 50, true, GYRO, DONT_SLOW_DOWN);
+				abs_turn(COUNTERCLOCKWISE, POINT, TURN, 7, 70);
 				break;
 
 			default:
-
+				//abs_drive(FORWARD, E_ANGLE, 250, 50, true, GYRO, DONT_SLOW_DOWN);\
 				break;
 			}
 

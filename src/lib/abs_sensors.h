@@ -44,7 +44,7 @@ task abs_sensors()
 		}
 		nxtDisplayBigTextLine(3,"%1d",g_ir_bearing1);
 		//nxtDisplayBigTextLine(5,"%3d %3d",HTEOPDreadRaw(HTEOPD),HTEOPDreadProcessed(HTEOPD));
-
+g_sonar = USreadDist(LEGOUS);
 		//-------------------------
 		// HiTechnic IR Sensor
 		//-------------------------
