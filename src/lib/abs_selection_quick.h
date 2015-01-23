@@ -38,24 +38,42 @@ void abs_selection_quick()
 		switch(g_quick_mission)
 		{
 		case 1:
-			abs_cscreen("Mission ","Hit And ","Run    1");
+			abs_cscreen("Mission ","Ramp Bsc","No Kick1");
 			g_input_array[STARTING_POINT] = START_RAMP;	//RAMP
 			g_input_array[STARTING_DELAY] = 0;
-			g_input_array[FIRST_OBJECTIVE] = CENTER_GOAL;					//CENTER GOAL
+			g_input_array[FIRST_OBJECTIVE] = ROLLGOAL1;					//ROLLGOAL1
 			g_input_array[FIRST_OBJECTIVE_DELAY] = 0;
-			g_input_array[SECOND_OBJECTIVE] = ROLLGOAL1;				//ROLLING GOAL 1
+			g_input_array[SECOND_OBJECTIVE] = PARKING_ZONE;				//PARKING_ZONE
 			g_input_array[SECOND_OBJECTIVE_DELAY] = 0;
-			g_input_array[END_POINT] = PARKING_ZONE;								//LOW AREA
+			g_input_array[END_POINT] = STOP;								//STOP
+
+			//abs_cscreen("Mission ","Hit And ","Run    1");
+			//g_input_array[STARTING_POINT] = START_RAMP;	//RAMP
+			//g_input_array[STARTING_DELAY] = 0;
+			//g_input_array[FIRST_OBJECTIVE] = CENTER_GOAL;					//CENTER GOAL
+			//g_input_array[FIRST_OBJECTIVE_DELAY] = 0;
+			//g_input_array[SECOND_OBJECTIVE] = ROLLGOAL1;				//ROLLING GOAL 1
+			//g_input_array[SECOND_OBJECTIVE_DELAY] = 0;
+			//g_input_array[END_POINT] = PARKING_ZONE;								//LOW AREA
 			break;
 		case 2:
-			abs_cscreen("Mission ","Ramp Bsc","Score 2");
+			abs_cscreen("Mission ","Ramp Bsc","Kick   2");
 			g_input_array[STARTING_POINT] = START_RAMP;					//RAMP
 			g_input_array[STARTING_DELAY] = 0;
 			g_input_array[FIRST_OBJECTIVE] = ROLLGOAL1;					//ROLLING GOAL 1
 			g_input_array[FIRST_OBJECTIVE_DELAY] = 0;
-			g_input_array[SECOND_OBJECTIVE] = STOP;					//STOP
+			g_input_array[SECOND_OBJECTIVE] = PARKING_ZONE;					//LOW AREA
 			g_input_array[SECOND_OBJECTIVE_DELAY] = 0;
-			g_input_array[END_POINT] = PARKING_ZONE;								//LOW AREA
+			g_input_array[END_POINT] = KICK_STAND;								//KICK STAND
+
+			//abs_cscreen("Mission ","Ramp Bsc","Score 2");
+			//g_input_array[STARTING_POINT] = START_RAMP;					//RAMP
+			//g_input_array[STARTING_DELAY] = 0;
+			//g_input_array[FIRST_OBJECTIVE] = ROLLGOAL1;					//ROLLING GOAL 1
+			//g_input_array[FIRST_OBJECTIVE_DELAY] = 0;
+			//g_input_array[SECOND_OBJECTIVE] = STOP;					//STOP
+			//g_input_array[SECOND_OBJECTIVE_DELAY] = 0;
+			//g_input_array[END_POINT] = PARKING_ZONE;								//LOW AREA
 			break;
 		case 3:
 			abs_cscreen("Mission ","FloorBsc","Score 3");

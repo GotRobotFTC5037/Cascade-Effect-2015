@@ -47,7 +47,7 @@ void abs_floor_mission()
 		{
 		case 1:
 			abs_drive(BACKWARD, E_ANGLE, 100, 60, true, GYRO, DONT_SLOW_DOWN);
-			abs_turn(COUNTERCLOCKWISE, POINT, TURN, 21, 40);
+			abs_turn(COUNTERCLOCKWISE, POINT, TURN, 23, 40);
 
 			abs_drive(BACKWARD, E_ANGLE, 250, 60, true, GYRO, DONT_SLOW_DOWN);
 
@@ -127,6 +127,7 @@ void abs_floor_mission()
 
 		break; //CENTER GOAL
 	case ROLLGOAL2: break; //ROLLING GOAL 2
+	default: break;
 	}
 }
 
