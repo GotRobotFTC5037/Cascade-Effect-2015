@@ -145,13 +145,20 @@ void abs_auto_end(e_scoring_options second_start_pos)
 						wait1Msec(500);
 
 						break;
-					default: break;
+					default:
+						break;
 					}
 					break; //ROLLGOAL1
+				default:
+					break;
 				}
 				break;  //KICK_STAND
+			default:
+				break;
 			}
 			break; //ROLLGOAL1
+		default:
+			break;
 		}
 
 		while(nMotorEncoder(shoulder)>50)
