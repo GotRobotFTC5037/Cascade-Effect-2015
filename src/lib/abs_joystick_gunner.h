@@ -151,7 +151,12 @@ task abs_joystick_gunner()
 		// ball lift buttons
 		//-----------------------------
 
-		if(TSreadState(LEGOTOUCH)==true) nMotorEncoder(lift1) = 0;
+		if(TSreadState(LEGOTOUCH))
+		{
+			nxtDisplayBigTextLine(2,"True");
+			//nMotorEncoder(lift1) = 0;
+		}
+		else nxtDisplayBigTextLine(2,"False");
 
 		if(joystick.joy2_y1>10)
 		{
