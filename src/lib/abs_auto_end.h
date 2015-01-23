@@ -48,22 +48,39 @@ void abs_auto_end(e_scoring_options second_start_pos)
 			switch(g_input_array[END_POINT])
 			{
 			case PARKING_ZONE:
-
 				StopTask(abs_auto_pipe_score);
 				StartTask(abs_auto_pipe_lower);
-				abs_turn(CLOCKWISE, POINT, TURN, 30, 40);
-				abs_drive(FORWARD, E_ANGLE, 460, 100, true, GYRO);
+				/*if(!force_done)*/
+				abs_turn(CLOCKWISE, POINT, TURN, 29, 40);
+				abs_drive(FORWARD, E_ANGLE, 460, 100, true, GYRO, DONT_SLOW_DOWN);
 
-				abs_turn(COUNTERCLOCKWISE, POINT, TURN, 200, 60);
+				abs_turn(CLOCKWISE, POINT, TURN, 150, 70);
+				PlayTone(200, 20);
 				servo[goal_claw] = g_goal_claw_up;
-				abs_drive(BACKWARD, E_ANGLE, 30, 100, true, GYRO);
+				abs_drive(BACKWARD, E_ANGLE, 80, 100, true, GYRO, DONT_SLOW_DOWN);
+				switch (g_center_goal_pos)
+				{
+				case 1:
+					abs_drive(FORWARD, E_ANGLE, 170, 50, true, GYRO, DONT_SLOW_DOWN);
+					abs_turn(CLOCKWISE, POINT, TURN, 88, 70);
+					abs_drive(BACKWARD, E_ANGLE, 220, 50, true, GYRO, DONT_SLOW_DOWN);
+					break;
 
+					/*case 2:
 
-				//abs_turn(CLOCKWISE, POINT, TURN, 45, 60);
-				//abs_drive(FORWARD, E_ANGLE, 85, 100, true, NON_SENSOR);//GYRO);
+					break;*/
 
-				break;								//LOW AREA
-			}
+				case 3:
+
+					abs_drive(FORWARD, E_ANGLE, 250, 50, true, GYRO, DONT_SLOW_DOWN);
+					abs_turn(COUNTERCLOCKWISE, POINT, TURN, 7, 70);
+					break;
+
+				default:
+					//abs_drive(FORWARD, E_ANGLE, 250, 50, true, GYRO, DONT_SLOW_DOWN);\
+					break;
+
+				}
 			break;
 		case ROLLGOAL2:
 			switch(g_input_array[END_POINT])

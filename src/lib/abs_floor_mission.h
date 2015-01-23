@@ -27,14 +27,14 @@ void abs_floor_mission()
 	{
 	case STOP: break; //STOP
 	case ROLLGOAL1:
-		abs_drive(BACKWARD, E_ANGLE, 60, 50, true, GYRO);
+		abs_drive(BACKWARD, E_ANGLE, 60, 50, true, GYRO, DONT_SLOW_DOWN);
 		abs_turn(CLOCKWISE, POINT, TURN, 37, 34);
-		abs_drive(BACKWARD, E_ANGLE, 474, 50, true, GYRO);
+		abs_drive(BACKWARD, E_ANGLE, 474, 50, true, GYRO, DONT_SLOW_DOWN);
 
 		abs_turn(COUNTERCLOCKWISE, POINT, TURN, 38, 38);
 
 		StartTask(abs_auto_pipe_score);
-		abs_drive(BACKWARD, E_ANGLE, 45, 15, true, GYRO);
+		abs_drive(BACKWARD, E_ANGLE, 45, 15, true, GYRO, DONT_SLOW_DOWN);
 		servo[goal_claw] = g_goal_claw_down;
 		wait1Msec(500);
 		while(!g_auto_lift_done){}

@@ -471,6 +471,14 @@ typedef enum
 	HARD_RESET
 } e_angle_reset_type;
 
+typedef enum
+{
+	SLOW_DOWN,
+	DONT_SLOW_DOWN
+} e_slow_down_at_end;
+
+e_slow_down_at_end slow_down_at_end = SLOW_DOWN;
+
 //=========================================================
 // auto movements
 //=========================================================
@@ -684,8 +692,8 @@ int g_selection_value = 0;
 
 #define MIN_DRIVE_SPEED 20
 #define MIN_TURN_SPEED 15
-#define DRIVE_SPEED_PERCENTAGE_DROP 50
-#define DRIVE_SPEED_COEFFICIENT 5
+#define DRIVE_SPEED_PERCENTAGE_DROP 25
+#define DRIVE_SPEED_COEFFICIENT 30
 #define TURN_SPEED_PERCENTAGE_DROP 50
 #define TURN_SPEED_COEFFICIENT 5
 /**
@@ -819,6 +827,7 @@ int g_recont_heading = 0; //this is the recalculated const gyro heading
 int g_IR_average = 0;
 int g_sonar_average = 0;
 
+bool force_done = false;
 /**
 * Sensor variables
 *
