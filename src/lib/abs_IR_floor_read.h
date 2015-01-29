@@ -22,6 +22,7 @@ void abs_IR_floor_read()
 {
 	memset(IR_tests,0,5);
 	memset(sonar_tests,0,5);
+	g_sonar_average = 0;
 
 	for(int i = 0;i<5;i++)
 	{

@@ -30,7 +30,7 @@
 #include "abs_get_angle_sensor_val.h"
 #include "abs_move_utils.h"
 
-void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int dist, int speed, bool stop_at_end, e_drive_type drive_type)
+void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int dist, int speed, bool stop_at_end, e_drive_type drive_type, e_slow_down_at_end slowDown)
 {
 	/** logging constants */
 	const string speed_str = "speed";
@@ -272,21 +272,46 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 		{
 			if(drive_type == GYRO)
 			{
-				abs_gyro_drive(adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_TU)),dir);
+				if(slowDown == SLOW_DOWN)
+				{
+					abs_gyro_drive(adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_TU)),dir);
+				}
+				else
+				{
+					abs_gyro_drive(speed, dir);
+				}
 			}
+
 
 			/** No gyro correction*/
 			else
 			{
-				if(dir == FORWARD)
+				if(slowDown == SLOW_DOWN)
 				{
-					motor[left_motor] = adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_TU));
-					motor[right_motor] = adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_TU));
+					if(dir == FORWARD)
+					{
+						motor[left_motor] = adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_TU));
+						motor[right_motor] = adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_TU));
+					}
+					else
+					{
+						motor[left_motor] = -adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_TU));
+						motor[right_motor] = -adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_TU));
+					}
 				}
 				else
 				{
-					motor[left_motor] = -adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_TU));
-					motor[right_motor] = -adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_TU));
+					if(dir == FORWARD)
+					{
+						motor[left_motor] = speed;
+						motor[right_motor] = speed;
+					}
+					else
+					{
+						motor[left_motor] = -speed;
+						motor[right_motor] = -speed;
+					}
+
 				}
 			}
 		}
@@ -370,9 +395,9 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 
 	//if(dist_method == E_OPTICAL) servo[optical_servo] = OPTICAL_SERVO_UP;
 
-//#if EOPD_ACTIVE == 0
-//	if(dist_method==E_LIGHT) LSsetInactive(LEGOLS);
-//#endif
+	//#if EOPD_ACTIVE == 0
+	//	if(dist_method==E_LIGHT) LSsetInactive(LEGOLS);
+	//#endif
 	//if(dist_record==true)
 	//{
 	//	if(g_start_point==1)

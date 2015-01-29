@@ -93,7 +93,7 @@ void abs_initialize()
 
 #else
 	while(nNxtButtonPressed == kEnterButton){}
-	if(nNxtButtonPressed != kEnterButton) wait1Msec(3000);
+	if(nNxtButtonPressed != kEnterButton) {}//wait1Msec(3000);
 #endif
 
 	abs_dlog(__FILE__ ,"auto start","timestamp",nPgmTime);
