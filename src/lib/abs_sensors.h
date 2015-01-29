@@ -35,16 +35,21 @@ task abs_sensors()
 	(gyro_read % 10 == 0) ? gyro_read=0 : gyro_read++;
 
 		//nxtDisplayBigTextLine(1,"Gyro:%1d",g_const_heading);
-		switch(g_bearing_ac1)
-		{
-		case 5: nxtDisplayBigTextLine(1,"3"); break;
-		case 6: nxtDisplayBigTextLine(1,"2"); break;
-		case 7: nxtDisplayBigTextLine(1,"1"); break;
-		//----------------------------; break;
-		}
-		nxtDisplayBigTextLine(3,"%1d",g_ir_bearing1);
-		//nxtDisplayBigTextLine(5,"%3d %3d",HTEOPDreadRaw(HTEOPD),HTEOPDreadProcessed(HTEOPD));
+		nxtDisplayBigTextLine(1,"%2d %2d",g_bearing_ac1,g_bearing_ac2);
+		nxtDisplayBigTextLine(3,"%2d %2d",g_IR_average, g_sonar_average);
+		nxtDisplayBigTextLine(5,"%3d %1d",g_sonar,g_center_goal_pos);
 
+		g_sonar = USreadDist(LEGOUS);
+
+		//switch(g_bearing_ac1)
+		//{
+		//case 5: nxtDisplayBigTextLine(1,"3"); break;
+		//case 6: nxtDisplayBigTextLine(1,"2"); break;
+		//case 7: nxtDisplayBigTextLine(1,"1"); break;
+		////----------------------------; break;
+		//}
+		//nxtDisplayBigTextLine(5,"%3d %3d",HTEOPDreadRaw(HTEOPD),HTEOPDreadProcessed(HTEOPD));
+g_sonar = USreadDist(LEGOUS);
 		//-------------------------
 		// HiTechnic IR Sensor
 		//-------------------------

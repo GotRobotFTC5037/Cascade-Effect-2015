@@ -40,6 +40,7 @@
 #include "lib/xander/hitechnic-gyro.h"
 #include "lib/xander/hitechnic-angle.h"
 #include "lib/xander/lego-touch.h"
+#include "lib/xander/lego-ultrasound.h"
 
 //-----------------------
 // custom functions includes
