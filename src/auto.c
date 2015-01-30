@@ -46,6 +46,7 @@
 
 #include "lib/global_variables.h"
 #include "lib/compile_flags.h"
+#include "lib/abs_IR_floor_read.h"
 #include "lib/abs_initialize.h"
 #include "lib/abs_dlog.h"
 #include "lib/abs_stay_on_ramp.h"
@@ -53,6 +54,10 @@
 #include "lib/abs_turn.h"
 #include "lib/abs_ramp_mission.h"
 #include "lib/abs_floor_mission.h"
+#include "lib/abs_auto_center_pipe_score.h"
+#include "lib/abs_auto_pipe_lower_mid.h"
+#include "lib/abs_IR_floor_read.h"
+
 #define DRIVE_TYPE TANK
 
 //========================================
@@ -69,12 +74,15 @@ task main()
 
 	disableDiagnosticsDisplay();
 
-	wait1Msec(STARTING_DELAY*1000);
+	//wait1Msec(STARTING_DELAY*1000);
 
 	switch(g_input_array[STARTING_POINT])
 	{
 	case START_RAMP: abs_ramp_mission();	break;
-	case START_FLOOR: abs_floor_mission(); break;
+	case START_FLOOR:
+		abs_IR_floor_read();
+		abs_floor_mission();
+		break;
 	default:
 		PlayTone(200,20);
 		break;

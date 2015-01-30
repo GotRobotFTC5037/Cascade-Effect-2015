@@ -30,7 +30,7 @@ const tMUXSensor HTAC = msensor_S2_1;
 const tMUXSensor HTGYRO = msensor_S3_1;	   // HiTechnic GYRO sensor
 const tMUXSensor HTIRS2_2 = msensor_S2_4;     // HiTechnic Infrared sensor 2
 const tMUXSensor HTIRS2 = msensor_S2_3;     // HiTechnic Infrared sensor 2
-const tMUXSensor LEGOTOUCH = msensor_S3_2;
+const tMUXSensor LEGOTOUCH = msensor_S3_4;//2;
 const tMUXSensor LEGOUS = msensor_S2_2;
 
 //#if EOPD_ACTIVE == 1
@@ -243,6 +243,7 @@ const int g_optical_threshold = 100;//305;
 //#endif
 
 const int g_IR_center_goal_dist = 125;
+const int g_center_pos_sonar_dist = 100;
 
 const int g_optical_move_min_dist = 70;
 
@@ -382,6 +383,7 @@ typedef enum
 	SCORE_ERROR,
 	ROLLGOAL1,
 	CENTER_GOAL,
+	KICK_STAND,
 	ROLLGOAL2,
 	START_RAMP,
 	START_FLOOR,
@@ -657,15 +659,16 @@ int g_debug_time_2 = 0;
 
 int g_quick_mission = 1;
 int g_max_quick_missions = 6;
-int g_auto_ending_points = 2;
+int g_auto_ending_points = 3;
 int g_travel_dist = 0;
 int g_auto_starting_points = 2; //ramp or floor
 int g_first_objectives = 3;
-int g_second_objectives = 3;
+int g_second_objectives = 4;
 int g_drive_heading = 0;
 int g_ir_heading = 5;
 bool g_program_done = false;
 int g_center_goal_pos = 0;
+
 
 bool g_joy1_enabled = false;
 bool g_joy2_enabled = false;
@@ -687,7 +690,7 @@ int g_selection_value = 0;
 *		Tells the robot how fast it should drop the speed
 */
 
-#define MIN_DRIVE_SPEED 15
+#define MIN_DRIVE_SPEED 20
 #define MIN_TURN_SPEED 15
 #define DRIVE_SPEED_PERCENTAGE_DROP 25
 #define DRIVE_SPEED_COEFFICIENT 30
@@ -819,8 +822,10 @@ float g_rel_heading = 0;
 long g_curr_time = 0;
 long g_prev_time = 0;
 int g_raw_gyro = 0;
-int g_recont_heading = 0; //this is the recalculated const gyro heading
 int g_sonar = 0;
+int g_recont_heading = 0; //this is the recalculated const gyro heading
+int g_IR_average = 0;
+int g_sonar_average = 0;
 
 bool force_done = false;
 /**
