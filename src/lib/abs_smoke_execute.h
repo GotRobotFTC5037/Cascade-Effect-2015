@@ -28,23 +28,25 @@ void abs_smoke_execute(int test_num)
 		switch(test_num)
 		{
 		case 1:
+
+
+
 			if(nNxtButtonPressed==kLeftButton)
 			{
 				motor[lift1] = g_lift_speed_down;
 				motor[lift2] = g_lift_speed_down;
-				abs_smoke_test_view(test_num,g_lift_speed_down,0);
 				PlaySoundFile("! Click.rso");
-				while(nNxtButtonPressed==kLeftButton){}
+				while(nNxtButtonPressed==kLeftButton){ abs_smoke_test_view(test_num,g_lift_speed_down,nMotorEncoder(lift1)); }
 			}
 			else if(nNxtButtonPressed==kRightButton)
 			{
 				motor[lift1] = g_lift_speed_up;
 				motor[lift2] = g_lift_speed_up;
-				abs_smoke_test_view(test_num,g_lift_speed_up,0);
 				PlaySoundFile("! Click.rso");
-				while(nNxtButtonPressed==kRightButton){}
+				while(nNxtButtonPressed==kRightButton){ abs_smoke_test_view(test_num,g_lift_speed_up,nMotorEncoder(lift1)); }
 			}
-			abs_smoke_test_view(test_num,0,0);
+			abs_smoke_test_view(test_num,0,nMotorEncoder(lift1));
+
 			motor[lift1] = 0;
 			motor[lift2] = 0;
 			break;

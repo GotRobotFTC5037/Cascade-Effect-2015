@@ -121,8 +121,11 @@ void abs_selection_custom()
 			else abs_cscreen("Second  ","Objectiv","CENTGOAL"); break;
 		case 3: if(g_input_array[FIRST_OBJECTIVE]==3) abs_cscreen("Second  ","Objectiv","N/A     ");
 			else abs_cscreen("Second  ","Objectiv","ROLGOAL2"); break;
+		case 4: if(g_input_array[FIRST_OBJECTIVE]==4) abs_cscreen("Second  ","Objectiv","N/A     ");
+			else abs_cscreen("Second  ","Objectiv","KIKSTAND"); break;
 		}
 	}
+	if(g_input_array[SECOND_OBJECTIVE]==4) g_input_array[SECOND_OBJECTIVE] = KICK_STAND;
 	PlaySoundFile("! Click.rso");
 	while(nNxtButtonPressed == kEnterButton){}
 	eraseDisplay();
@@ -157,8 +160,10 @@ void abs_selection_custom()
 		case 0: abs_cscreen("End pnt ","ERROR   ","        "); break;
 		case 1: abs_cscreen("End pnt ","Low Area","        "); break;
 		case 2: abs_cscreen("End pnt ","STOP    ","        "); break;
+		case 3: abs_cscreen("End pnt ","ROLGOAL1","        "); break;
 		}
 	}
+	if(g_input_array[END_POINT] == 3) g_input_array[END_POINT] = ROLLGOAL1;
 	PlaySoundFile("! Click.rso");
 	while(nNxtButtonPressed == kEnterButton){}
 	eraseDisplay();

@@ -28,7 +28,6 @@ void abs_ramp_mission()
 	switch(g_input_array[FIRST_OBJECTIVE])
 	{
 	case STOP:
-
 		wait1Msec(STARTING_DELAY*DELAY_MULTIPLICATION_FACTOR);
 		abs_second_objective(STOP);
 		break; //STOP
@@ -58,6 +57,11 @@ void abs_ramp_mission()
 
 		wait1Msec(STARTING_DELAY*DELAY_MULTIPLICATION_FACTOR);
 		abs_second_objective(ROLLGOAL2);
+		break;
+	case KICK_STAND:
+
+		wait1Msec(STARTING_DELAY*DELAY_MULTIPLICATION_FACTOR);
+		abs_second_objective(KICK_STAND);
 		break;
 	}
 }
