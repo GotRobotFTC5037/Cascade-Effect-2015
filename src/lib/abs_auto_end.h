@@ -64,8 +64,8 @@ void abs_auto_end(e_scoring_options second_start_pos)
 
 			case 3:
 
-				abs_drive(FORWARD, E_ANGLE, 250, 50, true, GYRO, DONT_SLOW_DOWN);
-				abs_turn(COUNTERCLOCKWISE, POINT, TURN, 7, 70);
+				/*abs_drive(FORWARD, E_ANGLE, 250, 50, true, GYRO, DONT_SLOW_DOWN);
+				abs_turn(COUNTERCLOCKWISE, POINT, TURN, 7, 70);*/
 				break;
 
 			default:
