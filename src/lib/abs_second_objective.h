@@ -19,40 +19,41 @@
 #include "abs_auto_end.h"
 #include "abs_auto_pipe_lower_mid.h"
 
-void abs_second_objective(e_scoring_options second_start_pos)
+e_scoring_options abs_second_objective(e_scoring_options previously_completed_obj, e_scoring_options current_obj, int center_goal_pos)
 {
-	if(g_input_array[SECOND_OBJECTIVE]==STOP)
+	/** assume that the last successfully completed objective is the one that has already completed */
+	e_scoring_options last_successful_obj = previously_completed_obj;
+
+	if(current_obj == STOP)
 	{
-		abs_auto_end(g_input_array[FIRST_OBJECTIVE]);
+		last_successful_obj = previously_completed_obj;
 	}
 	else
 	{
-		switch(second_start_pos)
+		switch(previously_completed_obj)
 		{
 		case CENTER_GOAL:
-			switch(g_input_array[SECOND_OBJECTIVE])
+			switch(current_obj)
 			{
 			case ROLLGOAL1:
-				wait1Msec(SECOND_OBJECTIVE_DELAY*DELAY_MULTIPLICATION_FACTOR);
-				switch(g_center_goal_pos)
+				switch(center_goal_pos)
 				{
 				case 1: break;
 				case 2: break;
 				case 3: break;
 				default: break;
 				}
-				abs_auto_end(ROLLGOAL1);
+				last_successful_obj = current_obj;
 				break;
 			case ROLLGOAL2:
-				wait1Msec(SECOND_OBJECTIVE_DELAY*DELAY_MULTIPLICATION_FACTOR);
-				switch(g_center_goal_pos)
+				switch(center_goal_pos)
 				{
 				case 1: break;
 				case 2: break;
 				case 3: break;
 				default: break;
 				}
-				abs_auto_end(ROLLGOAL2);
+				last_successful_obj = current_obj;
 				break;
 			case KICK_STAND:
 
@@ -67,7 +68,7 @@ void abs_second_objective(e_scoring_options second_start_pos)
 				StopTask(abs_auto_pipe_lower_mid);
 
 				wait1Msec(200);
-				abs_auto_end(KICK_STAND);
+				last_successful_obj = current_obj;
 				break;
 
 			default:
@@ -76,7 +77,7 @@ void abs_second_objective(e_scoring_options second_start_pos)
 			break;
 
 		case ROLLGOAL1: //ROLLING GOAL 1
-			switch(g_input_array[SECOND_OBJECTIVE])
+			switch(current_obj)
 			{
 			case PARKING_ZONE:
 				StopTask(abs_auto_pipe_score);
@@ -90,26 +91,30 @@ void abs_second_objective(e_scoring_options second_start_pos)
 				servo[goal_claw] = g_goal_claw_up;
 				abs_drive(BACKWARD, E_ANGLE, 65, 100, true, GYRO, DONT_SLOW_DOWN);
 
-				abs_auto_end(PARKING_ZONE);
+				last_successful_obj = current_obj;
+				break;
+			default:
+				last_successful_obj = previously_completed_obj;
 				break;
 			}
 
 		case ROLLGOAL2: //ROLLING GOAL 2
 
-			wait1Msec(SECOND_OBJECTIVE_DELAY*DELAY_MULTIPLICATION_FACTOR);
-			abs_auto_end(ROLLGOAL2);
+			last_successful_obj = previously_completed_obj;
 			break;
 
 		case KICK_STAND:
 
-			wait1Msec(SECOND_OBJECTIVE_DELAY*DELAY_MULTIPLICATION_FACTOR);
 			abs_auto_end(KICK_STAND);
+			last_successful_obj = previously_completed_obj;
 			break;
 
 		default:
 			break;
 		}
 	}
+
+	return last_successful_obj;
 }
 
 #endif /* !ABS_SECOND_OBJECTIVE_H */

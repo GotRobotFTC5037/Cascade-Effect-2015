@@ -19,11 +19,11 @@
 #include "abs_auto_pipe_score.h"
 #include "abs_auto_pipe_lower.h"
 
-void abs_auto_end(e_scoring_options second_start_pos)
+void abs_auto_end(e_scoring_options previously_completed_obj, e_scoring_options current_obj, int center_goal_pos)
 {
-	if(g_input_array[END_POINT]==STOP)
+	if(current_obj==STOP)
 	{
-		if(g_input_array[STARTING_POINT] == START_FLOOR && g_input_array[FIRST_OBJECTIVE] == CENTER_GOAL && g_input_array[SECOND_OBJECTIVE] == KICK_STAND && g_center_goal_pos == 3)
+		if(g_input_array[STARTING_POINT] == START_FLOOR && g_input_array[FIRST_OBJECTIVE] == CENTER_GOAL && g_input_array[SECOND_OBJECTIVE] == KICK_STAND && center_goal_pos == 3)
 		{
 			abs_drive(BACKWARD, E_ANGLE, 100, 60, true, GYRO, DONT_SLOW_DOWN);
 			abs_turn(COUNTERCLOCKWISE, POINT, TURN, 90, 50);
@@ -32,11 +32,11 @@ void abs_auto_end(e_scoring_options second_start_pos)
 	}
 	else
 	{
-		switch(second_start_pos)
+		switch(previously_completed_obj)
 		{
 		case PARKING_ZONE:
 
-			switch (g_center_goal_pos)
+			switch (center_goal_pos)
 			{
 			case 1:
 				wait1Msec(50);
@@ -61,7 +61,7 @@ void abs_auto_end(e_scoring_options second_start_pos)
 
 			break;
 		case CENTER_GOAL:
-			switch(g_input_array[END_POINT])
+			switch(current_obj)
 			{
 			case PARKING_ZONE:
 
@@ -71,7 +71,7 @@ void abs_auto_end(e_scoring_options second_start_pos)
 		case STOP:
 			break;
 		case ROLLGOAL1:
-			switch(g_input_array[END_POINT])
+			switch(current_obj)
 			{
 			case PARKING_ZONE:
 				StopTask(abs_auto_pipe_score);
@@ -84,7 +84,7 @@ void abs_auto_end(e_scoring_options second_start_pos)
 				PlayTone(200, 20);
 				servo[goal_claw] = g_goal_claw_up;
 				abs_drive(BACKWARD, E_ANGLE, 65, 100, true, GYRO, DONT_SLOW_DOWN);
-				switch (g_center_goal_pos)
+				switch (center_goal_pos)
 				{
 				case 1:
 					wait1Msec(50);
@@ -114,18 +114,18 @@ void abs_auto_end(e_scoring_options second_start_pos)
 			}
 			break;
 		case ROLLGOAL2:
-			switch(g_input_array[END_POINT])
+			switch(current_obj)
 			{
 			case PARKING_ZONE: break;								//LOW AREA
 			}
 			break;
 		case KICK_STAND:
-			switch(g_input_array[END_POINT])
+			switch(current_obj)
 			{
 			case PARKING_ZONE: break;								//LOW AREA
 			case ROLLGOAL1:
 
-				switch(g_center_goal_pos)
+				switch(center_goal_pos)
 				{
 				case 1: break;
 				case 2: break;
