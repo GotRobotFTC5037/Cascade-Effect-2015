@@ -160,7 +160,8 @@ void abs_auto_end(e_scoring_options second_start_pos)
 					wait1Msec(100);
 					PlayTone(200,20);
 
-					abs_turn(CLOCKWISE, SWING, TURN, 24, 60);
+					//abs_turn(CLOCKWISE, SWING, TURN, 24, 60);
+					abs_turn(CLOCKWISE, SWING, TURN, 41, 60);
 					wait1Msec(400);
 
 					abs_drive(BACKWARD, E_TIME, 800, 30, true, GYRO, DONT_SLOW_DOWN);

@@ -242,7 +242,8 @@ const int g_optical_threshold = 100;//305;
 //const int g_optical_threshold = 30;
 //#endif
 
-const int g_IR_center_goal_dist = 125;
+const int g_IR_center_goal_dist_180 = 324;
+const int g_IR_center_goal_dist_classic = 125;
 const int g_center_pos_sonar_dist = 100;
 
 const int g_optical_move_min_dist = 70;
@@ -824,8 +825,6 @@ long g_prev_time = 0;
 int g_raw_gyro = 0;
 int g_sonar = 0;
 int g_recont_heading = 0; //this is the recalculated const gyro heading
-int g_IR_average = 0;
-int g_sonar_average = 0;
 
 bool force_done = false;
 /**
@@ -845,12 +844,6 @@ bool force_done = false;
 *
 * @var g_ir_bearing2
 *		the calibrated value from the second IR sensor
-*
-* @var g_acs1
-*		The value of the accelermoeter to deplay on the screen
-*
-* @var g_acs2
-*		The value of the accelermoeter to deplay on the screen
 *
 * @var g_curr_dir1
 *		The value of the direction to deplay on the screen
@@ -881,48 +874,20 @@ float g_curr_dir2 = 0.0;
 int g_misc = 0;
 bool g_reset_angle = false;
 
-//-----------------------------
-// accelermoeter variables
-//-----------------------------
-
-/**
-* @var g_accelermoeter_sensor
-*		 Tells the robot the volosity its self
-* @var g_x_axis
-*		Tells the robot its x axis
-* @var g_y_axis
-*		 Tells the robot its y axis
-* @var g_z_axis
-*		Tells the robot its z axis
-* @var g_target_angle
-*		Tells the robot the tegeted posion
-* @var g_accelermoeter_reads
-*		Tells the robot the the amount of times it read the accelermoeter
-* @var g_accelermoeter_array
-*		Tells the robot the accelermoeter array
-* @var g_accelermoeter_total_value
-*		 Tells the robot the value of the accelermoeter
-* @var g_accelermoeter_average
-*		Tells the robot the avage number for the accelermoeter
-*/
-
-int g_accelermoeter_sensor = 0;
-int g_x_axis = 0;
-int g_y_axis = 0;
-int g_z_axis = 0;
-const int g_target_angle = 110;
-ubyte g_accelermoeter_reads = 0;
-int g_accelermoeter_array [] = {0,30};
-ubyte g_accelermoeter_total_value = 0;
-int g_accelermoeter_average = 0;
-
-
 /**
 * @var g_sensor_reference_drive
 *		Tells the robot if it should use sensors to help it drive
 */
 
 bool g_sensor_reference_drive = false;
+
+typedef enum
+{
+	IR_CLASSIC,
+	IR_180
+} e_IR_types;
+
+e_IR_types g_selected_IR = IR_180;
 
 /**
 *  @enum e_light_sensor_status Tells the robot if it should turn on the light sensor
@@ -961,8 +926,6 @@ int g_graph_selection_tab = 0;
 *     Tells the robot that theres a error with the sensor mux
 *  @def ERR_JOYSTICKS
 *     Tells the robot that theres a error with the joysticks
-*  @def ERR_ACCELERMOETER
-*     Tells the robot that theres a error with the accelermoeter
 *  @var g_error
 *			Tells the robot the number for an error
 */
@@ -971,7 +934,6 @@ int g_graph_selection_tab = 0;
 #define ERR_GYRO_MUX 2
 #define ERR_SENSOR_MUX 3
 #define ERR_JOYSTICKS 4
-#define ERR_ACCELERMOETER 5
 
 int g_error = 0;
 

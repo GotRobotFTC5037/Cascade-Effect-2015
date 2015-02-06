@@ -352,6 +352,16 @@ task abs_joystick_gunner()
 			shutter_button_pressed = true;
 		}
 		servo[shutter] = shutter_state;
+
+		//-----------------------------
+		// arm reset button (this button will set both the shoulder and the lift encoders to 0, use only if compleatly needed)
+		//-----------------------------
+
+		if(joy1Btn(1)&&joy1Btn(3))
+		{
+			nMotorEncoder[lift1] = 0;
+			nMotorEncoder[shoulder] = 0;
+		}
 	}
 }
 

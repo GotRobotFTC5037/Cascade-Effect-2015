@@ -76,7 +76,7 @@ void abs_selection_quick()
 			//g_input_array[END_POINT] = PARKING_ZONE;								//LOW AREA
 			break;
 		case 3:
-			abs_cscreen("Mission ","FloorBsc","Score 3");
+			abs_cscreen("Mission ","FloorBsc","Score  3");
 			g_input_array[STARTING_POINT] = START_FLOOR;					//FLOOR
 			g_input_array[STARTING_DELAY] = 0;
 			g_input_array[FIRST_OBJECTIVE] = ROLLGOAL1;					//ROLLING GOAL 1
@@ -86,7 +86,7 @@ void abs_selection_quick()
 			g_input_array[END_POINT] = PARKING_ZONE;								//LOW AREA
 			break;
 		case 4:
-			abs_cscreen("Mission ","F CENTR4","KICK ROL");
+			abs_cscreen("Mission ","F Center","KickRol4");
 			g_input_array[STARTING_POINT] = START_FLOOR;					//FLOOR
 			g_input_array[STARTING_DELAY] = 0;
 			g_input_array[FIRST_OBJECTIVE] = CENTER_GOAL;					//CENTER GOAL
@@ -104,7 +104,7 @@ void abs_selection_quick()
 			//g_input_array[END_POINT] = PARKING_ZONE;								//LOW AREA
 			break;
 		case 5:
-			abs_cscreen("Mission ","F CENTER","KICK  5");
+			abs_cscreen("Mission ","F Center","Kick   5");
 			g_input_array[STARTING_POINT] = START_FLOOR;					//FLOOR
 			g_input_array[STARTING_DELAY] = 0;
 			g_input_array[FIRST_OBJECTIVE] = CENTER_GOAL;					//CENTER GOAL

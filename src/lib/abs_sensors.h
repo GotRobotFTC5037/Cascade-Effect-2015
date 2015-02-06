@@ -36,7 +36,7 @@ task abs_sensors()
 
 		//nxtDisplayBigTextLine(1,"Gyro:%1d",g_const_heading);
 		nxtDisplayBigTextLine(1,"%2d %2d",g_bearing_ac1,g_bearing_ac2);
-		nxtDisplayBigTextLine(3,"%2d %2d",g_IR_average, g_sonar_average);
+		//nxtDisplayBigTextLine(3,"%2d %2d",g_IR_average, g_sonar_average);
 		nxtDisplayBigTextLine(5,"%3d %1d",g_sonar,g_center_goal_pos);
 
 		g_sonar = USreadDist(LEGOUS);
@@ -166,30 +166,6 @@ g_sonar = USreadDist(LEGOUS);
 		g_recont_heading = g_const_heading % 360;
 		if(g_recont_heading<0) g_recont_heading += 360;
 		*/
-		//-------------------------
-		// HiTechnic accelermoeter
-		//-------------------------
-
-		HTACreadAllAxes(HTAC, g_x_axis, g_y_axis, g_z_axis);
-		g_accelermoeter_sensor = g_x_axis;
-
-		if(g_sensor_reference_drive == true)
-		{
-			g_accelermoeter_reads++;
-			g_accelermoeter_array[g_accelermoeter_reads%50]=g_accelermoeter_sensor;
-			for(int i=0;i<30;i++)
-			{
-				g_accelermoeter_total_value = g_accelermoeter_array[i];
-			}
-			g_accelermoeter_average = g_accelermoeter_total_value/50;
-		}
-		else
-		{
-			g_accelermoeter_reads = 0;
-			g_accelermoeter_total_value = 0;
-			g_accelermoeter_average = 0;
-			memset(g_accelermoeter_array,0,30);
-		}
 		wait1Msec(20);
 	}
 }
