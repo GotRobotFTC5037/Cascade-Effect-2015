@@ -21,12 +21,12 @@
 #include "lib/abs_auto_center_pipe_score.h"
 #include "lib/abs_auto_pipe_lower_mid.h"
 
-void abs_floor_mission_1st_obj(int objective, int center_goal_pos)
+void abs_floor_mission_1st_obj(e_scoring_options objective, int center_goal_pos)
 {
 	switch(objective)
 	{
 
- 	/** do nothing in these cases *
+ 	/** do nothing in these cases */
 	case STOP:
 	case ROLLGOAL2:
 		break;

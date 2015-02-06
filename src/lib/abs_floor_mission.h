@@ -20,6 +20,7 @@
 #include "abs_IR_floor_read.h"
 #include "lib/abs_auto_center_pipe_score.h"
 #include "lib/abs_auto_pipe_lower_mid.h"
+#include "lib/abs_floor_mission_1st_obj.h"
 
 void abs_floor_mission()
 {
@@ -27,7 +28,7 @@ void abs_floor_mission()
 
 	/** scan IR beacons to determine center goal position */
 	int center_goal_pos = abs_IR_floor_read();
-	
+
 	// insert configurable wait here
 
 	/** perform first objective */

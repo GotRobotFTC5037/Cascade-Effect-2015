@@ -105,7 +105,7 @@ e_scoring_options abs_second_objective(e_scoring_options previously_completed_ob
 
 		case KICK_STAND:
 
-			abs_auto_end(KICK_STAND);
+			abs_auto_end(previously_completed_obj, current_obj, center_goal_pos);
 			last_successful_obj = previously_completed_obj;
 			break;
 

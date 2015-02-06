@@ -29,7 +29,7 @@ void abs_ramp_mission()
 	{
 	case STOP:
 		wait1Msec(STARTING_DELAY*DELAY_MULTIPLICATION_FACTOR);
-		abs_second_objective(STOP);
+	//	abs_second_objective(STOP);
 		break; //STOP
 	case ROLLGOAL1:
 		StartTask(abs_IR_center_read);
@@ -46,22 +46,22 @@ void abs_ramp_mission()
 		wait1Msec(500);
 		while(!g_auto_lift_done){}
 		wait1Msec(1000);
-		abs_second_objective(ROLLGOAL1);
+//		abs_second_objective(ROLLGOAL1);
 		break;
 	case CENTER_GOAL:
 
 		wait1Msec(STARTING_DELAY*DELAY_MULTIPLICATION_FACTOR);
-		abs_second_objective(CENTER_GOAL);
+	//	abs_second_objective(CENTER_GOAL);
 		break;
 	case ROLLGOAL2:
 
 		wait1Msec(STARTING_DELAY*DELAY_MULTIPLICATION_FACTOR);
-		abs_second_objective(ROLLGOAL2);
+//		abs_second_objective(ROLLGOAL2);
 		break;
 	case KICK_STAND:
 
 		wait1Msec(STARTING_DELAY*DELAY_MULTIPLICATION_FACTOR);
-		abs_second_objective(KICK_STAND);
+	//	abs_second_objective(KICK_STAND);
 		break;
 	}
 }
