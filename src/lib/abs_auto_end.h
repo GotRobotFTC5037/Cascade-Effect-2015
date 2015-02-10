@@ -19,11 +19,11 @@
 #include "abs_auto_pipe_score.h"
 #include "abs_auto_pipe_lower.h"
 
-void abs_auto_end(e_scoring_options previously_completed_obj, e_scoring_options current_obj, int center_goal_pos)
+void abs_auto_end(e_scoring_options previously_completed_obj, e_scoring_options current_obj)
 {
 	if(current_obj==STOP)
 	{
-		if(g_input_array[STARTING_POINT] == START_FLOOR && g_input_array[FIRST_OBJECTIVE] == CENTER_GOAL && g_input_array[SECOND_OBJECTIVE] == KICK_STAND && center_goal_pos == 3)
+		if(g_input_array[STARTING_POINT] == START_FLOOR && g_input_array[FIRST_OBJECTIVE] == CENTER_GOAL && g_input_array[SECOND_OBJECTIVE] == KICK_STAND && g_center_goal_pos == 3)
 		{
 			abs_drive(BACKWARD, E_ANGLE, 100, 60, true, GYRO, DONT_SLOW_DOWN);
 			abs_turn(COUNTERCLOCKWISE, POINT, TURN, 90, 50);
@@ -36,7 +36,7 @@ void abs_auto_end(e_scoring_options previously_completed_obj, e_scoring_options 
 		{
 		case PARKING_ZONE:
 
-			switch (center_goal_pos)
+			switch (g_center_goal_pos)
 			{
 			case 1:
 				wait1Msec(50);
@@ -84,7 +84,7 @@ void abs_auto_end(e_scoring_options previously_completed_obj, e_scoring_options 
 				PlayTone(200, 20);
 				servo[goal_claw] = g_goal_claw_up;
 				abs_drive(BACKWARD, E_ANGLE, 65, 100, true, GYRO, DONT_SLOW_DOWN);
-				switch (center_goal_pos)
+				switch (g_center_goal_pos)
 				{
 				case 1:
 					wait1Msec(50);
@@ -125,7 +125,7 @@ void abs_auto_end(e_scoring_options previously_completed_obj, e_scoring_options 
 			case PARKING_ZONE: break;								//LOW AREA
 			case ROLLGOAL1:
 
-				switch(center_goal_pos)
+				switch(g_center_goal_pos)
 				{
 				case 1: break;
 				case 2: break;

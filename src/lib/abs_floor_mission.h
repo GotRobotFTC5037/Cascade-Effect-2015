@@ -27,23 +27,23 @@ void abs_floor_mission()
 	e_scoring_options last_successful_objective;
 
 	/** scan IR beacons to determine center goal position */
-	int center_goal_pos = abs_IR_floor_read();
+	abs_IR_floor_read();
 
 	// insert configurable wait here
 
 	/** perform first objective */
-	abs_floor_mission_1st_obj(g_input_array[FIRST_OBJECTIVE], center_goal_pos);
+	abs_floor_mission_1st_obj(g_input_array[FIRST_OBJECTIVE]);
 
 	wait1Msec(SECOND_OBJECTIVE_DELAY * DELAY_MULTIPLICATION_FACTOR);
 
 	/** perform second objective */
 	last_successful_objective = abs_second_objective(g_input_array[FIRST_OBJECTIVE],
-					g_input_array[SECOND_OBJECTIVE], center_goal_pos);
+					g_input_array[SECOND_OBJECTIVE]);
 
 	// insert configurable wait here
 
 	/** perform final objective */
-	abs_auto_end(last_successful_objective, g_input_array[END_POINT], center_goal_pos);
+	abs_auto_end(last_successful_objective, g_input_array[END_POINT]);
 
 }
 

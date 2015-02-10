@@ -20,50 +20,28 @@
 #include "abs_second_objective.h"
 #include "abs_IR_center_read.h"
 #include "abs_auto_pipe_score.h"
-
-//#include "global_variables.h"
+#include "abs_ramp_mission_1st_obj.h"
 
 void abs_ramp_mission()
 {
-	switch(g_input_array[FIRST_OBJECTIVE])
-	{
-	case STOP:
-		wait1Msec(STARTING_DELAY*DELAY_MULTIPLICATION_FACTOR);
-	//	abs_second_objective(STOP);
-		break; //STOP
-	case ROLLGOAL1:
-		StartTask(abs_IR_center_read);
-		abs_drive(BACKWARD, E_ANGLE, 430, 30, false, GYRO, DONT_SLOW_DOWN);
-		StartTask(abs_auto_pipe_score);
-		abs_drive(BACKWARD, E_ANGLE, 45, 25, true, GYRO, DONT_SLOW_DOWN);
-		/**
-		while(true)
-		{
-		nxtDisplayBigTextLine(2,"%2d %2d", g_bearing_ac1, g_center_goal_pos);
-		}
-		*/
-		servo[goal_claw] = g_goal_claw_down;
-		wait1Msec(500);
-		while(!g_auto_lift_done){}
-		wait1Msec(1000);
-//		abs_second_objective(ROLLGOAL1);
-		break;
-	case CENTER_GOAL:
 
-		wait1Msec(STARTING_DELAY*DELAY_MULTIPLICATION_FACTOR);
-	//	abs_second_objective(CENTER_GOAL);
-		break;
-	case ROLLGOAL2:
+	e_scoring_options last_successful_objective;
 
-		wait1Msec(STARTING_DELAY*DELAY_MULTIPLICATION_FACTOR);
-//		abs_second_objective(ROLLGOAL2);
-		break;
-	case KICK_STAND:
+        // insert configurable wait here
 
-		wait1Msec(STARTING_DELAY*DELAY_MULTIPLICATION_FACTOR);
-	//	abs_second_objective(KICK_STAND);
-		break;
-	}
+	last_successful_objective = abs_ramp_mission_1st_obj(g_input_array[FIRST_OBJECTIVE]);
+
+	/** insert wait here */
+        wait1Msec(SECOND_OBJECTIVE_DELAY * DELAY_MULTIPLICATION_FACTOR);
+
+	last_successful_objective = abs_second_objective(last_successful_objective,
+					g_input_array[SECOND_OBJECTIVE]);
+
+        // insert configurable wait here
+
+        /** perform final objective */
+        abs_auto_end(last_successful_objective, g_input_array[END_POINT]);
+
 }
 
 #endif /* !ABS_RAMP_MISSION_H */

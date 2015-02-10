@@ -18,7 +18,7 @@
 int IR_tests[5];
 int sonar_tests[5];
 
-int abs_IR_floor_read()
+void abs_IR_floor_read()
 {
 	memset(IR_tests,0,5);
 	memset(sonar_tests,0,5);
@@ -46,7 +46,5 @@ int abs_IR_floor_read()
 	//else g_center_goal_pos  = 0;
 
 	wait1Msec(10);
-
-	return g_center_goal_pos;
 }
 #endif /*ABS_IR_FLOOR_READ_H*/

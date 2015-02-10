@@ -21,7 +21,7 @@
 #include "lib/abs_auto_center_pipe_score.h"
 #include "lib/abs_auto_pipe_lower_mid.h"
 
-void abs_floor_mission_1st_obj(e_scoring_options objective, int center_goal_pos)
+void abs_floor_mission_1st_obj(e_scoring_options objective)
 {
 	switch(objective)
 	{
@@ -49,7 +49,7 @@ void abs_floor_mission_1st_obj(e_scoring_options objective, int center_goal_pos)
 		break; //ROLLING GOAL 1
 
 	case CENTER_GOAL:
-		switch(center_goal_pos)
+		switch(g_center_goal_pos)
 		{
 		case 1:
 			abs_drive(BACKWARD, E_ANGLE, 100, 60, true, GYRO, DONT_SLOW_DOWN);

@@ -19,7 +19,7 @@
 #include "abs_auto_end.h"
 #include "abs_auto_pipe_lower_mid.h"
 
-e_scoring_options abs_second_objective(e_scoring_options previously_completed_obj, e_scoring_options current_obj, int center_goal_pos)
+e_scoring_options abs_second_objective(e_scoring_options previously_completed_obj, e_scoring_options current_obj)
 {
 	/** assume that the last successfully completed objective is the one that has already completed */
 	e_scoring_options last_successful_obj = previously_completed_obj;
@@ -36,7 +36,7 @@ e_scoring_options abs_second_objective(e_scoring_options previously_completed_ob
 			switch(current_obj)
 			{
 			case ROLLGOAL1:
-				switch(center_goal_pos)
+				switch(g_center_goal_pos)
 				{
 				case 1: break;
 				case 2: break;
@@ -46,7 +46,7 @@ e_scoring_options abs_second_objective(e_scoring_options previously_completed_ob
 				last_successful_obj = current_obj;
 				break;
 			case ROLLGOAL2:
-				switch(center_goal_pos)
+				switch(g_center_goal_pos)
 				{
 				case 1: break;
 				case 2: break;
@@ -105,7 +105,6 @@ e_scoring_options abs_second_objective(e_scoring_options previously_completed_ob
 
 		case KICK_STAND:
 
-			abs_auto_end(previously_completed_obj, current_obj, center_goal_pos);
 			last_successful_obj = previously_completed_obj;
 			break;
 
