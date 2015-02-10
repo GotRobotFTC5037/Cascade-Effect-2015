@@ -22,9 +22,9 @@
 void play_error_tone()
 {
 	PlayTone(1600, DTONE_DURATION);
-	Wait1Msec(DTONE_SPACING);
+	wait1Msec(DTONE_SPACING);
 	PlayTone(800, DTONE_DURATION);
-	Wait1Msec(DTONE_SPACING);
+	wait1Msec(DTONE_SPACING);
 	PlayTone(400, DTONE_DURATION * 2);
 }
 
@@ -35,10 +35,21 @@ void play_error_tone()
 void play_success_tone()
 {
 	PlayTone(400, DTONE_DURATION);
-	Wait1Msec(DTONE_SPACING);
+	wait1Msec(DTONE_SPACING);
 	PlayTone(800, DTONE_DURATION);
-	Wait1Msec(DTONE_SPACING);
+	wait1Msec(DTONE_SPACING);
 	PlayTone(1600, DTONE_DURATION * 2);
+}
+
+/**
+* @def play_success_tone()
+*      plays success tone
+*/
+void play_bad_data_tone()
+{
+	PlayTone(800, DTONE_DURATION);
+	wait1Msec(DTONE_SPACING);
+	PlayTone(800, DTONE_DURATION);
 }
 
 #endif /* !DIAGNOSTIC_SOUNDS_H */

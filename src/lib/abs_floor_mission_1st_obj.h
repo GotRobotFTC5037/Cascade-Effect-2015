@@ -20,6 +20,7 @@
 #include "abs_IR_floor_read.h"
 #include "lib/abs_auto_center_pipe_score.h"
 #include "lib/abs_auto_pipe_lower_mid.h"
+#include "diagnostic_sounds.h"
 
 e_scoring_options abs_floor_mission_1st_obj(user_input * usr_input)
 {
@@ -124,10 +125,7 @@ e_scoring_options abs_floor_mission_1st_obj(user_input * usr_input)
 		default:
 			while(true)
 			{
-				PlayTone(200,20);
-				wait1Msec(250);
-				PlayTone(300,20);
-				wait1Msec(250);
+				play_bad_data_tone();
 			}
 			break;
 		}
