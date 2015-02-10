@@ -21,9 +21,12 @@
 #include "lib/abs_auto_center_pipe_score.h"
 #include "lib/abs_auto_pipe_lower_mid.h"
 
-void abs_floor_mission_1st_obj(e_scoring_options objective)
+e_scoring_options abs_floor_mission_1st_obj(user_input * usr_input)
 {
-	switch(objective)
+
+	e_scoring_options last_successful_obj = usr_input->first_obj;
+
+	switch(usr_input->first_obj)
 	{
 
  	/** do nothing in these cases */
@@ -133,6 +136,8 @@ void abs_floor_mission_1st_obj(e_scoring_options objective)
 	default:
 		break;
 	}
+
+	return last_successful_obj;
 }
 
 #endif /* !ABS_FLOOR_MISSION_1ST_OBJ_H */

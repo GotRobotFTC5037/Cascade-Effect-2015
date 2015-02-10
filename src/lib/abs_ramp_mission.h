@@ -21,26 +21,28 @@
 #include "abs_IR_center_read.h"
 #include "abs_auto_pipe_score.h"
 #include "abs_ramp_mission_1st_obj.h"
+#include "global_variables.h"
 
-void abs_ramp_mission()
+void abs_ramp_mission(user_input * usr_input)
 {
 
 	e_scoring_options last_successful_objective;
 
-        // insert configurable wait here
+        /** enforce the starting delay */
+	wait1Msec(STARTING_DELAY*DELAY_MULTIPLICATION_FACTOR);
 
-	last_successful_objective = abs_ramp_mission_1st_obj(g_input_array[FIRST_OBJECTIVE]);
+	last_successful_objective = abs_ramp_mission_1st_obj(usr_input);
 
 	/** insert wait here */
         wait1Msec(SECOND_OBJECTIVE_DELAY * DELAY_MULTIPLICATION_FACTOR);
 
-	last_successful_objective = abs_second_objective(last_successful_objective,
-					g_input_array[SECOND_OBJECTIVE]);
+	last_successful_objective = abs_second_objective(
+				last_successful_objective, usr_input);
 
         // insert configurable wait here
 
         /** perform final objective */
-        abs_auto_end(last_successful_objective, g_input_array[END_POINT]);
+        abs_auto_end(last_successful_objective, usr_input);
 
 }
 

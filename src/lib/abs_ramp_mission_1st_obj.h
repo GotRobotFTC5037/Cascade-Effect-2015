@@ -21,17 +21,16 @@
 #include "abs_IR_center_read.h"
 #include "abs_auto_pipe_score.h"
 
-//#include "global_variables.h"
-
-e_scoring_options abs_ramp_mission_1st_obj(e_scoring_options objective)
+//e_scoring_options abs_ramp_mission_1st_obj(e_scoring_options objective)
+e_scoring_options abs_ramp_mission_1st_obj(user_input * usr_input)
 {
 	/** assume this will be successful */
-	e_scoring_options previously_completed_obj = objective;
+	//e_scoring_options previously_completed_obj = objective;
+	e_scoring_options previously_completed_obj = usr_input->first_obj;
 
-	switch(objective)
+	switch(usr_input->first_obj)
 	{
 	case STOP:
-		wait1Msec(STARTING_DELAY*DELAY_MULTIPLICATION_FACTOR);
 		break; //STOP
 
 	case ROLLGOAL1:
@@ -39,12 +38,6 @@ e_scoring_options abs_ramp_mission_1st_obj(e_scoring_options objective)
 		abs_drive(BACKWARD, E_ANGLE, 430, 30, false, GYRO, DONT_SLOW_DOWN);
 		StartTask(abs_auto_pipe_score);
 		abs_drive(BACKWARD, E_ANGLE, 45, 25, true, GYRO, DONT_SLOW_DOWN);
-		/**
-		while(true)
-		{
-		nxtDisplayBigTextLine(2,"%2d %2d", g_bearing_ac1, g_center_goal_pos);
-		}
-		*/
 		servo[goal_claw] = g_goal_claw_down;
 		wait1Msec(500);
 		while(!g_auto_lift_done){}
@@ -52,18 +45,12 @@ e_scoring_options abs_ramp_mission_1st_obj(e_scoring_options objective)
 		break;
 
 	case CENTER_GOAL:
-
-		wait1Msec(STARTING_DELAY*DELAY_MULTIPLICATION_FACTOR);
 		break;
 
 	case ROLLGOAL2:
-
-		wait1Msec(STARTING_DELAY*DELAY_MULTIPLICATION_FACTOR);
 		break;
 
 	case KICK_STAND:
-
-		wait1Msec(STARTING_DELAY*DELAY_MULTIPLICATION_FACTOR);
 		break;
 	}
 

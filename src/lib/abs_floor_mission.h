@@ -22,7 +22,7 @@
 #include "lib/abs_auto_pipe_lower_mid.h"
 #include "lib/abs_floor_mission_1st_obj.h"
 
-void abs_floor_mission()
+void abs_floor_mission(user_input * usr_input)
 {
 	e_scoring_options last_successful_objective;
 
@@ -32,18 +32,18 @@ void abs_floor_mission()
 	// insert configurable wait here
 
 	/** perform first objective */
-	abs_floor_mission_1st_obj(g_input_array[FIRST_OBJECTIVE]);
+	last_successful_objective = abs_floor_mission_1st_obj(usr_input);
 
 	wait1Msec(SECOND_OBJECTIVE_DELAY * DELAY_MULTIPLICATION_FACTOR);
 
 	/** perform second objective */
-	last_successful_objective = abs_second_objective(g_input_array[FIRST_OBJECTIVE],
-					g_input_array[SECOND_OBJECTIVE]);
+	last_successful_objective = abs_second_objective(
+					last_successful_objective, usr_input);
 
 	// insert configurable wait here
 
 	/** perform final objective */
-	abs_auto_end(last_successful_objective, g_input_array[END_POINT]);
+	abs_auto_end(last_successful_objective, usr_input);
 
 }
 

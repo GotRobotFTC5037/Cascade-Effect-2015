@@ -60,9 +60,9 @@
 
 #define DRIVE_TYPE TANK
 
-//========================================
-// Main program
-//========================================
+/**
+ * Main program
+ */
 task main()
 {
 	Delete(LogFileName, LogIoResult);
@@ -74,16 +74,25 @@ task main()
 
 	disableDiagnosticsDisplay();
 
-	//wait1Msec(STARTING_DELAY*1000);
+	user_input input;
 
-	switch(g_input_array[STARTING_POINT])
+	/**
+	 * read the parameters directly into this structure and get rid
+	 * of the global array
+	 */
+	input.start_point = (e_scoring_options)g_input_array[STARTING_POINT];
+	input.first_obj = (e_scoring_options)g_input_array[FIRST_OBJECTIVE];
+	input.second_obj = (e_scoring_options)g_input_array[SECOND_OBJECTIVE];
+	input.end_point = (e_scoring_options)g_input_array[END_POINT];
+
+	switch(input.start_point)
 	{
 	case START_RAMP:
-		abs_ramp_mission();
+		abs_ramp_mission(&input);
 		break;
 	case START_FLOOR:
 		abs_IR_floor_read();
-		abs_floor_mission();
+		abs_floor_mission(&input);
 		break;
 	default:
 		PlayTone(200,20);

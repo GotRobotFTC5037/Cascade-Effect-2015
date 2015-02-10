@@ -19,11 +19,13 @@
 #include "abs_auto_pipe_score.h"
 #include "abs_auto_pipe_lower.h"
 
-void abs_auto_end(e_scoring_options previously_completed_obj, e_scoring_options current_obj)
+void abs_auto_end(e_scoring_options previously_completed_obj, user_input * usr_input)
 {
-	if(current_obj==STOP)
+	if(usr_input->end_point == STOP)
 	{
-		if(g_input_array[STARTING_POINT] == START_FLOOR && g_input_array[FIRST_OBJECTIVE] == CENTER_GOAL && g_input_array[SECOND_OBJECTIVE] == KICK_STAND && g_center_goal_pos == 3)
+		if(usr_input->start_point == START_FLOOR &&
+		   usr_input->first_obj == CENTER_GOAL &&
+		   usr_input->second_obj == KICK_STAND && g_center_goal_pos == 3)
 		{
 			abs_drive(BACKWARD, E_ANGLE, 100, 60, true, GYRO, DONT_SLOW_DOWN);
 			abs_turn(COUNTERCLOCKWISE, POINT, TURN, 90, 50);
@@ -61,7 +63,7 @@ void abs_auto_end(e_scoring_options previously_completed_obj, e_scoring_options 
 
 			break;
 		case CENTER_GOAL:
-			switch(current_obj)
+			switch(usr_input->end_point)
 			{
 			case PARKING_ZONE:
 
@@ -71,7 +73,7 @@ void abs_auto_end(e_scoring_options previously_completed_obj, e_scoring_options 
 		case STOP:
 			break;
 		case ROLLGOAL1:
-			switch(current_obj)
+			switch(usr_input->end_point)
 			{
 			case PARKING_ZONE:
 				StopTask(abs_auto_pipe_score);
@@ -114,13 +116,13 @@ void abs_auto_end(e_scoring_options previously_completed_obj, e_scoring_options 
 			}
 			break;
 		case ROLLGOAL2:
-			switch(current_obj)
+			switch(usr_input->end_point)
 			{
 			case PARKING_ZONE: break;								//LOW AREA
 			}
 			break;
 		case KICK_STAND:
-			switch(current_obj)
+			switch(usr_input->end_point)
 			{
 			case PARKING_ZONE: break;								//LOW AREA
 			case ROLLGOAL1:

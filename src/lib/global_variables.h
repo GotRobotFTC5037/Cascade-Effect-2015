@@ -252,6 +252,7 @@ const int g_optical_move_min_dist = 70;
 
 #define TURN_SPEED 50
 
+
 //=========================================================
 // auto selection points
 //=========================================================
@@ -391,10 +392,17 @@ typedef enum
 	STOP
 } e_scoring_options;
 
-//typedef enum
-//{
 
-//}
+/**
+ * this structure is used to store the user input in a single place
+ */
+struct 
+{
+        e_scoring_options start_point;
+        e_scoring_options first_obj;
+        e_scoring_options second_obj;
+        e_scoring_options end_point;
+} user_input;
 
 //=========================================================
 // auto sub selections
