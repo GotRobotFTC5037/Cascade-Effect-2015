@@ -30,19 +30,22 @@ task abs_auto_pipe_score()
 			motor[lift2] = 0;
 			lift_done = true;
 		}
-		if(nMotorEncoder(shoulder)<g_shoulder_mid-700) motor[shoulder] = (((((g_shoulder_mid-700)-nMotorEncoder(shoulder))*100)/g_shoulder_max)+g_shoulder_min_speed);
+		if(nMotorEncoder(shoulder)<g_shoulder_mid-700)
+		{
+			motor[shoulder] = (((((g_shoulder_mid-700)-nMotorEncoder(shoulder))*100)/g_shoulder_max)+g_shoulder_min_speed);
+		}
 		else
 		{
 			motor[shoulder] = 0;
 			shoulder_done = true;
 		}
 
-		if(lift_done&&shoulder_done)
+		/*if(lift_done&&shoulder_done)
 		{
 			wait1Msec(200);
 			servo[shutter] = g_shutter_open;
 			g_auto_lift_done = true;
-		}
+		}*/
 	}
 }
 #endif /*ABS_AUTO_PIPE_SCORE_H*/
