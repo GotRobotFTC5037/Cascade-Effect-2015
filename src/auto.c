@@ -78,8 +78,7 @@ task main()
 
 	switch(g_input_array[STARTING_POINT])
 	{
-	case START_RAMP: abs_ramp_mission();
-	break;
+	case START_RAMP: abs_ramp_mission(); break;
 	case START_FLOOR:
 		abs_IR_floor_read();
 		abs_floor_mission();

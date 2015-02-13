@@ -47,7 +47,7 @@ task abs_joystick_gunner()
 
 	while(true)
 	{
-		nxtDisplayBigTextLine(1,"%3d", g_bearing_ac1);
+		//nxtDisplayBigTextLine(1,"%3d", g_bearing_ac1);
 		//nxtDisplayBigTextLine(3,"%3d", nMotorEncoder(shoulder));//((((g_shoulder_mid-nMotorEncoder(shoulder))*100)/g_shoulder_max)+g_shoulder_min_speed));//nMotorEncoder(shoulder));
 		//nxtDisplayBigTextLine(5,"%3d",(((nMotorEncoder(lift1)-0)*100)/g_max_lift)+g_lift_min_speed);//(((nMotorEncoder(lift1)-0)*100)/g_max_lift));
 		//-----------------------------
@@ -86,12 +86,12 @@ task abs_joystick_gunner()
 		else if(joystick.joy2_y2<-10)
 		{
 			if(joy2Btn(12)) motor[shoulder] = (joystick.joy2_y2*100)/127;
-			else if(nMotorEncoder(shoulder)<0) motor[shoulder] = 0;
+			else if(nMotorEncoder(shoulder)<300) motor[shoulder] = 0;
 			else motor[shoulder] = -((((nMotorEncoder(shoulder))*100)/g_shoulder_max)+g_shoulder_min_speed);//((joystick.joy2_y2*100)/127)/2;
 				shoulder_active = false;
 			shoulder_return = false;
 		}
-		if(joy2Btn(2))
+		if(joy2Btn(6))
 		{
 			shoulder_active = true;
 			shoulder_state = g_shoulder_low;
@@ -112,7 +112,7 @@ task abs_joystick_gunner()
 			shoulder_min = g_tall_min_lift;
 			shoulder_return = false;
 		}
-		else if(joy2Btn(6))
+		else if(joy2Btn(2))
 		{
 			shoulder_active = true;
 			shoulder_state = g_shoulder_center;
@@ -134,7 +134,7 @@ task abs_joystick_gunner()
 		}
 		else if(shoulder_active&&shoulder_return)
 		{
-			if(nMotorEncoder(shoulder)>50) motor[shoulder] = -((((nMotorEncoder(shoulder))*100)/g_shoulder_max)+g_shoulder_min_speed);
+			if(nMotorEncoder(shoulder)>100) motor[shoulder] = -((((nMotorEncoder(shoulder))*100)/g_shoulder_max)+g_shoulder_min_speed);
 			else
 			{
 				motor[shoulder] = 0;
@@ -153,10 +153,10 @@ task abs_joystick_gunner()
 
 		if(TSreadState(LEGOTOUCH))
 		{
-			nxtDisplayBigTextLine(2,"True");
+			//nxtDisplayBigTextLine(2,"True");
 			//nMotorEncoder(lift1) = 0;
 		}
-		else nxtDisplayBigTextLine(2,"False");
+		//else nxtDisplayBigTextLine(2,"False");
 
 		if(joystick.joy2_y1>10)
 		{
@@ -184,14 +184,14 @@ task abs_joystick_gunner()
 
 			lift_active = 1;
 		}
-		else if(joy2Btn(6))  //CENTER GOAL SCORING POSISION
+		else if(joy2Btn(2))  //CENTER GOAL SCORING POSISION
 		{
-			lift_active = 6;
+			lift_active = 2;
 			shutter_state = g_shutter_closed;
 			if(nMotorEncoder(lift1)>g_center_lift) lift_move_dir_up = false;
 			else lift_move_dir_up = true;
 		}
-		else if(lift_active == 6)
+		else if(lift_active == 2)
 		{
 			if(!lift_move_dir_up&&nMotorEncoder(lift1)>g_center_lift)
 			{
@@ -277,14 +277,14 @@ task abs_joystick_gunner()
 			}
 			else lift_active = 1;
 		}
-		else if(joy2Btn(2)) //A //LOW ROLLING GOAL SCORING POSITION
+		else if(joy2Btn(6)) //CENTER GOAL SCORING
 		{
-			lift_active = 2;
+			lift_active = 6;
 			shutter_state = g_shutter_closed;
 			if(nMotorEncoder(lift1)>g_low_lift) lift_move_dir_up = false;
 			else lift_move_dir_up = true;
 		}
-		else if(lift_active == 2)
+		else if(lift_active == 6)
 		{
 			if(!lift_move_dir_up&&nMotorEncoder(lift1)>g_low_lift)
 			{

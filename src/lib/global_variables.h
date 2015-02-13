@@ -1,17 +1,17 @@
 #pragma systemFile // treat as system file to eliminate warnings for unused variables
 /**
- *
- *  @file global_variables.h
- *
- *  @brief varaibles that are global
- *
- *  @param None n/a
- *
- *  @return
- *
- *  @copyright Copyright 2013, Got Robot? FTC Team 5037
- *
- */
+*
+*  @file global_variables.h
+*
+*  @brief varaibles that are global
+*
+*  @param None n/a
+*
+*  @return
+*
+*  @copyright Copyright 2013, Got Robot? FTC Team 5037
+*
+*/
 //
 //============================================================
 // Define sensor multiplexor connectivity and port allocations
@@ -28,10 +28,10 @@
 //const tMUXSensor HTIRS2 = msensor_S3_1;     // HiTechnic Infrared sensor
 const tMUXSensor HTAC = msensor_S2_1;
 const tMUXSensor HTGYRO = msensor_S3_1;	   // HiTechnic GYRO sensor
-const tMUXSensor HTIRS2_2 = msensor_S2_4;     // HiTechnic Infrared sensor 2
+const tMUXSensor LEGOUS2 = msensor_S2_4;     // sonar 2 //HiTechnic Infrared sensor 2
 const tMUXSensor HTIRS2 = msensor_S2_3;     // HiTechnic Infrared sensor 2
-const tMUXSensor LEGOTOUCH = msensor_S3_4;//2;
-const tMUXSensor LEGOUS = msensor_S2_2;
+const tMUXSensor LEGOTOUCH = msensor_S3_4; //2;
+const tMUXSensor LEGOUS = msensor_S2_2;	// sonar 1
 
 //#if EOPD_ACTIVE == 1
 //const tMUXSensor HTEOPD = msensor_S2_4;
@@ -84,13 +84,13 @@ bool g_gyro_true = false;
 #define GRABBER_RIGHT_CLOSE 131
 
 /**
- * @var g_angle_sensor_val
- *		Tells the robot the value of the raw angle sensor
- * @var g_EOPD_sensor
- *		Tells the robot the value of the raw angle sensor
- * @var g_optical_sensor
- *		Tells the robot the value of the raw angle sensor
- */
+* @var g_angle_sensor_val
+*		Tells the robot the value of the raw angle sensor
+* @var g_EOPD_sensor
+*		Tells the robot the value of the raw angle sensor
+* @var g_optical_sensor
+*		Tells the robot the value of the raw angle sensor
+*/
 
 long g_angle_sensor_val = 0;
 
@@ -207,7 +207,7 @@ const int g_jog_lift = 200;
 const int g_shoulder_max = 8000;
 const int g_shoulder_tall = 7620;//was 7650
 const int g_shoulder_low = 6209;
-const int g_shoulder_mid = 6900;
+const int g_shoulder_mid = 6500;//6900;
 const int g_shoulder_min_speed = 24;//was 18
 const int g_shoulder_center = 4600;
 const int g_shoulder_lower_min = 6500;
@@ -242,9 +242,13 @@ const int g_optical_threshold = 100;//305;
 //const int g_optical_threshold = 30;
 //#endif
 
-const int g_IR_center_goal_dist_180 = 324;
+const int g_sonar_center_goal_dist_180 = 450;//324;
 const int g_IR_center_goal_dist_classic = 125;
 const int g_center_pos_sonar_dist = 100;
+
+int g_auto_pipe_score_hight = g_mid_lift;
+int g_auto_pipe_score_angle = g_shoulder_mid;
+
 
 const int g_optical_move_min_dist = 70;
 
@@ -577,30 +581,30 @@ int g_input_array[INPUT_ARRAY_SIZE];
 // Datalogging variables
 //=========================================================
 /**
- * @var LogFileName
- *		The name of the data logging file
- *
- * @var LogIoResult
- *		The success status of writing to the log file
- *
- * @var LogFileHandle
- *		The file handle variable (represents the file)
- *
- * @var LogFileSize
- *		The size of the log file
- *
- * @var CRLF
- *		characters required to cause output to appear on a new line
- *
- * @var LogData
- *		Tells the robot is if should log data or not
- *
- * @var sString
- *		Tells the robot the string we are sending to the wright handler
- *
- * @var g_delta_drift
- *		Tells the robot the delta of the drift
- */
+* @var LogFileName
+*		The name of the data logging file
+*
+* @var LogIoResult
+*		The success status of writing to the log file
+*
+* @var LogFileHandle
+*		The file handle variable (represents the file)
+*
+* @var LogFileSize
+*		The size of the log file
+*
+* @var CRLF
+*		characters required to cause output to appear on a new line
+*
+* @var LogData
+*		Tells the robot is if should log data or not
+*
+* @var sString
+*		Tells the robot the string we are sending to the wright handler
+*
+* @var g_delta_drift
+*		Tells the robot the delta of the drift
+*/
 const string LogFileName = "DATALOG.txt";
 TFileIOResult LogIoResult;
 TFileHandle LogFileHandle;
@@ -698,16 +702,16 @@ int g_selection_value = 0;
 #define TURN_SPEED_PERCENTAGE_DROP 50
 #define TURN_SPEED_COEFFICIENT 5
 /**
- *
- * @var g_good_gyro
- *	flag indicating that the gyro has not given a bad reading
- * @def GYRO_VALUE_QUEUE_SIZE
- *	the size of the queue used to store the gyro readings
- * @var g_gyro_values
- *	array used to store all the gyro readings for debug purposes
- * @var g_gyro_ran
- *	flag indicating that we have performed at least one gyro read
- */
+*
+* @var g_good_gyro
+*	flag indicating that the gyro has not given a bad reading
+* @def GYRO_VALUE_QUEUE_SIZE
+*	the size of the queue used to store the gyro readings
+* @var g_gyro_values
+*	array used to store all the gyro readings for debug purposes
+* @var g_gyro_ran
+*	flag indicating that we have performed at least one gyro read
+*/
 //#if EOPD_ACTIVE == 1
 const int g_optical_delta_value = 100;
 //#else
@@ -719,25 +723,25 @@ bool g_shift_due_to_ir = false;
 bool g_good_gyro = true;
 
 #if DEBUG_MODE == 1
-	#define GYRO_VALUE_QUEUE_SIZE 3
-	int g_gyro_values[GYRO_VALUE_QUEUE_SIZE];
+#define GYRO_VALUE_QUEUE_SIZE 3
+int g_gyro_values[GYRO_VALUE_QUEUE_SIZE];
 #endif
 
 bool g_gyro_ran = false;
 /**
- * @def MAX_TURN_RATE
- *		Tells the robot the max rate thats possable to happen so we can know if the gyro gliches
- * @def STAY_ON_RAMP_WAIT_TIME
- *		Tells the robot the wait time before it  gose on the ramp
- * @def OPTICAL_SENSOR_CALIBRATION_TIME
- *		Tells the robot the time it needs to calibrate
- * @def OPTICAL_CALIBRATION_SAMPLE_RATE
- *		Tells the robot the Calibration sample rate
- * @def DEFAULT_CALIBRATED_OPTICAL_THRESHOLD
- *		Tells the robot the default calibration of the optical to force it to fail if it gives us weid readings
- * @def DELAY_MULTIPLICATION_FACTOR
- *	the factor to multiply all delays by
- */
+* @def MAX_TURN_RATE
+*		Tells the robot the max rate thats possable to happen so we can know if the gyro gliches
+* @def STAY_ON_RAMP_WAIT_TIME
+*		Tells the robot the wait time before it  gose on the ramp
+* @def OPTICAL_SENSOR_CALIBRATION_TIME
+*		Tells the robot the time it needs to calibrate
+* @def OPTICAL_CALIBRATION_SAMPLE_RATE
+*		Tells the robot the Calibration sample rate
+* @def DEFAULT_CALIBRATED_OPTICAL_THRESHOLD
+*		Tells the robot the default calibration of the optical to force it to fail if it gives us weid readings
+* @def DELAY_MULTIPLICATION_FACTOR
+*	the factor to multiply all delays by
+*/
 #define MAX_TURN_RATE 0.72
 #define STAY_ON_RAMP_WAIT_TIME 100
 #define OPTICAL_SENSOR_CALIBRATION_TIME 2000
@@ -824,6 +828,7 @@ long g_curr_time = 0;
 long g_prev_time = 0;
 int g_raw_gyro = 0;
 int g_sonar = 0;
+int g_sonar2 = 0;
 int g_recont_heading = 0; //this is the recalculated const gyro heading
 
 bool force_done = false;

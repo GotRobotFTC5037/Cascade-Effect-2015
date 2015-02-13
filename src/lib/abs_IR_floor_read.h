@@ -44,6 +44,7 @@ void abs_IR_floor_read()
 		//else if(g_bearing_ac1 == 8 || g_bearing_ac1 == 9) g_center_goal_pos  = 2;
 		//else if(g_bearing_ac1 <= 7) g_center_goal_pos  = 3;
 		//else g_center_goal_pos  = 0;
+
 		wait1Msec(10);
 }
 #endif /*ABS_IR_FLOOR_READ_H*/

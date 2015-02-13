@@ -35,11 +35,12 @@ task abs_sensors()
 	(gyro_read % 10 == 0) ? gyro_read=0 : gyro_read++;
 
 		//nxtDisplayBigTextLine(1,"Gyro:%1d",g_const_heading);
-		nxtDisplayBigTextLine(1,"%2d %2d",g_bearing_ac1,g_bearing_ac2);
+		nxtDisplayBigTextLine(1,"%2d",g_bearing_ac1);
 		//nxtDisplayBigTextLine(3,"%2d %2d",g_IR_average, g_sonar_average);
 		nxtDisplayBigTextLine(5,"%3d %1d",g_sonar,g_center_goal_pos);
 
 		g_sonar = USreadDist(LEGOUS);
+		g_sonar2 = USreadDist(LEGOUS2);
 
 		//switch(g_bearing_ac1)
 		//{
@@ -95,45 +96,45 @@ g_sonar = USreadDist(LEGOUS);
 		//-------------------------
 		// HiTechnic IR Sensor 2
 		//-------------------------
-		g_bearing_ac2 = HTIRS2readACDir(HTIRS2_2);				// Read the IR bearing from the sensor
-		g_curr_dir2 = (float) g_bearing_ac2;
+		//g_bearing_ac2 = HTIRS2readACDir(HTIRS2_2);				// Read the IR bearing from the sensor
+		//g_curr_dir2 = (float) g_bearing_ac2;
 
-		HTIRS2readAllACStrength(HTIRS2_2, g_acs2[0], g_acs2[1], g_acs2[2], g_acs2[3], g_acs2[4]);
+		//HTIRS2readAllACStrength(HTIRS2_2, g_acs2[0], g_acs2[1], g_acs2[2], g_acs2[3], g_acs2[4]);
 		//-----------------------------------
 		// code for the peaks of IR sensor 2
 		//-----------------------------------
-		if (g_bearing_ac2!=0)								// we have a valid IR signal
-		{
-			int maximum = -1;
-			int peak = 0, offset=0;
-			for (int i=0;i<5;i++)	// scan array to find the peak entry
-			{	if (g_acs2[i]>maximum)
-				{
-					peak = i;
-					maximum = g_acs2[i];
-				}
-			}
-			offset=0;
-			if ((peak < 4) && (peak>0) && (g_acs2[peak] != 0))  // we are not working with extreme value
-			{
-				if (g_acs2[peak-1]!=g_acs2[peak+1]) // if the values either side of the peak are identical then peak is peak
-				{
-					if (g_acs2[peak-1]>g_acs2[peak+1])	// otherwise decide which side has higher signal
-					{
-						offset = -25*(1-(float)(g_acs2[peak]-g_acs2[peak-1])/		// calculate the bias away from the peak
-						max(g_acs2[peak], g_acs2[peak-1]));
-					}
-					else
-					{
-						offset = 25*(1-(float)(g_acs2[peak]-g_acs2[peak+1])/
-						max(g_acs2[peak], g_acs2[peak+1]));
-					}
-				}
-			}
-			g_ir_bearing2 = (float)((peak-2)*50) + offset;		// direction is the total of the peak bias plus the adjacent bias
-			//nxtDisplayBigTextLine(3, "%2d", g_ir_bearing1);
-			wait1Msec(20);
-		}
+		//if (g_bearing_ac2!=0)								// we have a valid IR signal
+		//{
+		//	int maximum = -1;
+		//	int peak = 0, offset=0;
+		//	for (int i=0;i<5;i++)	// scan array to find the peak entry
+		//	{	if (g_acs2[i]>maximum)
+		//		{
+		//			peak = i;
+		//			maximum = g_acs2[i];
+		//		}
+		//	}
+		//	offset=0;
+		//	if ((peak < 4) && (peak>0) && (g_acs2[peak] != 0))  // we are not working with extreme value
+		//	{
+		//		if (g_acs2[peak-1]!=g_acs2[peak+1]) // if the values either side of the peak are identical then peak is peak
+		//		{
+		//			if (g_acs2[peak-1]>g_acs2[peak+1])	// otherwise decide which side has higher signal
+		//			{
+		//				offset = -25*(1-(float)(g_acs2[peak]-g_acs2[peak-1])/		// calculate the bias away from the peak
+		//				max(g_acs2[peak], g_acs2[peak-1]));
+		//			}
+		//			else
+		//			{
+		//				offset = 25*(1-(float)(g_acs2[peak]-g_acs2[peak+1])/
+		//				max(g_acs2[peak], g_acs2[peak+1]));
+		//			}
+		//		}
+		//	}
+		//	g_ir_bearing2 = (float)((peak-2)*50) + offset;		// direction is the total of the peak bias plus the adjacent bias
+		//	//nxtDisplayBigTextLine(3, "%2d", g_ir_bearing1);
+		//	wait1Msec(20);
+		//}
 		//-------------------------
 		// HiTechnic Gyro
 		//-------------------------
