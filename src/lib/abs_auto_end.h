@@ -127,10 +127,10 @@ void abs_auto_end(e_scoring_options second_start_pos)
 			case PARKING_ZONE:
 				StopTask(abs_auto_pipe_score);
 				StartTask(abs_auto_pipe_lower);
-				abs_turn(CLOCKWISE, POINT, TURN, 21, 40);
+				abs_turn(CLOCKWISE, POINT, TURN, 21, 40, FORWARD);
 				abs_drive(FORWARD, E_ANGLE, 470, 100, true, GYRO, DONT_SLOW_DOWN);
 
-				abs_turn(CLOCKWISE, POINT, TURN, 160, 70);
+				abs_turn(CLOCKWISE, POINT, TURN, 160, 70, FORWARD);
 				PlayTone(200, 20);
 				servo[goal_claw] = g_goal_claw_up;
 				abs_drive(BACKWARD, E_ANGLE, 100, 100, true, GYRO, DONT_SLOW_DOWN);
