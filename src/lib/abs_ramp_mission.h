@@ -138,7 +138,7 @@ void abs_ramp_mission()
 		servo[goal_claw] = g_goal_claw_down;
 		wait1Msec(500);
 
-		abs_turn(COUNTERCLOCKWISE, SWING, TURN, 50, 90);
+		abs_turn(COUNTERCLOCKWISE, SWING, TURN, 50, 90, FORWARD);
 		servo[goal_claw] = g_goal_claw_up;
 		abs_drive(BACKWARD, E_ANGLE, 20, 25, true, GYRO, DONT_SLOW_DOWN);
 		wait1Msec(500);
@@ -149,7 +149,7 @@ void abs_ramp_mission()
 		g_auto_pipe_score_angle = g_shoulder_tall+700;
 		StartTask(abs_auto_pipe_score);
 
-		abs_turn(CLOCKWISE, SWING, TURN, 53, 90);
+		abs_turn(CLOCKWISE, SWING, TURN, 53, 90, FORWARD);
 		abs_drive(BACKWARD, E_ANGLE, 60, 25, true, GYRO, DONT_SLOW_DOWN);
 
 
