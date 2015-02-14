@@ -252,6 +252,8 @@ int g_auto_pipe_score_angle = g_shoulder_mid;
 
 const int g_optical_move_min_dist = 70;
 
+const int g_center_detect_value = 30;
+
 #define NON_IR_DRIVE_SPEED 70
 #define IR_DRIVE_SPEED 40
 

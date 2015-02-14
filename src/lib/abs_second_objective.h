@@ -59,10 +59,10 @@ void abs_second_objective(e_scoring_options second_start_pos)
 				StartTask(abs_auto_pipe_lower_mid);
 
 				abs_drive(FORWARD, E_ANGLE, 4, 35, true, GYRO, DONT_SLOW_DOWN);
-				abs_turn(COUNTERCLOCKWISE, POINT, TURN, 90, 40);
+				abs_turn(COUNTERCLOCKWISE, POINT, TURN, 90, 40, FORWARD);
 				abs_drive(FORWARD, E_ANGLE, 82, 60, true, GYRO, DONT_SLOW_DOWN);
 				wait1Msec(300);
-				abs_turn(CLOCKWISE, POINT, TURN, 90, 40);
+				abs_turn(CLOCKWISE, POINT, TURN, 90, 40, FORWARD);
 				abs_drive(BACKWARD, E_ANGLE, 200, 90, true, GYRO, DONT_SLOW_DOWN);
 				StopTask(abs_auto_pipe_lower_mid);
 
@@ -82,10 +82,18 @@ void abs_second_objective(e_scoring_options second_start_pos)
 				StopTask(abs_auto_pipe_score);
 				StartTask(abs_auto_pipe_lower);
 				/*if(!force_done)*/
-				abs_turn(CLOCKWISE, POINT, TURN, 29, 40);
+
+				/*
+				   !!!@@@### MAKE THIS A TURN_TO###@@@!!!
+				\/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/
+				*/
+
+
+				//abs_turn(COUNTERCLOCKWISE, POINT, TURN, 10, 40, FORWARD);
+				//abs_turn(COUNTERCLOCKWISE, POINT, TURN, 29, 40, FORWARD);
 				abs_drive(FORWARD, E_ANGLE, 425, 100, true, GYRO, DONT_SLOW_DOWN);
 
-				abs_turn(CLOCKWISE, POINT, TURN, 147, 70);
+				abs_turn(CLOCKWISE, POINT, TURN, 147, 70, FORWARD);
 				PlayTone(200, 20);
 				servo[goal_claw] = g_goal_claw_up;
 				abs_drive(BACKWARD, E_ANGLE, 65, 100, true, GYRO, DONT_SLOW_DOWN);
