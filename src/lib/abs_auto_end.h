@@ -124,7 +124,17 @@ void abs_auto_end(e_scoring_options second_start_pos)
 		case ROLLGOAL2:
 			switch(g_input_array[END_POINT])
 			{
-			case PARKING_ZONE: break;								//LOW AREA
+			case PARKING_ZONE:
+				StopTask(abs_auto_pipe_score);
+				StartTask(abs_auto_pipe_lower);
+				abs_turn(CLOCKWISE, POINT, TURN, 21, 40);
+				abs_drive(FORWARD, E_ANGLE, 470, 100, true, GYRO, DONT_SLOW_DOWN);
+
+				abs_turn(CLOCKWISE, POINT, TURN, 160, 70);
+				PlayTone(200, 20);
+				servo[goal_claw] = g_goal_claw_up;
+				abs_drive(BACKWARD, E_ANGLE, 100, 100, true, GYRO, DONT_SLOW_DOWN);
+			break;								//LOW AREA
 			}
 			break;
 		case KICK_STAND:
@@ -168,7 +178,8 @@ void abs_auto_end(e_scoring_options second_start_pos)
 					wait1Msec(100);
 					PlayTone(200,20);
 
-					abs_turn(CLOCKWISE, SWING, TURN, 24, 60, FORWARD);
+					//abs_turn(CLOCKWISE, SWING, TURN, 24, 60);
+					abs_turn(CLOCKWISE, SWING, TURN, /*41*/30, 60, FORWARD);
 					wait1Msec(400);
 
 					abs_drive(BACKWARD, E_TIME, 800, 30, true, GYRO, DONT_SLOW_DOWN);

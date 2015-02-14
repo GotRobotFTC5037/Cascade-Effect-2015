@@ -53,10 +53,10 @@ void abs_selection_program()
 		selection_type = SELECTION_TYPE_NUMBER; break;
 		case 3: abs_cscreen("Selectin","type    ","QUICK   ");
 		selection_type = SELECTION_TYPE_QUICK; break;
-		case 4: abs_cscreen("Selectin","type    ","ADVANCED");
-		selection_type = SELECTION_TYPE_ADVANCED; break;
-		case 5: abs_cscreen("Selectin","type    ","OPTION  ");
+		case 4: abs_cscreen("Selectin","type    ","OPTION  ");
 		selection_type = SELECTION_TYPE_OPTIONS; break;
+		case 5: abs_cscreen("Selectin","type    ","ADVANCED");
+		selection_type = SELECTION_TYPE_ADVANCED; break;
 		}
 	}
 	PlaySoundFile("! Click.rso");

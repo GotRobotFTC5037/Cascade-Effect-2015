@@ -19,19 +19,29 @@
 void abs_selection_options()
 {
 	//---------------------------------------
-	// stand ground
+	// IR type
 	//---------------------------------------
 	while(nNxtButtonPressed != kEnterButton)
 	{
 		if(nNxtButtonPressed == kRightButton)
 		{
 			PlaySoundFile("! Click.rso");
+			if(g_selected_IR == IR_180) g_selected_IR = IR_CLASSIC;
+			else g_selected_IR = IR_180;
 			while(nNxtButtonPressed == kRightButton){}
 		}
 		if(nNxtButtonPressed == kLeftButton)
 		{
 			PlaySoundFile("! Click.rso");
+			if(g_selected_IR == IR_180) g_selected_IR = IR_CLASSIC;
+			else g_selected_IR = IR_180;
 			while(nNxtButtonPressed == kLeftButton){}
+		}
+		switch(g_selected_IR)
+		{
+		case IR_180:    abs_cscreen("IR Type ","IR      "," 180    "); break;
+		case IR_CLASSIC: abs_cscreen("IR Type ","IR      "," Classic"); break;
+		default:        abs_cscreen("ERROR   ","        ","        "); break;
 		}
 	}
 	PlaySoundFile("! Click.rso");

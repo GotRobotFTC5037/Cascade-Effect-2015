@@ -140,9 +140,9 @@ int adjusted_speed(int speed, int max_move_dist, int current, int coefficient, i
 	/*int reduced_speed;
 	if (max_move_dist - current >= 50)
 	{
-		reduced_speed = (speed/100)*((max_move_dist - current)*2);
+	reduced_speed = (speed/100)*((max_move_dist - current)*2);
 	}
-*/
+	*/
 	float percent_of_speed = coefficient * sqrt(abs(max_move_dist-current)) + percentage;
 	int reduced_speed = (int)percent_of_speed * speed / 100;
 

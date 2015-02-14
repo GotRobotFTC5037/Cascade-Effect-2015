@@ -223,39 +223,6 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 		}
 	}
 	//------------------------
-	// accelermeoter sensor stopping method
-	//------------------------
-	//Stops the robot baced on the accelermeoter
-	else if(dist_method == E_TILT)
-	{
-		int j = 0;
-		g_sensor_reference_drive = true;
-		while(j<30)
-		{
-			if(drive_type == GYRO)
-			{
-				abs_gyro_drive(speed,dir);
-			}
-
-			/** No gyro correction*/
-			else
-			{
-				if(dir == FORWARD)
-				{
-					motor[left_motor] = speed;
-					motor[right_motor] = speed;
-				}
-				else
-				{
-					motor[left_motor] = -speed;
-					motor[right_motor] = -speed;
-				}
-			}
-			if(g_accelermoeter_average > dist) j++;
-		}
-		g_sensor_reference_drive = false;
-	}
-	//------------------------
 	// angle sensor stopping method
 	//------------------------
 	//Tells the robot to stop baced on the real distence it has went
