@@ -19,7 +19,7 @@ task abs_auto_pipe_score()
 {
 	while(true)
 	{
-		if(nMotorEncoder(lift1)<g_mid_lift)
+		if(nMotorEncoder(lift1)<g_auto_pipe_score_hight)
 		{
 			motor[lift1] = g_lift_speed_up;
 			motor[lift2] = g_lift_speed_up;
@@ -30,12 +30,13 @@ task abs_auto_pipe_score()
 			motor[lift2] = 0;
 			lift_done = true;
 		}
-		if(nMotorEncoder(shoulder)<g_shoulder_mid-700) motor[shoulder] = (((((g_shoulder_mid-700)-nMotorEncoder(shoulder))*100)/g_shoulder_max)+g_shoulder_min_speed);
-		else
+		if(nMotorEncoder(shoulder)<g_auto_pipe_score_angle-700&&nMotorEncoder(lift1)>g_auto_pipe_score_hight-800) motor[shoulder] = (((((g_auto_pipe_score_angle-700)-nMotorEncoder(shoulder))*100)/g_shoulder_max)+g_shoulder_min_speed);
+		else if(nMotorEncoder(shoulder)>=g_auto_pipe_score_angle-700)
 		{
 			motor[shoulder] = 0;
 			shoulder_done = true;
 		}
+		else motor[shoulder] = 0;
 
 		if(lift_done&&shoulder_done)
 		{

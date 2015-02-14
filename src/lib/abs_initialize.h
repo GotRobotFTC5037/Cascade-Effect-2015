@@ -36,11 +36,6 @@ void abs_initialize()
 	HTGYROstartCal(HTGYRO);
 	g_drift = 0;//abs_gyro_cal(2);
 
-	if(!HTACreadAllAxes(HTAC, g_x_axis, g_y_axis, g_z_axis))
-	{
-		g_error = ERR_ACCELERMOETER;
-		g_error_type = ERROR_NONLETHAL;
-	}
 	if(g_gyro_noise>10)
 	{
 		g_error = ERR_GYRO_CAL;

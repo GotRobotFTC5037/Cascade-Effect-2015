@@ -57,12 +57,6 @@
 
 task main ()
 {
-	motor[brush] = 0;
-	servo[impellar1] = 127;
-	servo[impellar2] = 127;
-	nMotorEncoder(lift1) = 0;
-	nMotorEncoder(shoulder) = 0;
-
 	abs_tele_op_initialize();
 	StartTask(abs_joystick_gunner);
 	while(g_program_done==false)
