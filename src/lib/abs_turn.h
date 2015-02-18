@@ -26,7 +26,7 @@
 //=======================================
 // point turn
 //=======================================
-void abs_turn(e_direction dir, e_turn_method turn_method, e_turn_stopping_method e_stop, int degree, int speed)
+void abs_turn(e_direction dir, e_turn_method turn_method, e_turn_stopping_method e_stop, int degree, int speed, e_drive_direction direction)
 {
 	if(dir == COUNTERCLOCKWISE)
 		abs_dlog(__FILE__ ,"enter CC","speed", speed, "degree", degree, "g_rel_heading", g_rel_heading, "g_const_heading", g_const_heading);
@@ -49,7 +49,7 @@ void abs_turn(e_direction dir, e_turn_method turn_method, e_turn_stopping_method
 			if(degree<g_recont_heading) target = 360-(g_recont_heading-degree);
 			else target = degree-g_recont_heading;
 		}
-		abs_turn(dir, turn_method, TURN, target, speed);
+		abs_turn(dir, turn_method, TURN, target, speed, FORWARD);
 		PlaySoundFile("! Click.rso");
 	}
 	else
@@ -59,40 +59,82 @@ void abs_turn(e_direction dir, e_turn_method turn_method, e_turn_stopping_method
 		//-------------------------
 
 		g_rel_heading = 0;
-		while(abs(g_rel_heading) < abs(degree))
+		if(direction == FORWARD)
 		{
-			int turn_speed = adjusted_turn_speed(speed, abs(degree), abs(g_rel_heading));
-
-			if(turn_method == SWING)
+			while(abs(g_rel_heading) < abs(degree))
 			{
-				if(dir == COUNTERCLOCKWISE)
+				int turn_speed = adjusted_turn_speed(speed, abs(degree), abs(g_rel_heading));
+
+				if(turn_method == SWING)
 				{
-					motor[right_motor] = turn_speed;
-					motor[left_motor] = 0;
+					if(dir == COUNTERCLOCKWISE)
+					{
+						motor[right_motor] = turn_speed;
+						motor[left_motor] = 0;
+					}
+					else
+					{
+						motor[right_motor] = 0;
+						motor[left_motor] = turn_speed;
+					}
 				}
+
+				//-------------------------
+				// point turn
+				//-------------------------
 				else
 				{
-					motor[right_motor] = 0;
-					motor[left_motor] = turn_speed;
+					if(dir == COUNTERCLOCKWISE)
+					{
+						motor[right_motor] = turn_speed;
+						motor[left_motor] = -turn_speed;
+					}
+					else
+					{
+						motor[right_motor] = -turn_speed;
+						motor[left_motor] = turn_speed;
+					}
+				}
+			}
+		}
+		else
+		{
+			while(abs(g_rel_heading) < abs(degree))
+			{
+				int turn_speed = adjusted_turn_speed(speed, abs(degree), abs(g_rel_heading));
+
+				if(turn_method == SWING)
+				{
+					if(dir == COUNTERCLOCKWISE)
+					{
+						motor[right_motor] = 0;
+						motor[left_motor] = -turn_speed;
+					}
+					else
+					{
+						motor[right_motor] = -turn_speed;
+						motor[left_motor] = 0;
+					}
+				}
+
+				//-------------------------
+				// point turn
+				//-------------------------
+				else
+				{
+					if(dir == COUNTERCLOCKWISE)
+					{
+						motor[right_motor] = turn_speed;
+						motor[left_motor] = -turn_speed;
+					}
+					else
+					{
+						motor[right_motor] = -turn_speed;
+						motor[left_motor] = turn_speed;
+					}
 				}
 			}
 
-			//-------------------------
-			// point turn
-			//-------------------------
-			else
-			{
-				if(dir == COUNTERCLOCKWISE)
-				{
-					motor[right_motor] = turn_speed;
-					motor[left_motor] = -turn_speed;
-				}
-				else
-				{
-					motor[right_motor] = -turn_speed;
-					motor[left_motor] = turn_speed;
-				}
-			}
 		}
 	}
 	//-------------------------
