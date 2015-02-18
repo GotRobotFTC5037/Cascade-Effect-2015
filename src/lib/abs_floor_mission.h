@@ -53,7 +53,7 @@ void abs_floor_mission()
 		{
 		case 1:
 			abs_drive(BACKWARD, E_ANGLE, 100, 60, true, GYRO, DONT_SLOW_DOWN);
-			abs_turn(COUNTERCLOCKWISE, POINT, TURN, 23, 40, FORWARD);
+			abs_turn(COUNTERCLOCKWISE, POINT, TURN, 25/*23*/, 40, FORWARD);
 
 			abs_drive(BACKWARD, E_ANGLE, 250, 60, true, GYRO, DONT_SLOW_DOWN);
 
@@ -66,8 +66,6 @@ void abs_floor_mission()
 
 			while(!g_auto_lift_done){}
 			StopTask(abs_auto_center_pipe_score);
-
-			while(true){}
 
 			wait1Msec(400);
 
