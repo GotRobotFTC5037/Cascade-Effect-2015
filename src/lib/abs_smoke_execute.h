@@ -202,6 +202,20 @@ void abs_smoke_execute(int test_num)
 				servo[shutter] = g_shutter_open;
 			}
 			break;
+			case 10:
+			if(nNxtButtonPressed==kLeftButton)
+			{
+				servo[intake_shutter] = g_intake_shutter_up;
+				PlaySoundFile("! Click.rso");
+				while(nNxtButtonPressed==kLeftButton){ abs_smoke_test_view(test_num,g_intake_shutter_up,0); }
+			}
+			else if(nNxtButtonPressed==kRightButton)
+			{
+				servo[intake_shutter] = g_intake_shutter_down;
+				PlaySoundFile("! Click.rso");
+				while(nNxtButtonPressed==kRightButton){ abs_smoke_test_view(test_num,g_intake_shutter_down,0); }
+			}
+			break;
 		default: abs_cscreen("ERROR   ","Test 2 B","added   "); break;
 		}
 	}

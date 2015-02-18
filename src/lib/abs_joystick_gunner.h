@@ -45,6 +45,9 @@ task abs_joystick_gunner()
 	int shoulder_min = 0;
 	bool shoulder_return = false;
 
+	int intake_shutter_state = g_intake_shutter_up;
+	bool intake_shutter_button_pressed = false;
+
 	while(true)
 	{
 		//nxtDisplayBigTextLine(1,"%3d", g_bearing_ac1);
@@ -362,6 +365,20 @@ task abs_joystick_gunner()
 			nMotorEncoder[lift1] = 0;
 			nMotorEncoder[shoulder] = 0;
 		}
+
+		//-----------------------------------
+		// intake shutter
+		//-----------------------------------
+		if(!joy2Btn(10)&&!joy1Btn(10))intake_shutter_button_pressed = false;
+		else if(intake_shutter_button_pressed == false)
+		{
+			if(intake_shutter_state == g_intake_shutter_up) intake_shutter_state = g_intake_shutter_down;
+			else intake_shutter_state = g_intake_shutter_up;
+
+			intake_shutter_button_pressed = true;
+		}
+		servo[intake_shutter] = intake_shutter_state;
+
 	}
 }
 

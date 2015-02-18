@@ -28,6 +28,7 @@ void abs_initialize()
 	memset(g_input_array,0,INPUT_ARRAY_SIZE);
 	servo[goal_claw] = g_goal_claw_up;
 	servo[shutter] = g_shutter_open;
+	servo[intake_shutter] = g_intake_shutter_up;
 	nMotorEncoder(shoulder) = 0;
 	nMotorEncoder(lift1) = 0;
 	abs_selection_program();
