@@ -25,7 +25,7 @@ void abs_auto_end(e_scoring_options second_start_pos)
 	{
 		if(g_input_array[STARTING_POINT] == START_FLOOR && g_input_array[FIRST_OBJECTIVE] == CENTER_GOAL && g_input_array[SECOND_OBJECTIVE] == KICK_STAND && g_center_goal_pos == 3)
 		{
-			abs_drive(BACKWARD, E_ANGLE, 100, 60, true, GYRO, DONT_SLOW_DOWN);
+			abs_drive(BACKWARD, E_ANGLE, 120/*100*/, 60, true, GYRO, DONT_SLOW_DOWN);
 			abs_turn(COUNTERCLOCKWISE, POINT, TURN, 90, 50);
 			abs_drive(BACKWARD, E_ANGLE, 180, 90, true, GYRO, DONT_SLOW_DOWN);
 		}

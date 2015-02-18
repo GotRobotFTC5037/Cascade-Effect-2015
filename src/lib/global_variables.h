@@ -226,6 +226,9 @@ const int g_lift_speed_up = 100;
 const int g_shutter_open = 255;
 const int g_shutter_closed = 127;
 
+const int g_intake_shutter_up = 240;
+const int g_intake_shutter_down = 0;
+
 const int g_goal_claw_up = 225;
 const int g_goal_claw_down = 60;
 

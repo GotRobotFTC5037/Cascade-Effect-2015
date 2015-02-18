@@ -24,6 +24,7 @@ void abs_tele_op_initialize()
 	motor[brush] = 0;
 	servo[impellar1] = 127;
 	servo[impellar2] = 127;
+	servo[intake_shutter] = g_intake_shutter_up;
 	nMotorEncoder(lift1) = 0;
 	nMotorEncoder(shoulder) = 0;
 
