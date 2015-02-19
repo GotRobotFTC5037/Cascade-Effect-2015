@@ -30,7 +30,7 @@ task abs_auto_pipe_score()
 			motor[lift2] = 0;
 			lift_done = true;
 		}
-		if(nMotorEncoder(shoulder)<g_auto_pipe_score_angle-700&&nMotorEncoder(lift1)>g_auto_pipe_score_hight-800) motor[shoulder] = (((((g_auto_pipe_score_angle-700)-nMotorEncoder(shoulder))*100)/g_shoulder_max)+g_shoulder_min_speed);
+		if(nMotorEncoder(shoulder)<g_auto_pipe_score_angle-0&&nMotorEncoder(lift1)>g_auto_pipe_score_hight-800) motor[shoulder] = (((((g_auto_pipe_score_angle-700)-nMotorEncoder(shoulder))*100)/g_shoulder_max)+g_shoulder_min_speed);
 		else if(nMotorEncoder(shoulder)>=g_auto_pipe_score_angle-700)
 		{
 			motor[shoulder] = 0;

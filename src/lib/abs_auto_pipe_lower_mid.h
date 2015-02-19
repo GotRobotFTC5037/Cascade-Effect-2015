@@ -36,7 +36,7 @@ task abs_auto_pipe_lower_mid()
 		{
 			motor[lift1] = 0;
 			motor[lift2] = 0;
-			shoulder_done2 = true;
+			shoulder_done4 = true;
 		}
 
 		if(nMotorEncoder(shoulder)>50) motor[shoulder] = -((((nMotorEncoder(shoulder))*100)/g_shoulder_max)+g_shoulder_min_speed);
