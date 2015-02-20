@@ -53,21 +53,19 @@ void abs_floor_mission()
 		{
 		case 1:
 			abs_drive(BACKWARD, E_ANGLE, 100, 60, true, GYRO, DONT_SLOW_DOWN);
-			abs_turn(COUNTERCLOCKWISE, POINT, TURN, 23, 40, FORWARD);
+			abs_turn(COUNTERCLOCKWISE, POINT, TURN, 35/*23*/, 40, FORWARD);
 
-			abs_drive(BACKWARD, E_ANGLE, 250, 60, true, GYRO, DONT_SLOW_DOWN);
+			abs_drive(BACKWARD, E_ANGLE, 180, 60, true, GYRO, DONT_SLOW_DOWN);
 
 			g_auto_lift_done = false;
 			StartTask(abs_auto_center_pipe_score);
 			wait1Msec(200);
-			abs_turn(CLOCKWISE, POINT, TURN, 112, 40, FORWARD);
+			abs_turn(CLOCKWISE, POINT, TURN, 126, 40, FORWARD);
 
 			abs_drive(BACKWARD, E_ANGLE, 8, 40, true, GYRO, DONT_SLOW_DOWN);
 
 			while(!g_auto_lift_done){}
 			StopTask(abs_auto_center_pipe_score);
-
-			while(true){}
 
 			wait1Msec(400);
 

@@ -226,6 +226,9 @@ const int g_lift_speed_up = 100;
 const int g_shutter_open = 255;
 const int g_shutter_closed = 127;
 
+const int g_intake_shutter_up = 240;
+const int g_intake_shutter_down = 0;
+
 const int g_goal_claw_up = 225;
 const int g_goal_claw_down = 60;
 
@@ -675,6 +678,7 @@ int g_drive_heading = 0;
 int g_ir_heading = 5;
 bool g_program_done = false;
 int g_center_goal_pos = 0;
+int g_roll1_sonar_turn = 0;
 
 
 bool g_joy1_enabled = false;
