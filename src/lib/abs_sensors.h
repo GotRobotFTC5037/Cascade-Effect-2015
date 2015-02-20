@@ -35,7 +35,7 @@ task abs_sensors()
 	(gyro_read % 10 == 0) ? gyro_read=0 : gyro_read++;
 
 		//nxtDisplayBigTextLine(1,"Gyro:%1d",g_const_heading);
-		nxtDisplayBigTextLine(1,"%2d",g_bearing_ac1);
+		nxtDisplayBigTextLine(1,"%2d %3d",g_bearing_ac1,g_sonar2);
 		//nxtDisplayBigTextLine(3,"%2d %2d",g_IR_average, g_sonar_average);
 		nxtDisplayBigTextLine(5,"%3d %1d",g_sonar,g_center_goal_pos);
 

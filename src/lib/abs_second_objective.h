@@ -18,6 +18,7 @@
 #include "abs_drive.h"
 #include "abs_auto_end.h"
 #include "abs_auto_pipe_lower_mid.h"
+#include "abs_auto_pipe_score_tall.h"
 
 void abs_second_objective(e_scoring_options second_start_pos)
 {
@@ -78,22 +79,68 @@ void abs_second_objective(e_scoring_options second_start_pos)
 		case ROLLGOAL1: //ROLLING GOAL 1
 			switch(g_input_array[SECOND_OBJECTIVE])
 			{
+			case ROLLGOAL2:
+
+				StartTask(abs_auto_pipe_lower_mid);
+				abs_turn(CLOCKWISE, SWING, TURN, 40, 60, FORWARD);
+				servo[goal_claw] = g_goal_claw_up;
+
+				abs_drive(FORWARD, E_ANGLE, 45, 40, true, GYRO, DONT_SLOW_DOWN);
+				abs_turn(COUNTERCLOCKWISE, POINT, TURN, 48+abs(g_roll1_sonar_turn), 50, FORWARD);
+
+				abs_drive(BACKWARD, E_ANGLE, 90, 30, true, GYRO, DONT_SLOW_DOWN);
+
+				g_rel_heading = 0;
+				while(g_sonar>35&&abs(g_rel_heading)<100){ motor[left_motor] = 45; }
+				motor[left_motor] = 0;
+				g_roll1_sonar_turn = g_rel_heading;
+
+				if(!(abs(g_rel_heading)<100))
+				{
+					PlayTone(1500, 30);
+					wait1Msec(200);
+					PlayTone(1000, 30);
+					wait1Msec(200);
+					PlayTone(500, 30);
+
+					StopTask(abs_auto_pipe_score);
+					StartTask(abs_auto_pipe_lower);
+
+					while(true){}
+				}
+
+				abs_turn(CLOCKWISE, SWING, TURN, 25, 40, FORWARD);
+				abs_drive(BACKWARD, E_ANGLE, 65, 30, true, GYRO, DONT_SLOW_DOWN);
+
+				servo[goal_claw] = g_goal_claw_down;
+
+				StopTask(abs_auto_pipe_lower_mid);
+				StartTask(abs_auto_pipe_score_tall);
+
+				while(nNxtButtonPressed!=kEnterButton){}
+
+				servo[shutter] = g_shutter_open;
+
+				while(nNxtButtonPressed==kEnterButton){}
+				while(nNxtButtonPressed!=kEnterButton){}
+
+				StopTask(abs_auto_pipe_score_tall);
+				StopTask(abs_auto_pipe_lower_mid);
+				StartTask(abs_auto_pipe_lower);
+
+				while(true){}
+				break;
 			case PARKING_ZONE:
+
 				StopTask(abs_auto_pipe_score);
 				StartTask(abs_auto_pipe_lower);
-				/*if(!force_done)*/
 
-				/*
-				   !!!@@@### MAKE THIS A TURN_TO###@@@!!!
-				\/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/
-				*/
+				servo[goal_claw] = g_goal_claw_down;
 
+				abs_turn(COUNTERCLOCKWISE, POINT, TURN, g_roll1_sonar_turn-2, 60, FORWARD);
+				abs_drive(FORWARD, E_ANGLE, 440, 100, true, GYRO, DONT_SLOW_DOWN);
 
-				//abs_turn(COUNTERCLOCKWISE, POINT, TURN, 10, 40, FORWARD);
-				//abs_turn(COUNTERCLOCKWISE, POINT, TURN, 29, 40, FORWARD);
-				abs_drive(FORWARD, E_ANGLE, 425, 100, true, GYRO, DONT_SLOW_DOWN);
-
-				abs_turn(CLOCKWISE, POINT, TURN, 147, 70, FORWARD);
+				abs_turn(CLOCKWISE, POINT, TURN, 155, 70, FORWARD);
 				PlayTone(200, 20);
 				servo[goal_claw] = g_goal_claw_up;
 				abs_drive(BACKWARD, E_ANGLE, 65, 100, true, GYRO, DONT_SLOW_DOWN);
