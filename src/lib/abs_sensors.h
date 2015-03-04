@@ -22,11 +22,7 @@
 
 task abs_sensors()
 {
-	//abs_dlog(__FILE__ ,"", "", );
-
 	g_prev_time = nPgmTime;
-
-	//StartTask(abs_gyro_read);
 
 	short gyro_read;
 
@@ -34,23 +30,23 @@ task abs_sensors()
 	{
 	(gyro_read % 10 == 0) ? gyro_read=0 : gyro_read++;
 
-		//nxtDisplayBigTextLine(1,"Gyro:%1d",g_const_heading);
-		nxtDisplayBigTextLine(1,"%2d %3d",g_bearing_ac1,g_sonar2);
-		//nxtDisplayBigTextLine(3,"%2d %2d",g_IR_average, g_sonar_average);
-		nxtDisplayBigTextLine(5,"%3d %1d",g_sonar,g_center_goal_pos);
+		nxtDisplayBigTextLine(1,"%2d %3d",g_sonar,g_sonar2);
+		nxtDisplayBigTextLine(3,"%2d %2d",g_sonar3,g_sonar4);
+		nxtDisplayBigTextLine(5,"%3d",g_angle_sensor);
+
+		//------------------------
+		// angle sensor
+		//------------------------
+		g_angle_sensor = HTANGreadAccumulatedAngle(angle_sensor);
+
+		//------------------------
+		// sonar
+		//------------------------
 
 		g_sonar = USreadDist(LEGOUS);
 		g_sonar2 = USreadDist(LEGOUS2);
-
-		//switch(g_bearing_ac1)
-		//{
-		//case 5: nxtDisplayBigTextLine(1,"3"); break;
-		//case 6: nxtDisplayBigTextLine(1,"2"); break;
-		//case 7: nxtDisplayBigTextLine(1,"1"); break;
-		////----------------------------; break;
-		//}
-		//nxtDisplayBigTextLine(5,"%3d %3d",HTEOPDreadRaw(HTEOPD),HTEOPDreadProcessed(HTEOPD));
-g_sonar = USreadDist(LEGOUS);
+		g_sonar3 = USreadDist(LEGOUS3);
+		g_sonar4 = USreadDist(LEGOUS4);
 		//-------------------------
 		// HiTechnic IR Sensor
 		//-------------------------
@@ -59,7 +55,7 @@ g_sonar = USreadDist(LEGOUS);
 
 		HTIRS2readAllACStrength(HTIRS2, g_acs1[0], g_acs1[1], g_acs1[2], g_acs1[3], g_acs1[4]);
 		//-----------------------------------
-		// code for the peaks of IR sen-------
+		// code for the peaks of IR sensor
 
 		if (g_bearing_ac1!=0)								// we have a valid IR signal
 		{
@@ -90,51 +86,7 @@ g_sonar = USreadDist(LEGOUS);
 				}
 			}
 			g_ir_bearing1 = (float)((peak-2)*50) + offset;		// direction is the total of the peak bias plus the adjacent bias
-
-			//nxtDisplayBigTextLine(3, "%2d", g_ir_bearing1);
 		}
-		//-------------------------
-		// HiTechnic IR Sensor 2
-		//-------------------------
-		//g_bearing_ac2 = HTIRS2readACDir(HTIRS2_2);				// Read the IR bearing from the sensor
-		//g_curr_dir2 = (float) g_bearing_ac2;
-
-		//HTIRS2readAllACStrength(HTIRS2_2, g_acs2[0], g_acs2[1], g_acs2[2], g_acs2[3], g_acs2[4]);
-		//-----------------------------------
-		// code for the peaks of IR sensor 2
-		//-----------------------------------
-		//if (g_bearing_ac2!=0)								// we have a valid IR signal
-		//{
-		//	int maximum = -1;
-		//	int peak = 0, offset=0;
-		//	for (int i=0;i<5;i++)	// scan array to find the peak entry
-		//	{	if (g_acs2[i]>maximum)
-		//		{
-		//			peak = i;
-		//			maximum = g_acs2[i];
-		//		}
-		//	}
-		//	offset=0;
-		//	if ((peak < 4) && (peak>0) && (g_acs2[peak] != 0))  // we are not working with extreme value
-		//	{
-		//		if (g_acs2[peak-1]!=g_acs2[peak+1]) // if the values either side of the peak are identical then peak is peak
-		//		{
-		//			if (g_acs2[peak-1]>g_acs2[peak+1])	// otherwise decide which side has higher signal
-		//			{
-		//				offset = -25*(1-(float)(g_acs2[peak]-g_acs2[peak-1])/		// calculate the bias away from the peak
-		//				max(g_acs2[peak], g_acs2[peak-1]));
-		//			}
-		//			else
-		//			{
-		//				offset = 25*(1-(float)(g_acs2[peak]-g_acs2[peak+1])/
-		//				max(g_acs2[peak], g_acs2[peak+1]));
-		//			}
-		//		}
-		//	}
-		//	g_ir_bearing2 = (float)((peak-2)*50) + offset;		// direction is the total of the peak bias plus the adjacent bias
-		//	//nxtDisplayBigTextLine(3, "%2d", g_ir_bearing1);
-		//	wait1Msec(20);
-		//}
 		//-------------------------
 		// HiTechnic Gyro
 		//-------------------------
@@ -152,21 +104,6 @@ g_sonar = USreadDist(LEGOUS);
 			g_recont_heading = g_const_heading % 360;
 			if(g_recont_heading<0) g_recont_heading += 360;
 		}
-		/*
-		g_curr_time=nPgmTime;
-		g_raw_gyro = abs_get_gyro_sensor_val(RAW);
-		g_sacred_const_heading += (g_raw_gyro - (g_drift+(g_delta_drift*(float)(g_curr_time-g_prev_time)))) * (float)(g_curr_time-g_prev_time)/1000;
-		g_rel_heading += (g_raw_gyro - (g_drift+(g_delta_drift*(float)(g_curr_time-g_prev_time)))) * (float)(g_curr_time-g_prev_time)/1000;
-
-		g_const_heading += (g_raw_gyro - (g_drift+(g_delta_drift*(float)(g_curr_time-g_prev_time)))) * (float)(g_curr_time-g_prev_time)/1000;
-
-		//abs_dlog(__FILE__ ,"heading"," g_const_heading: %d ", g_const_heading," g_rel_heading: %d ", g_rel_heading);
-		//wait1Msec(100);
-		g_prev_time = g_curr_time;
-
-		g_recont_heading = g_const_heading % 360;
-		if(g_recont_heading<0) g_recont_heading += 360;
-		*/
 		wait1Msec(20);
 	}
 }

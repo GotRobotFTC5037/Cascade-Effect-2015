@@ -25,13 +25,16 @@
 #define ENCODER_SIDE right_motor
 #endif
 
-//const tMUXSensor HTIRS2 = msensor_S3_1;     // HiTechnic Infrared sensor
+//const tMUXSensor HTIRS2 = msensor_S3_1;    // HiTechnic Infrared sensor
 const tMUXSensor HTAC = msensor_S2_1;
-const tMUXSensor HTGYRO = msensor_S3_1;	   // HiTechnic GYRO sensor
-const tMUXSensor LEGOUS2 = msensor_S2_4;     // sonar 2 //HiTechnic Infrared sensor 2
-const tMUXSensor HTIRS2 = msensor_S2_3;     // HiTechnic Infrared sensor 2
-const tMUXSensor LEGOTOUCH = msensor_S3_4; //2;
-const tMUXSensor LEGOUS = msensor_S2_2;	// sonar 1
+const tMUXSensor HTGYRO = msensor_S3_1;	     // HiTechnic GYRO sensor
+const tMUXSensor LEGOUS2 = msensor_S2_4;     // sonar 2 right side sensor
+const tMUXSensor HTIRS2 = msensor_S2_3;      // HiTechnic Infrared sensor 2
+const tMUXSensor LEGOTOUCH = msensor_S3_4;   // touchsensor;
+const tMUXSensor LEGOUS = msensor_S2_2;      // sonar 1 center goal detection sensor
+const tMUXSensor angle_sensor = msensor_S4_1;      // angle sensor
+const tMUXSensor LEGOUS3 = msensor_S4_2;     // sonar 3 left side sensor
+const tMUXSensor LEGOUS4 = msensor_S4_3;     // sonar 4 rolling goal sensor
 
 //#if EOPD_ACTIVE == 1
 //const tMUXSensor HTEOPD = msensor_S2_4;
@@ -493,52 +496,6 @@ e_slow_down_at_end slow_down_at_end = SLOW_DOWN;
 // auto movements
 //=========================================================
 /**
-* @var g_to_turn_dist
-* 		 Tells the robot how far it has gone when doing ir detection
-*
-* @var g_IR_angle_dist_complete
-* 		 Tells the robot when it has reached a the first crate
-*
-* @var g_forward_crate1_to_turn_dist
-* 		 Tells the robot how far it need to go to get to the turn
-*
-* @var g_forward_crate2_to_turn_dist
-* 		 Tells the robot how far it need to go to get to the turn
-*
-* @var g_forward_crate3_to_turn_dist
-* 		 Tells the robot how far it need to go to get to the turn
-*
-* @var g_forward_crate4_to_turn_dist
-*  		 Tells the robot how far it need to go to get to the turn
-*
-* @var g_backwards_crate1_to_turn_dist
-*  		 Tells the robot how far it need to go to get to the turn
-*
-* @var g_backwards_crate2_to_turn_dist
-* 		 Tells the robot how far it need to go to get to the turn
-*
-* @var g_backwards_crate3_to_turn_dist
-* 		 Tells the robot how far it need to go to get to the turn
-*
-* @var g_backwards_crate4_to_turn_dist
-* 		 Tells the robot how far it need to go to get to the turn
-*/
-
-int g_to_turn_dist = 0;
-
-bool g_IR_angle_dist_complete = false;
-
-const int g_forward_crate1_to_turn_dist = 130;
-const int g_forward_crate2_to_turn_dist = 105;
-const int g_forward_crate3_to_turn_dist = 55;
-const int g_forward_crate4_to_turn_dist = 30;
-
-const int g_backwards_crate1_to_turn_dist = 40;
-const int g_backwards_crate2_to_turn_dist = 65;
-const int g_backwards_crate3_to_turn_dist = 115;
-const int g_backwards_crate4_to_turn_dist = 140;
-
-/**
 * @def MAX_DRIVE_DIST_TO_FIRST_RAMP_LINE
 *		Tells the robot the maxamum drive dist  to first ramp
 *
@@ -796,7 +753,7 @@ int g_gyro_cal_time = 5;
 
 int g_dist_backwards = 0;
 
-int g_number_min_limit [] = {0,0,0,0,0,0,0,0};//warp here
+int g_number_min_limit [] = {0,0,0,0,0,0,0,0};
 int g_number_max_limit [] = {0,g_auto_starting_points,30,g_first_objectives,30,g_second_objectives,30,g_auto_ending_points};
 //=============================================================
 // Gyro variables
@@ -835,6 +792,8 @@ long g_prev_time = 0;
 int g_raw_gyro = 0;
 int g_sonar = 0;
 int g_sonar2 = 0;
+int g_sonar3 = 0;
+int g_sonar4 = 0;
 int g_recont_heading = 0; //this is the recalculated const gyro heading
 
 bool force_done = false;
@@ -873,6 +832,7 @@ bool force_done = false;
 */
 
 bool dist_record = true;
+int g_angle_sensor = 0;
 int g_light_sensor;
 int g_bearing_ac1 = 0;
 int g_bearing_ac2 = 0;
