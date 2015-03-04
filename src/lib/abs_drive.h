@@ -29,6 +29,8 @@
 #include "abs_reset_angle_sensor.h"
 #include "abs_get_angle_sensor_val.h"
 #include "abs_move_utils.h"
+#include "abs_stall_detect.h"
+#include "abs_reset_stall_detect.h"
 
 void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int dist, int speed, bool stop_at_end, e_drive_type drive_type, e_slow_down_at_end slowDown)
 {
@@ -246,6 +248,15 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 				else
 				{
 					abs_gyro_drive(speed, dir);
+					/*if(abs_stall_detect(abs_get_angle_sensor_val(RELATIVE_TU)))
+					{
+						PlayTone(300, 20);
+						wait10Msec(20);
+						PlayTone(300, 20);
+						wait10Msec(20);
+						PlayTone(300, 20);
+						wait10Msec(20);
+					}*/
 				}
 			}
 
@@ -358,6 +369,8 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 		motor[left_motor] = 0;
 		motor[right_motor] = 0;
 	}
+
+	abs_reset_stall_detect();
 	g_debug_time_2 = nPgmTime;
 
 	//if(dist_method == E_OPTICAL) servo[optical_servo] = OPTICAL_SERVO_UP;
