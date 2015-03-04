@@ -265,6 +265,8 @@ const int g_center_detect_value = 30;
 
 #define TURN_SPEED 50
 
+bool g_reset_stall_detect = false;
+
 //=========================================================
 // auto selection points
 //=========================================================

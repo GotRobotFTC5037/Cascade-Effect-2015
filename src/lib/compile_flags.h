@@ -17,7 +17,7 @@
 
 //0 = wait for start
 //1 = wait 3 seconds
-#define WAIT 1
+#define WAIT 0
 
 // 1 = Left
 // 2 = Right
