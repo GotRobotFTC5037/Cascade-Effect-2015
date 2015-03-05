@@ -25,6 +25,7 @@
 #define ABS_DRIVE_H
 
 #include "abs_gyro_drive.h"
+#include "abs_sonar_drive.h"
 #include "abs_dlog.h"
 #include "abs_reset_angle_sensor.h"
 #include "abs_get_angle_sensor_val.h"
@@ -79,7 +80,10 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 			{
 				abs_gyro_drive(speed,dir);
 			}
-
+			else if(drive_type == WALL_SONAR)
+			{
+				abs_sonar_drive(speed, dir, g_sonar_wall_dist, g_sonar3);
+			}
 			/** No gyro correction*/
 			else
 			{
@@ -114,7 +118,10 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 			{
 				abs_gyro_drive(speed,dir);
 			}
-
+			else if(drive_type == WALL_SONAR)
+			{
+				abs_sonar_drive(speed, dir, g_sonar_wall_dist, g_sonar3);
+			}
 			/** No gyro correction*/
 			else
 			{
@@ -177,6 +184,10 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 				{
 					abs_gyro_drive(speed,dir);
 				}
+				else if(drive_type == WALL_SONAR)
+				{
+					abs_sonar_drive(speed, dir, g_sonar_wall_dist, g_sonar3);
+				}
 
 				/** No gyro correction*/
 				else
@@ -199,6 +210,10 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 				{
 					abs_gyro_drive(speed,dir);
 				}
+				else if(drive_type == WALL_SONAR)
+				{
+					abs_sonar_drive(speed, dir, g_sonar_wall_dist, g_sonar3);
+				}
 				/** No gyro correction*/
 				else
 				{
@@ -215,6 +230,10 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 				{
 					abs_gyro_drive(speed,dir);
 				}
+				else if(drive_type == WALL_SONAR)
+				{
+					abs_sonar_drive(speed, dir, g_sonar_wall_dist, g_sonar3);
+				}
 				/** No gyro correction*/
 				else
 				{
@@ -227,7 +246,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 	//------------------------
 	// angle sensor stopping method
 	//------------------------
-	//Tells the robot to stop baced on the real distence it has went
+	//Tells the robot to stop based on the real distence it has driven determined by the angle sensor
 	else if(dist_method == E_ANGLE)
 	{
 		int pre_dist = 0;
@@ -250,16 +269,20 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 					abs_gyro_drive(speed, dir);
 					/*if(abs_stall_detect(abs_get_angle_sensor_val(RELATIVE_TU)))
 					{
-						PlayTone(300, 20);
-						wait10Msec(20);
-						PlayTone(300, 20);
-						wait10Msec(20);
-						PlayTone(300, 20);
-						wait10Msec(20);
+					PlayTone(300, 20);
+					wait10Msec(20);
+					PlayTone(300, 20);
+					wait10Msec(20);
+					PlayTone(300, 20);
+					wait10Msec(20);
 					}*/
 				}
 			}
 
+			else if(drive_type == WALL_SONAR)
+			{
+				abs_sonar_drive(speed, dir, g_sonar_wall_dist, g_sonar3);
+			}
 
 			/** No gyro correction*/
 			else
@@ -333,6 +356,10 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 				abs_gyro_drive(adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU)),dir);
 			}
 
+			else if(drive_type == WALL_SONAR)
+			{
+				abs_sonar_drive(speed, dir, g_sonar_wall_dist, g_sonar3);
+			}
 			/** No gyro correction*/
 			else
 			{

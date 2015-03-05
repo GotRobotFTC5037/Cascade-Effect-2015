@@ -236,6 +236,7 @@ const int g_goal_claw_up = 225;
 const int g_goal_claw_down = 60;
 
 const int g_gyro_adjust = 5;//10;
+const float g_sonar_adjust = 1;
 int g_original_gyro_val = 0;
 
 const int g_ground_arm_up = 0;
@@ -260,66 +261,14 @@ const int g_optical_move_min_dist = 70;
 
 const int g_center_detect_value = 30;
 
+const int g_sonar_wall_dist = 10;
+
 #define NON_IR_DRIVE_SPEED 70
 #define IR_DRIVE_SPEED 40
 
 #define TURN_SPEED 50
 
 bool g_reset_stall_detect = false;
-
-//=========================================================
-// auto selection points
-//=========================================================
-/**
-* @enum e_auto_selection_points Tells the robot what part it is in the selection program
-* @var e_auto_selection_points::SELECTION_START_POINT
-*     Tells the robot to go to this part in the selection program
-* @var e_auto_selection_points::SELECTION_START_DELAY
-*     Tells the robot to go to this part in the selection program
-* @var e_auto_selection_points::SELECTION_MISSION_POINT
-*     Tells the robot to go to this part in the selection program
-* @var e_auto_selection_points::SELECTION_MISSION_DELAY
-*     Tells the robot to go to this part in the selection program
-* @var e_auto_selection_points::SELECTION_END_POINT
-*     Tells the robot to go to this part in the selection program
-* @var e_auto_selection_points::SELECTION_SUB_GRABBERS
-*     Tells the robot to go to this part in the selection program
-* @var e_auto_selection_points::SELECTION_GYRO_CAL
-*      Tells the robot to go to this part in the selection program
-*  @var e_auto_selection_points::SELECTION_SELECTION_TYPE
-*     Tells the robot to go to this part in the selection program
-* @var e_auto_selection_points::SELECTION_GRAPH_NUMBER_INPUT
-*     Tells the robot to go to this part in the selection program
-* @var e_auto_selection_points::SELECTION_QUICK_INPUT
-*			Tells the robot to go to this part in the selection program
-*	@var e_auto_selection_points::SELECTION_SUB_RAMP
-*			Tells the robot to go to this part in the selection program
-*	@var e_auto_selection_points::SELECTION_CORNOR_DELAY
-*			Tells the robot to go to this part in the selection program
-*	@var e_auto_selection_points::SELECTION_RAMP_DELAY
-*			Tells the robot to go to this part in the selection program
-* @var g_auto_selection_point
-*			Tells the robot what phase its in on auto
-*/
-
-typedef enum
-{
-	SELECTION_START_POINT,
-	SELECTION_START_DELAY,
-	SELECTION_MISSION_POINT,
-	SELECTION_MISSION_DELAY,
-	SELECTION_END_POINT,
-	SELECTION_SUB_GRABBERS,
-	SELECTION_GYRO_CAL,
-	SELECTION_SELECTION_TYPE,
-	SELECTION_GRAPH_NUMBER_INPUT,
-	SELECTION_QUICK_INPUT,
-	SELECTION_SUB_RAMP,
-	SELECTION_CORNOR_DELAY,
-	SELECTION_RAMP_DELAY
-} e_auto_selection_points;
-
-e_auto_selection_points g_auto_selection_point = SELECTION_START_POINT;
 
 //=========================================================
 // auto selection type options
@@ -382,17 +331,6 @@ typedef enum
 	END_POINT,
 } e_selection_values;
 
-/**
-*  @enum e_drive_type Tells the robot were the second movement will be starting from
-*/
-//typedef enum
-//{
-//	SECOND_CENTER,
-//	SECOND_ROLLGOAL1,
-//	SECOND_ROLLGOAL2,
-//	SECOND_STOP
-//} e_second_objective_pos;
-
 typedef enum
 {
 	SCORE_ERROR,
@@ -406,33 +344,9 @@ typedef enum
 	STOP
 } e_scoring_options;
 
-//typedef enum
-//{
-
-//}
-
 //=========================================================
 // auto sub selections
 //=========================================================
-
-/**
-*  @enum e_drive_type Tells the robot its corection type
-*  @var e_auto_sub_selection_ramp::ENCODER
-*     Tells the robot to correct useing a encoder
-*  @var e_auto_sub_selection_ramp::GYRO
-*     Tells the robot to correct useing a gyro sensor
-*  @var e_auto_sub_selection_ramp::NON_SENSOR
-*     Tells the robot not to correct
-*/
-typedef enum
-{
-	ENCODER,
-	GYRO,
-	NON_SENSOR
-} e_drive_type;
-
-
-#define CORRECTION_DRIVE_TYPE NON_SENSOR
 /**
 *  @enum e_gyro_val_type the type of gyro units to read
 *  @var e_gyro_val_type::RAW
