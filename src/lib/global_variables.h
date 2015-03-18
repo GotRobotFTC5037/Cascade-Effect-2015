@@ -35,6 +35,7 @@ const tMUXSensor LEGOUS = msensor_S2_2;      // sonar 1 center goal detection se
 const tMUXSensor angle_sensor = msensor_S4_1;      // angle sensor
 const tMUXSensor LEGOUS3 = msensor_S4_2;     // sonar 3 left side sensor
 const tMUXSensor LEGOUS4 = msensor_S4_3;     // sonar 4 rolling goal sensor
+const tMUXSensor LEGOUS5 = msensor_S4_4;     // sonar 5 rolling goal sensor #2
 
 //#if EOPD_ACTIVE == 1
 //const tMUXSensor HTEOPD = msensor_S2_4;
@@ -256,12 +257,13 @@ const int g_center_pos_sonar_dist = 100;
 int g_auto_pipe_score_hight = g_mid_lift;
 int g_auto_pipe_score_angle = g_shoulder_mid;
 
+bool g_gyro_inherit = false;
 
 const int g_optical_move_min_dist = 70;
 
 const int g_center_detect_value = 30;
 
-const int g_sonar_wall_dist = 10;
+const int g_sonar_wall_dist = 11;
 
 #define NON_IR_DRIVE_SPEED 70
 #define IR_DRIVE_SPEED 40
@@ -710,6 +712,11 @@ int g_sonar = 0;
 int g_sonar2 = 0;
 int g_sonar3 = 0;
 int g_sonar4 = 0;
+int g_sonar5 = 0;
+int g_sonar_average4 = 0;
+int g_sonar_average5 = 0;
+int g_sonar_reads4 [11];
+int g_sonar_reads5 [11];
 int g_recont_heading = 0; //this is the recalculated const gyro heading
 
 bool force_done = false;

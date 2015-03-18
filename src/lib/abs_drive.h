@@ -65,7 +65,8 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 	}
 	int i = 0;
 	nMotorEncoder(ENCODER_SIDE)= 0;
-	g_rel_heading = 0;
+	if(g_gyro_inherit==true) g_gyro_inherit = false;
+	else g_rel_heading = 0;
 
 	//------------------------
 	// time stopping method
@@ -267,21 +268,13 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 				else
 				{
 					abs_gyro_drive(speed, dir);
-					/*if(abs_stall_detect(abs_get_angle_sensor_val(RELATIVE_TU)))
-					{
-					PlayTone(300, 20);
-					wait10Msec(20);
-					PlayTone(300, 20);
-					wait10Msec(20);
-					PlayTone(300, 20);
-					wait10Msec(20);
-					}*/
 				}
 			}
 
 			else if(drive_type == WALL_SONAR)
 			{
-				abs_sonar_drive(speed, dir, g_sonar_wall_dist, g_sonar3);
+				if(abs_get_angle_sensor_val(RELATIVE_TU)<((dist+pre_dist)-((dist+pre_dist)/1.8))) abs_sonar_drive(speed, dir, g_sonar_wall_dist, g_sonar3);
+				else abs_gyro_drive(speed, dir);
 			}
 
 			/** No gyro correction*/
@@ -399,41 +392,6 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 
 	abs_reset_stall_detect();
 	g_debug_time_2 = nPgmTime;
-
-	//if(dist_method == E_OPTICAL) servo[optical_servo] = OPTICAL_SERVO_UP;
-
-	//#if EOPD_ACTIVE == 0
-	//	if(dist_method==E_LIGHT) LSsetInactive(LEGOLS);
-	//#endif
-	//if(dist_record==true)
-	//{
-	//	if(g_start_point==1)
-	//	{
-	//		if(g_end_point == 3) g_dist_backwards = abs_get_angle_sensor_val(RELATIVE_BPU) - 6;//was 9
-	//		else if(g_end_point == 2) g_dist_backwards = 194 - abs_get_angle_sensor_val(RELATIVE_BPU);
-	//	}
-	//	else if(g_start_point==2)
-	//	{
-	//		if(g_mission_number==1)
-	//		{
-	//			//subtract 5 to account for drift of stop in ir
-	//			if(g_end_point == 2) g_dist_backwards = abs_get_angle_sensor_val(RAW_BPU) - 5 - 5;
-	//			else if(g_end_point == 3) g_dist_backwards = 196 - abs_get_angle_sensor_val(RAW_BPU);
-	//		}
-	//		else
-	//		{
-	//			if(g_end_point == 2) g_dist_backwards = abs_get_angle_sensor_val(RAW_BPU) - 5;
-	//			else if(g_end_point == 3) g_dist_backwards = 196 - abs_get_angle_sensor_val(RAW_BPU);
-	//		}
-	//		abs_dlog(__FILE__,"Raw values", "raw ASU", abs_get_angle_sensor_val(RAW_ASU), "raw BPU", abs_get_angle_sensor_val(RAW_BPU));
-	//	}
-	//	else if(g_start_point==3)
-	//	{
-	//		if(g_end_point==2)	g_dist_backwards = 170 - abs_get_angle_sensor_val(RELATIVE_BPU);
-	//		else if(g_end_point==3) g_dist_backwards = 75 + abs_get_angle_sensor_val(RELATIVE_BPU);
-	//	}
-	//	//dist_record=false;
-	//}
 
 	int rel_asu = abs_get_angle_sensor_val(RELATIVE_ASU);
 	int rel_bpu = abs_get_angle_sensor_val(RELATIVE_BPU);
