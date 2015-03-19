@@ -15,36 +15,43 @@
 //nPgmTime
 bool abs_stall_detect(int angle_sensor_value)
 {
+
+  //return true;
 	static int last_angle_sensor_value;
 	static int last_time_value;
-	const int angle_sensor_buffer_size = 5;
+	const int angle_sensor_buffer_size = 15;
+bool ret_val = false;
 
 	if(g_reset_stall_detect == true)
 	{
-		last_angle_sensor_value = 0;
-		last_time_value = 0;
+		last_angle_sensor_value = angle_sensor_value;
+		last_time_value = nPgmTime;
 		g_reset_stall_detect = false;
-	}
-
-	//if its been less then a second
-	if(nPgmTime<last_time_value+1000)
-	{
-		return false;
+		ret_val = false;
 	}
 	else
 	{
-		if(angle_sensor_value<last_angle_sensor_value+angle_sensor_buffer_size || angle_sensor_value>last_angle_sensor_value-angle_sensor_buffer_size)
+
+		//if its been less then a second
+		if(nPgmTime<last_time_value + 1000)
 		{
-			return true;
+			ret_val = false;
 		}
 		else
 		{
-			last_angle_sensor_value = angle_sensor_value;
-			last_time_value = nPgmTime;
-			return false;
+			if(abs(angle_sensor_value) < (abs(last_angle_sensor_value) + angle_sensor_buffer_size))
+			{
+				ret_val = true;
+			}
+			else
+			{
+				last_angle_sensor_value = angle_sensor_value;
+				last_time_value = nPgmTime;
+				ret_val = false;
+			}
 		}
 	}
+		return ret_val;
 }
-
 
 #endif /* !ABS_STALL_DETECT_H */

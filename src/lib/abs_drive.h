@@ -32,7 +32,7 @@
 #include "abs_stall_detect.h"
 #include "abs_reset_stall_detect.h"
 
-void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int dist, int speed, bool stop_at_end, e_drive_type drive_type, e_slow_down_at_end slowDown)
+void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int dist, int speed, bool stop_at_end, e_drive_type drive_type, e_slow_down_at_end slowDown, E_STALL_ACTION stall_action)
 {
 	/** logging constants */
 	const string speed_str = "speed";
@@ -237,29 +237,21 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 
 		abs_dlog(__FILE__ ,"reset angle", speed_str, speed, dist_str, dist, rel_asu_str, abs_get_angle_sensor_val(RELATIVE_ASU), rel_bpu_str, abs_get_angle_sensor_val(RELATIVE_TU));
 
-		while(abs_get_angle_sensor_val(RELATIVE_TU) < (dist+pre_dist))
+		while(abs_get_angle_sensor_val(RELATIVE_TU) < (dist+pre_dist)/* && abs_stall_detect(abs_get_angle_sensor_val(RELATIVE_TU) != true*/)
 		{
 			if(drive_type == GYRO)
 			{
 				if(slowDown == SLOW_DOWN)
 				{
 					abs_gyro_drive(adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_TU)),dir);
+					stall_detect(stall_action, RELATIVE_TU)
 				}
 				else
 				{
 					abs_gyro_drive(speed, dir);
-					/*if(abs_stall_detect(abs_get_angle_sensor_val(RELATIVE_TU)))
-					{
-						PlayTone(300, 20);
-						wait10Msec(20);
-						PlayTone(300, 20);
-						wait10Msec(20);
-						PlayTone(300, 20);
-						wait10Msec(20);
-					}*/
+					stall_detect(stall_action, RELATIVE_TU)
 				}
 			}
-
 
 			/** No gyro correction*/
 			else
@@ -292,6 +284,15 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 
 				}
 			}
+			/*if(abs_stall_detect(abs_get_angle_sensor_val(RELATIVE_TU)))
+			{
+			PlayTone(300, 50);
+			wait10Msec(70);
+			PlayTone(300, 50);
+			wait10Msec(70);
+			PlayTone(300, 50);
+			wait10Msec(70);
+			}*/
 		}
 
 		abs_dlog(__FILE__ ,"angle break", speed_str, speed, dist_str, dist, rel_asu_str, abs_get_angle_sensor_val(RELATIVE_ASU), rel_bpu_str, abs_get_angle_sensor_val(RELATIVE_TU));

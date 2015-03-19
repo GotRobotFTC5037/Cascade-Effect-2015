@@ -265,7 +265,7 @@ const int g_center_detect_value = 30;
 
 #define TURN_SPEED 50
 
-bool g_reset_stall_detect = false;
+bool g_reset_stall_detect = true;
 
 //=========================================================
 // auto selection points
@@ -875,6 +875,11 @@ typedef enum
 	INACTIVE
 } e_light_sensor_status;
 
+typedef enum
+{
+	DO_STALL_ACTION,
+	NO_STALL_ACTION
+} E_STALL_ACTION;
 //==============================================================
 // Define graph selection variables
 //==============================================================

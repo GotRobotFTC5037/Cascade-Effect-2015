@@ -169,4 +169,5 @@ int adjusted_speed(int speed, int max_move_dist, int current, int coefficient, i
 */
 #define adjusted_turn_speed(X, Y, Z) adjusted_speed((X),(Y),(Z), TURN_SPEED_COEFFICIENT, TURN_SPEED_PERCENTAGE_DROP)
 
+#define stall_detect(X,Y) if((X) == DO_STALL_ACTION) { if(abs_stall_detect(abs_get_angle_sensor_val((Y)))) { StopAllTasks(); } }
 #endif /* !ABS_TURN_UTILS */

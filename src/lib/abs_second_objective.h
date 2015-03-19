@@ -59,12 +59,12 @@ void abs_second_objective(e_scoring_options second_start_pos)
 
 				StartTask(abs_auto_pipe_lower_mid);
 
-				abs_drive(FORWARD, E_ANGLE, 4, 35, true, GYRO, DONT_SLOW_DOWN);
+				abs_drive(FORWARD, E_ANGLE, 4, 35, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
 				abs_turn(COUNTERCLOCKWISE, POINT, TURN, 90, 40, FORWARD);
-				abs_drive(FORWARD, E_ANGLE, 82, 60, true, GYRO, DONT_SLOW_DOWN);
+				abs_drive(FORWARD, E_ANGLE, 82, 60, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
 				wait1Msec(300);
 				abs_turn(CLOCKWISE, POINT, TURN, 90, 40, FORWARD);
-				abs_drive(BACKWARD, E_ANGLE, 200, 90, true, GYRO, DONT_SLOW_DOWN);
+				abs_drive(BACKWARD, E_ANGLE, 200, 90, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
 				StopTask(abs_auto_pipe_lower_mid);
 
 				wait1Msec(200);
@@ -85,10 +85,10 @@ void abs_second_objective(e_scoring_options second_start_pos)
 				abs_turn(CLOCKWISE, SWING, TURN, 40, 60, FORWARD);
 				servo[goal_claw] = g_goal_claw_up;
 
-				abs_drive(FORWARD, E_ANGLE, 45, 40, true, GYRO, DONT_SLOW_DOWN);
+				abs_drive(FORWARD, E_ANGLE, 45, 40, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
 				abs_turn(COUNTERCLOCKWISE, POINT, TURN, 48+abs(g_roll1_sonar_turn), 50, FORWARD);
 
-				abs_drive(BACKWARD, E_ANGLE, 90, 30, true, GYRO, DONT_SLOW_DOWN);
+				abs_drive(BACKWARD, E_ANGLE, 90, 30, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
 
 				g_rel_heading = 0;
 				while(g_sonar>35&&abs(g_rel_heading)<100){ motor[left_motor] = 45; }
@@ -110,7 +110,7 @@ void abs_second_objective(e_scoring_options second_start_pos)
 				}
 
 				abs_turn(CLOCKWISE, SWING, TURN, 25, 40, FORWARD);
-				abs_drive(BACKWARD, E_ANGLE, 65, 30, true, GYRO, DONT_SLOW_DOWN);
+				abs_drive(BACKWARD, E_ANGLE, 65, 30, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
 
 				servo[goal_claw] = g_goal_claw_down;
 
@@ -138,12 +138,12 @@ void abs_second_objective(e_scoring_options second_start_pos)
 				servo[goal_claw] = g_goal_claw_down;
 
 				abs_turn(COUNTERCLOCKWISE, POINT, TURN, g_roll1_sonar_turn-2, 60, FORWARD);
-				abs_drive(FORWARD, E_ANGLE, 440, 100, true, GYRO, DONT_SLOW_DOWN);
+				abs_drive(FORWARD, E_ANGLE, 440, 100, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
 
 				abs_turn(CLOCKWISE, POINT, TURN, 155, 70, FORWARD);
 				PlayTone(200, 20);
 				servo[goal_claw] = g_goal_claw_up;
-				abs_drive(BACKWARD, E_ANGLE, 65, 100, true, GYRO, DONT_SLOW_DOWN);
+				abs_drive(BACKWARD, E_ANGLE, 65, 100, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
 
 				abs_auto_end(PARKING_ZONE);
 				break;
