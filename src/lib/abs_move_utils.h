@@ -98,24 +98,24 @@ typedef enum
 } e_turn_stopping_method;
 
 /**
-*  @enum e_motor_move Tells the robot what motor to move
-*  @var e_motor_move::ABDD
-*     Move the ABDD and put in a block
-*  @var e_motor_move::LIFT
-*     Move the block lifter
-*  @var e_motor_move::GRABBER
-*     close the block grabber
-*  @var e_motor_move::ROGER_SLIDE
-*     Slide the flag liffter back
+*  @enum e_drive_type Tells the robot its corection type
+*  @var e_auto_sub_selection_ramp::ENCODER
+*     Tells the robot to correct useing a encoder
+*  @var e_auto_sub_selection_ramp::GYRO
+*     Tells the robot to correct useing a gyro sensor
+*  @var e_auto_sub_selection_ramp::NON_SENSOR
+*     Tells the robot not to correct
 */
 typedef enum
 {
-	ABDD,
-	LIFT,
-	GRABBER,
-	ROGER_SLIDE
-} e_motor_move;
+	ENCODER,
+	GYRO,
+	WALL_SONAR,
+	NON_SENSOR
+} e_drive_type;
 
+
+#define CORRECTION_DRIVE_TYPE NON_SENSOR
 
 /**
 *  @def distance_to_angle_derees(X)

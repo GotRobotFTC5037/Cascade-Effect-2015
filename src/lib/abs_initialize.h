@@ -26,6 +26,8 @@ void abs_initialize()
 {
 	disableDiagnosticsDisplay();
 	memset(g_input_array,0,INPUT_ARRAY_SIZE);
+	memset(g_sonar_reads4,0,11);
+	memset(g_sonar_reads5,0,11);
 	servo[goal_claw] = g_goal_claw_up;
 	servo[shutter] = g_shutter_open;
 	servo[intake_shutter] = g_intake_shutter_up;

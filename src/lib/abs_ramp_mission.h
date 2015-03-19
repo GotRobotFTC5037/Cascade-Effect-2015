@@ -33,39 +33,26 @@ void abs_ramp_mission()
 		break; //STOP
 	case ROLLGOAL1:
 		StartTask(abs_IR_center_read);
-		abs_drive(BACKWARD, E_ANGLE, 310, 30, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
-		abs_turn(COUNTERCLOCKWISE, SWING, TURN, 20, 80, BACKWARD);
-		abs_drive(BACKWARD, E_ANGLE, 110, 60, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
-
+		abs_drive(BACKWARD, E_ANGLE, 250, 20, true, GYRO, SLOW_DOWN);
+		wait1Msec(250);
+		servo[shutter] = g_shutter_closed;
 		StartTask(abs_auto_pipe_score);
+		g_gyro_inherit = true;
+		abs_drive(BACKWARD, E_ANGLE, 190, 30, true, WALL_SONAR, DONT_SLOW_DOWN);
 
-		g_rel_heading = 0;
-		while(g_sonar>45&&abs(g_rel_heading)<100){ motor[right_motor] = -45; }
-		motor[right_motor] = 0;
-		g_roll1_sonar_turn = g_rel_heading;
+		wait1Msec(200);
+		abs_turn(COUNTERCLOCKWISE, SWING, TURN, 3, 35, BACKWARD);
+		servo[shutter] = g_shutter_closed;
+		wait1Msec(700);
 
-		if(!(abs(g_rel_heading)<100))
-		{
-			PlayTone(1500, 30);
-			wait1Msec(200);
-			PlayTone(1000, 30);
-			wait1Msec(200);
-			PlayTone(500, 30);
-
-			StopTask(abs_auto_pipe_score);
-			StartTask(abs_auto_pipe_lower);
-
-			while(true){}
-		}
-
-		abs_turn(CLOCKWISE, SWING, TURN, 52, 60, BACKWARD);
-		abs_drive(BACKWARD, E_ANGLE, 8, 40, true, GYRO, DONT_SLOW_DOWN, NO_STALL_ACTION);
-
-		wait1Msec(2000);
 		servo[shutter] = 155;
 		servo[goal_claw] = g_goal_claw_down;
 		g_auto_lift_done = true;
 		StopTask(abs_auto_pipe_score);
+
+		wait1Msec(800);
+
+		StartTask(abs_auto_pipe_lower);
 
 		wait1Msec(500);
 		abs_second_objective(ROLLGOAL1);

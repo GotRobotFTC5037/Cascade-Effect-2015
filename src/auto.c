@@ -50,7 +50,6 @@
 #include "lib/abs_IR_floor_read.h"
 #include "lib/abs_initialize.h"
 #include "lib/abs_dlog.h"
-#include "lib/abs_stay_on_ramp.h"
 #include "lib/abs_drive.h"
 #include "lib/abs_turn.h"
 #include "lib/abs_ramp_mission.h"

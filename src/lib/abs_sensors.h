@@ -19,6 +19,8 @@
 #include "abs_get_gyro_sensor_val.h"
 #include "abs_get_angle_sensor_val.h"
 #include "abs_gyro_read.h"
+#include "abs_sonar_read.h"
+
 
 task abs_sensors()
 {
@@ -26,13 +28,14 @@ task abs_sensors()
 
 	short gyro_read;
 
+	StartTask(abs_sonar_read);
 	for(gyro_read = 0; true;)
 	{
 	(gyro_read % 10 == 0) ? gyro_read=0 : gyro_read++;
 
 		nxtDisplayBigTextLine(1,"%2d %3d",g_sonar,g_sonar2);
-		nxtDisplayBigTextLine(3,"%2d %2d",g_sonar3,g_sonar4);
-		nxtDisplayBigTextLine(5,"%3d",g_angle_sensor);
+		nxtDisplayBigTextLine(3,"%3d %3d",g_sonar3, g_sonar4);
+		nxtDisplayBigTextLine(5,"%3d %3d",g_sonar5, g_rel_heading);
 
 		//------------------------
 		// angle sensor
@@ -47,6 +50,7 @@ task abs_sensors()
 		g_sonar2 = USreadDist(LEGOUS2);
 		g_sonar3 = USreadDist(LEGOUS3);
 		g_sonar4 = USreadDist(LEGOUS4);
+		g_sonar5 = USreadDist(LEGOUS5);
 		//-------------------------
 		// HiTechnic IR Sensor
 		//-------------------------
