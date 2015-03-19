@@ -270,7 +270,7 @@ const int g_sonar_wall_dist = 11;
 
 #define TURN_SPEED 50
 
-bool g_reset_stall_detect = false;
+bool g_reset_stall_detect = true;
 
 //=========================================================
 // auto selection type options
@@ -796,6 +796,11 @@ typedef enum
 	INACTIVE
 } e_light_sensor_status;
 
+typedef enum
+{
+	DO_STALL_ACTION,
+	NO_STALL_ACTION
+} E_STALL_ACTION;
 //==============================================================
 // Define graph selection variables
 //==============================================================
