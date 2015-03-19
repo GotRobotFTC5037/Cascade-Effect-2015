@@ -137,10 +137,11 @@ void abs_second_objective(e_scoring_options second_start_pos)
 
 				servo[goal_claw] = g_goal_claw_down;
 
-				abs_turn(COUNTERCLOCKWISE, POINT, TURN, g_roll1_sonar_turn-2, 60, FORWARD);
+				abs_turn(CLOCKWISE, POINT, TURN, 27, 60, FORWARD);
+
 				abs_drive(FORWARD, E_ANGLE, 440, 100, true, GYRO, DONT_SLOW_DOWN);
 
-				abs_turn(CLOCKWISE, POINT, TURN, 155, 70, FORWARD);
+				abs_turn(CLOCKWISE, POINT, TURN, 134, 70, FORWARD);
 				PlayTone(200, 20);
 				servo[goal_claw] = g_goal_claw_up;
 				abs_drive(BACKWARD, E_ANGLE, 65, 100, true, GYRO, DONT_SLOW_DOWN);
