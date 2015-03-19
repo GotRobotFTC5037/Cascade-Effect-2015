@@ -32,5 +32,6 @@ void abs_gyro_drive(int speed,e_drive_direction dir)
 		motor[left_motor] = -(abs(speed) - (error*g_gyro_adjust));
 		motor[right_motor] = -(abs(speed) + (error*g_gyro_adjust));
 	}
+	return;
 }
 #endif /* !ABS_GYRO_DRIVE_H */

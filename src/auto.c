@@ -74,6 +74,7 @@ task main()
 
 	disableDiagnosticsDisplay();
 
+	abs_drive(FORWARD, E_ANGLE, 100, 50, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
 	//wait1Msec(STARTING_DELAY*1000);
 
 	switch(g_input_array[STARTING_POINT])

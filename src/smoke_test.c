@@ -63,8 +63,8 @@ task main()
 {
 	disableDiagnosticsDisplay();
 
-	nMotorEncoder(lift1) = 0;
-	nMotorEncoder(shoulder) = 0;
+	//nMotorEncoder(lift1) = 0;
+	//nMotorEncoder(shoulder) = 0;
 
 	abs_cscreen("        ","        ","        ");
 	nxtDisplayBigTextLine(7, "        ");
