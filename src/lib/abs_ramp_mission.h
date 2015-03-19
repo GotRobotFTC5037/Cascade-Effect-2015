@@ -33,12 +33,12 @@ void abs_ramp_mission()
 		break; //STOP
 	case ROLLGOAL1:
 		StartTask(abs_IR_center_read);
-		abs_drive(BACKWARD, E_ANGLE, 250, 20, true, GYRO, SLOW_DOWN);
+		abs_drive(BACKWARD, E_ANGLE, 250, 20, true, GYRO, SLOW_DOWN, DO_STALL_ACTION);
 		wait1Msec(250);
 		servo[shutter] = g_shutter_closed;
 		StartTask(abs_auto_pipe_score);
 		g_gyro_inherit = true;
-		abs_drive(BACKWARD, E_ANGLE, 190, 30, true, WALL_SONAR, DONT_SLOW_DOWN);
+		abs_drive(BACKWARD, E_ANGLE, 190, 30, true, WALL_SONAR, DONT_SLOW_DOWN, DO_STALL_ACTION);
 
 		wait1Msec(200);
 		abs_turn(COUNTERCLOCKWISE, SWING, TURN, 3, 35, BACKWARD);
