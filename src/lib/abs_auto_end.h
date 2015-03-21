@@ -23,7 +23,7 @@ void abs_auto_end(e_scoring_options second_start_pos)
 {
 	if(g_input_array[END_POINT]==STOP)
 	{
-		if(g_input_array[STARTING_POINT] == START_FLOOR && g_input_array[FIRST_OBJECTIVE] == CENTER_GOAL && g_input_array[SECOND_OBJECTIVE] == KICK_STAND && g_center_goal_pos == 3)
+		if(false)//g_input_array[STARTING_POINT] == START_FLOOR && g_input_array[FIRST_OBJECTIVE] == CENTER_GOAL && g_input_array[SECOND_OBJECTIVE] == KICK_STAND && g_center_goal_pos == 3)
 		{
 			abs_drive(BACKWARD, E_ANGLE, 120/*100*/, 60, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
 			abs_turn(COUNTERCLOCKWISE, POINT, TURN, 90, 50, FORWARD);
@@ -35,16 +35,21 @@ void abs_auto_end(e_scoring_options second_start_pos)
 		switch(second_start_pos)
 		{
 		case PARKING_ZONE:
-			switch (g_center_goal_pos)
+			switch(g_input_array[END_POINT])
 			{
-			case 1:
+			case KICK_STAND:
+				switch (g_center_goal_pos)
+				{
+				case 1:
 					wait1Msec(50);
-					abs_drive(FORWARD, E_ANGLE, 185, 50, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
+					abs_turn(CLOCKWISE, POINT, TURN, 12, 30, FORWARD);
+					abs_drive(FORWARD, E_ANGLE, 205, 50, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
 					abs_turn(CLOCKWISE, POINT, TURN, 82, 70, FORWARD);
-					abs_drive(BACKWARD, E_ANGLE, 220, 50, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
+					abs_drive(BACKWARD, E_ANGLE, 160, 50, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
 					break;
 
 				case 2:
+					wait1Msec(50);
 					abs_turn(COUNTERCLOCKWISE, POINT, TURN, 7, 30, FORWARD);
 					abs_drive(FORWARD, E_ANGLE, 194, 50, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
 					abs_turn(CLOCKWISE, POINT, TURN, 40, 50, FORWARD);
@@ -54,12 +59,14 @@ void abs_auto_end(e_scoring_options second_start_pos)
 				case 3:
 					wait1Msec(50);
 					abs_drive(FORWARD, E_ANGLE, 40, 50, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
-					abs_turn(COUNTERCLOCKWISE, POINT, TURN, 197, 50, FORWARD);
+					abs_turn(COUNTERCLOCKWISE, POINT, TURN, 170, 50, FORWARD);
 					abs_drive(BACKWARD, E_ANGLE, 250, 50, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
 					break;
 
-			default:
+				default:
 
+					break;
+				}
 				break;
 			}
 
@@ -91,7 +98,7 @@ void abs_auto_end(e_scoring_options second_start_pos)
 
 				switch (g_center_goal_pos)
 				{
-					case 1:
+				case 1:
 					wait1Msec(50);
 					abs_drive(FORWARD, E_ANGLE, 185, 50, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
 					abs_turn(CLOCKWISE, POINT, TURN, 82, 70, FORWARD);
@@ -134,7 +141,7 @@ void abs_auto_end(e_scoring_options second_start_pos)
 				PlayTone(200, 20);
 				servo[goal_claw] = g_goal_claw_up;
 				abs_drive(BACKWARD, E_ANGLE, 100, 100, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
-			break;								//LOW AREA
+				break;								//LOW AREA
 			}
 			break;
 		case KICK_STAND:

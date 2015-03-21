@@ -52,17 +52,17 @@ void abs_floor_mission()
 		switch(g_center_goal_pos)
 		{
 		case 1:
-			abs_drive(BACKWARD, E_ANGLE, 100, 60, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
-			abs_turn(COUNTERCLOCKWISE, POINT, TURN, 35/*23*/, 40, FORWARD);
+			abs_drive(BACKWARD, E_ANGLE, 80, 60, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
+			abs_turn(COUNTERCLOCKWISE, POINT, TURN, 30/*23*/, 40, FORWARD);
 
-			abs_drive(BACKWARD, E_ANGLE, 180, 60, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
+			abs_drive(BACKWARD, E_ANGLE, 206, 60, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
 
 			g_auto_lift_done = false;
 			StartTask(abs_auto_center_pipe_score);
 			wait1Msec(200);
 			abs_turn(CLOCKWISE, POINT, TURN, 126, 40, FORWARD);
 
-			abs_drive(BACKWARD, E_ANGLE, 8, 40, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
+			abs_drive(BACKWARD, E_ANGLE, 12, 40, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
 
 			while(!g_auto_lift_done){}
 			StopTask(abs_auto_center_pipe_score);
@@ -71,14 +71,15 @@ void abs_floor_mission()
 
 			servo[shutter] = g_shutter_closed;
 
+			wait1Msec(500);
+
 			abs_second_objective(CENTER_GOAL);
 
 			break;
 		case 2:
-			//abs_drive(BACKWARD, E_ANGLE, 60, 60, true, GYRO, DONT_SLOW_DOWN);
 			abs_turn(COUNTERCLOCKWISE, POINT, TURN, 31, 40, FORWARD);
 
-			abs_drive(BACKWARD, E_ANGLE, 130, 60, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
+			abs_drive(BACKWARD, E_ANGLE, 140, 60, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
 
 			g_auto_lift_done = false;
 			StartTask(abs_auto_center_pipe_score);
@@ -93,6 +94,8 @@ void abs_floor_mission()
 			wait1Msec(400);
 
 			servo[shutter] = g_shutter_closed;
+
+			wait1Msec(500);
 
 			abs_second_objective(CENTER_GOAL);
 			break;

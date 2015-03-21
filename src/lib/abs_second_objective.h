@@ -57,15 +57,15 @@ void abs_second_objective(e_scoring_options second_start_pos)
 				break;
 			case KICK_STAND:
 
-				StartTask(abs_auto_pipe_lower_mid);
+				StartTask(abs_auto_pipe_lower);
 
 				abs_drive(FORWARD, E_ANGLE, 4, 35, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
 				abs_turn(COUNTERCLOCKWISE, POINT, TURN, 90, 40, FORWARD);
-				abs_drive(FORWARD, E_ANGLE, 82, 60, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
+				abs_drive(FORWARD, E_ANGLE, 74, 60, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
 				wait1Msec(300);
 				abs_turn(CLOCKWISE, POINT, TURN, 90, 40, FORWARD);
 				abs_drive(BACKWARD, E_ANGLE, 200, 90, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
-				StopTask(abs_auto_pipe_lower_mid);
+				StopTask(abs_auto_pipe_lower);
 
 				wait1Msec(200);
 				abs_auto_end(KICK_STAND);
@@ -137,13 +137,13 @@ void abs_second_objective(e_scoring_options second_start_pos)
 
 				servo[goal_claw] = g_goal_claw_down;
 
-				abs_turn(CLOCKWISE, POINT, TURN, 27, 60, FORWARD);
+				abs_turn(CLOCKWISE, POINT, TURN, 26-g_roll_to_parking_turn, 45, FORWARD);
 				abs_drive(FORWARD, E_ANGLE, 440, 100, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
 
-				abs_turn(CLOCKWISE, POINT, TURN, 134, 70, FORWARD);
+				abs_turn(CLOCKWISE, POINT, TURN, 134, 60, FORWARD);
 				PlayTone(200, 20);
 				servo[goal_claw] = g_goal_claw_up;
-				abs_drive(BACKWARD, E_ANGLE, 65, 100, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
+				abs_drive(BACKWARD, E_ANGLE, 30, 100, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
 
 				abs_auto_end(PARKING_ZONE);
 				break;

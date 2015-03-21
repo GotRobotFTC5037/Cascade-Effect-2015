@@ -33,17 +33,25 @@ void abs_ramp_mission()
 		break; //STOP
 	case ROLLGOAL1:
 		StartTask(abs_IR_center_read);
-		abs_drive(BACKWARD, E_ANGLE, 250, 20, true, GYRO, SLOW_DOWN, DO_STALL_ACTION);
+		abs_drive(BACKWARD, E_ANGLE, 255, 20, false, GYRO, SLOW_DOWN, NO_STALL_ACTION);
 		wait1Msec(250);
 		servo[shutter] = g_shutter_closed;
 		StartTask(abs_auto_pipe_score);
 		g_gyro_inherit = true;
-		abs_drive(BACKWARD, E_ANGLE, 190, 30, true, WALL_SONAR, DONT_SLOW_DOWN, DO_STALL_ACTION);
+		abs_drive(BACKWARD, E_ANGLE, 175, 16, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
+
+		if(g_sonar3>=26) {abs_turn(CLOCKWISE, SWING, TURN, 18, 40, BACKWARD);
+			g_roll_to_parking_turn = 18;}
+		else if(g_sonar3>=20){ abs_turn(CLOCKWISE, SWING, TURN, 13, 40, BACKWARD);
+			g_roll_to_parking_turn = 13;}
+		else if(g_sonar3>=17) { abs_turn(CLOCKWISE, SWING, TURN, 10, 40, BACKWARD);
+			g_roll_to_parking_turn = 10;}
+		else if(g_sonar3>=14) { abs_turn(CLOCKWISE, SWING, TURN, 6, 40, BACKWARD);
+			g_roll_to_parking_turn = 6;}
 
 		wait1Msec(200);
-		abs_turn(COUNTERCLOCKWISE, SWING, TURN, 3, 35, BACKWARD);
 		servo[shutter] = g_shutter_closed;
-		wait1Msec(700);
+		wait1Msec(1600);
 
 		servo[shutter] = 155;
 		servo[goal_claw] = g_goal_claw_down;

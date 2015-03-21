@@ -265,6 +265,8 @@ const int g_center_detect_value = 30;
 
 const int g_sonar_wall_dist = 11;
 
+int g_roll_to_parking_turn = 0;
+
 #define NON_IR_DRIVE_SPEED 70
 #define IR_DRIVE_SPEED 40
 
