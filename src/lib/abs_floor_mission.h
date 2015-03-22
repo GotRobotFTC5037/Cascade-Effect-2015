@@ -22,120 +22,32 @@
 #include "lib/abs_auto_pipe_lower_mid.h"
 #include "lib/abs_sonar_floor_read.h"
 
+#include "lib/abs_floor_roll1.h"
+#include "lib/abs_floor_roll2.h"
+#include "lib/abs_floor_center.h"
+
 void abs_floor_mission()
 {
 	switch(g_input_array[FIRST_OBJECTIVE])
 	{
-	case STOP: break; //STOP
-	case ROLLGOAL1:
-		abs_drive(BACKWARD, E_ANGLE, 60, 50, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
-		abs_turn(CLOCKWISE, POINT, TURN, 37, 34, FORWARD);
-		abs_drive(BACKWARD, E_ANGLE, 474, 50, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
-
-		abs_turn(COUNTERCLOCKWISE, POINT, TURN, 38, 38, FORWARD);
-
-		StartTask(abs_auto_pipe_score);
-		abs_drive(BACKWARD, E_ANGLE, 45, 15, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
-		servo[goal_claw] = g_goal_claw_down;
-		wait1Msec(500);
-		while(!g_auto_lift_done){}
-		wait1Msec(1000);
-
-		abs_second_objective(ROLLGOAL1);
-		break; //ROLLING GOAL 1
-	case CENTER_GOAL:
-
-		abs_drive(BACKWARD, E_ANGLE, 60, 60, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
-		wait1Msec(150);
-		abs_sonar_floor_read();
-
-		switch(g_center_goal_pos)
-		{
-		case 1:
-			abs_drive(BACKWARD, E_ANGLE, 80, 60, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
-			abs_turn(COUNTERCLOCKWISE, POINT, TURN, 30/*23*/, 40, FORWARD);
-
-			abs_drive(BACKWARD, E_ANGLE, 206, 60, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
-
-			g_auto_lift_done = false;
-			StartTask(abs_auto_center_pipe_score);
-			wait1Msec(200);
-			abs_turn(CLOCKWISE, POINT, TURN, 126, 40, FORWARD);
-
-			abs_drive(BACKWARD, E_ANGLE, 12, 40, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
-
-			while(!g_auto_lift_done){}
-			StopTask(abs_auto_center_pipe_score);
-
-			wait1Msec(400);
-
-			servo[shutter] = g_shutter_closed;
-
-			wait1Msec(500);
-
-			abs_second_objective(CENTER_GOAL);
-
-			break;
-		case 2:
-			abs_turn(COUNTERCLOCKWISE, POINT, TURN, 31, 40, FORWARD);
-
-			abs_drive(BACKWARD, E_ANGLE, 140, 60, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
-
-			g_auto_lift_done = false;
-			StartTask(abs_auto_center_pipe_score);
-			wait1Msec(200);
-			abs_turn(CLOCKWISE, POINT, TURN, 74, 40, FORWARD);
-
-			abs_drive(BACKWARD, E_ANGLE, 44, 40, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
-
-			while(!g_auto_lift_done){}
-			StopTask(abs_auto_center_pipe_score);
-
-			wait1Msec(400);
-
-			servo[shutter] = g_shutter_closed;
-
-			wait1Msec(500);
-
-			abs_second_objective(CENTER_GOAL);
-			break;
-		case 3:
-			//abs_drive(BACKWARD, E_ANGLE, 60, 60, true, GYRO, DONT_SLOW_DOWN);
-			abs_turn(CLOCKWISE, POINT, TURN, 31, 40, FORWARD);
-
-			g_auto_lift_done = false;
-			StartTask(abs_auto_center_pipe_score);
-			abs_drive(BACKWARD, E_ANGLE, 78, 60, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
-
-			wait1Msec(200);
-			abs_turn(COUNTERCLOCKWISE, POINT, TURN, 33, 40, FORWARD);
-
-			abs_drive(BACKWARD, E_ANGLE, 16, 60, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
-
-			servo[shutter] = 155;
-
-			while(!g_auto_lift_done){}
-			StopTask(abs_auto_center_pipe_score);
-
-			wait1Msec(200);
-
-			servo[shutter] = g_shutter_closed;
-
-			abs_second_objective(CENTER_GOAL);
-			break;
-		default:
-			while(true)
-			{
-				PlayTone(200,20);
-				wait1Msec(250);
-				PlayTone(300,20);
-				wait1Msec(250);
-			}
-			break;
-		}
-
-		break; //CENTER GOAL
-	case ROLLGOAL2: break; //ROLLING GOAL 2
+	case FIRST_STOP:
+		wait1Msec(g_input_array[STARTING_DELAY]*DELAY_MULTIPLICATION_FACTOR);
+		abs_second_objective(FIRST_STOP);
+		break;
+	case FIRST_ROLLGOAL1:
+		abs_floor_roll1();
+		wait1Msec(g_input_array[STARTING_DELAY]*DELAY_MULTIPLICATION_FACTOR);
+		abs_second_objective(FIRST_ROLLGOAL1);
+		break;
+	case FIRST_CENTER_GOAL:
+		abs_floor_center();
+		wait1Msec(g_input_array[STARTING_DELAY]*DELAY_MULTIPLICATION_FACTOR);
+		abs_second_objective(FIRST_CENTER_GOAL);
+		break;
+	case FIRST_ROLLGOAL2: break;
+		abs_floor_roll2();
+		wait1Msec(g_input_array[STARTING_DELAY]*DELAY_MULTIPLICATION_FACTOR);
+		abs_second_objective(FIRST_ROLLGOAL2);
 	default: break;
 	}
 }
