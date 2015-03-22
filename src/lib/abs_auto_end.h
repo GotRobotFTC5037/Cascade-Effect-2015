@@ -19,11 +19,15 @@
 #include "abs_auto_pipe_score.h"
 #include "abs_auto_pipe_lower.h"
 
-void abs_auto_end(e_scoring_options second_start_pos)
+#include "abs_right_parkzone_kick.h"
+#include "abs_roll2_right_parkzone.h"
+#include "abs_kick_roll1.h"
+
+void abs_auto_end(e_second_objectives end_start_pos)
 {
-	if(g_input_array[END_POINT]==STOP)
+	if(g_input_array[END_POINT]==END_STOP)
 	{
-		if(g_input_array[STARTING_POINT] == START_FLOOR && g_input_array[FIRST_OBJECTIVE] == CENTER_GOAL && g_input_array[SECOND_OBJECTIVE] == KICK_STAND && g_center_goal_pos == 3)
+		if(false)//g_input_array[STARTING_POINT] == START_FLOOR && g_input_array[FIRST_OBJECTIVE] == CENTER_GOAL && g_input_array[SECOND_OBJECTIVE] == KICK_STAND && g_center_goal_pos == 3)
 		{
 			abs_drive(BACKWARD, E_ANGLE, 120/*100*/, 60, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
 			abs_turn(COUNTERCLOCKWISE, POINT, TURN, 90, 50, FORWARD);
@@ -32,179 +36,32 @@ void abs_auto_end(e_scoring_options second_start_pos)
 	}
 	else
 	{
-		switch(second_start_pos)
+		switch(end_start_pos)
 		{
-		case PARKING_ZONE:
-			switch (g_center_goal_pos)
+		case SECOND_PARKING_ZONE_RIGHT:
+			switch(g_input_array[END_POINT])
 			{
-			case 1:
-					wait1Msec(50);
-					abs_drive(FORWARD, E_ANGLE, 185, 50, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
-					abs_turn(CLOCKWISE, POINT, TURN, 82, 70, FORWARD);
-					abs_drive(BACKWARD, E_ANGLE, 220, 50, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
-					break;
-
-				case 2:
-					abs_turn(COUNTERCLOCKWISE, POINT, TURN, 7, 30, FORWARD);
-					abs_drive(FORWARD, E_ANGLE, 194, 50, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
-					abs_turn(CLOCKWISE, POINT, TURN, 40, 50, FORWARD);
-					abs_drive(FORWARD, E_ANGLE, 100, 50, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
-					break;
-
-				case 3:
-					wait1Msec(50);
-					abs_drive(FORWARD, E_ANGLE, 40, 50, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
-					abs_turn(COUNTERCLOCKWISE, POINT, TURN, 197, 50, FORWARD);
-					abs_drive(BACKWARD, E_ANGLE, 250, 50, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
-					break;
-
-			default:
-
+			case END_KICK_STAND:
+				abs_right_parkzone_kick();
 				break;
 			}
-
 			break;
-		case CENTER_GOAL:
+		case SECOND_ROLLGOAL2:
 			switch(g_input_array[END_POINT])
 			{
-			case PARKING_ZONE:
-
-				break;								//LOW AREA
+			case END_PARKING_ZONE_RIGHT:
+				abs_roll2_right_parkzone();
+				break;
 			}
 			break;
-		case STOP:
-			break;
-		case ROLLGOAL1:
+		case SECOND_KICK_STAND:
 			switch(g_input_array[END_POINT])
 			{
-			case PARKING_ZONE:
-				StopTask(abs_auto_pipe_score);
-				StartTask(abs_auto_pipe_lower);
-				/*if(!force_done)*/
-				abs_turn(CLOCKWISE, POINT, TURN, 29, 45, FORWARD);
-				abs_drive(FORWARD, E_ANGLE, 425, 100, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
-
-				abs_turn(CLOCKWISE, POINT, TURN, 147, 70, FORWARD);
-				PlayTone(200, 20);
-				servo[goal_claw] = g_goal_claw_up;
-				abs_drive(BACKWARD, E_ANGLE, 65, 100, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
-
-				switch (g_center_goal_pos)
-				{
-					case 1:
-					wait1Msec(50);
-					abs_drive(FORWARD, E_ANGLE, 185, 50, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
-					abs_turn(CLOCKWISE, POINT, TURN, 82, 70, FORWARD);
-					abs_drive(BACKWARD, E_ANGLE, 220, 50, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
-					break;
-
-				case 2:
-					abs_turn(COUNTERCLOCKWISE, POINT, TURN, 7, 30, FORWARD);
-					abs_drive(FORWARD, E_ANGLE, 194, 50, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
-					abs_turn(CLOCKWISE, POINT, TURN, 40, 50, FORWARD);
-					abs_drive(FORWARD, E_ANGLE, 100, 50, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
-					break;
-
-				case 3:
-					wait1Msec(50);
-					abs_drive(FORWARD, E_ANGLE, 25, 50, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
-					abs_turn(COUNTERCLOCKWISE, POINT, TURN, 97, 50, FORWARD);
-					abs_drive(FORWARD, E_ANGLE, 250, 50, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
-					break;
-
-				default:
-
-					break;
-
-				}
+			case END_ROLLGOAL1:
+				abs_kick_roll1();
 				break;
 			default: break;
 			}
-			break;
-		case ROLLGOAL2:
-			switch(g_input_array[END_POINT])
-			{
-			case PARKING_ZONE:
-				StopTask(abs_auto_pipe_score);
-				StartTask(abs_auto_pipe_lower);
-				abs_turn(CLOCKWISE, POINT, TURN, 21, 40, FORWARD);
-				abs_drive(FORWARD, E_ANGLE, 470, 100, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
-
-				abs_turn(CLOCKWISE, POINT, TURN, 160, 70, FORWARD);
-				PlayTone(200, 20);
-				servo[goal_claw] = g_goal_claw_up;
-				abs_drive(BACKWARD, E_ANGLE, 100, 100, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
-			break;								//LOW AREA
-			}
-			break;
-		case KICK_STAND:
-			switch(g_input_array[END_POINT])
-			{
-			case PARKING_ZONE: break;								//LOW AREA
-			case ROLLGOAL1:
-
-				switch(g_center_goal_pos)
-				{
-				case 1: break;
-				case 2: break;
-				case 3:
-					abs_turn(COUNTERCLOCKWISE, SWING, TURN, 20, 80, FORWARD);
-					abs_drive(FORWARD, E_ANGLE, 60, 40, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
-					wait1Msec(400);
-					abs_turn(CLOCKWISE, POINT, TURN, 56, 38, FORWARD);
-
-					abs_drive(BACKWARD, E_ANGLE, 253, 80, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
-					abs_turn(COUNTERCLOCKWISE, POINT, TURN, 16, 40, FORWARD);
-
-					bool force_done = false;
-					g_rel_heading = 0;
-					motor[right_motor] = -40;
-					while(g_sonar>30&&abs(g_rel_heading)<100)
-					{
-						if(nMotorEncoder(shoulder)<g_shoulder_center-400) motor[shoulder] = 40;
-						else motor[shoulder] = 0;
-					}
-					if(abs(g_rel_heading)>=100)
-					{
-						force_done = true;
-						PlayTone(400,20);
-						wait1Msec(250);
-						PlayTone(300,20);
-					}
-					motor[right_motor] = 0;
-					motor[left_motor] = 0;
-					motor[shoulder] = 0;
-
-					wait1Msec(100);
-					PlayTone(200,20);
-
-					//abs_turn(CLOCKWISE, SWING, TURN, 24, 60);
-					abs_turn(CLOCKWISE, SWING, TURN, 52, 60, BACKWARD);
-					//abs_turn(CLOCKWISE, SWING, TURN, /*41*/30, 60, FORWARD);
-					wait1Msec(400);
-
-					abs_drive(BACKWARD, E_TIME, 800, 30, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
-
-					motor[shoulder] = 40;
-					while(nMotorEncoder(shoulder)<g_shoulder_mid-400) {  }
-					motor[shoulder] = 0;
-
-					PlayTone(200,20);
-
-					servo[shutter] = g_shutter_open;
-
-					wait1Msec(500);
-
-					break;
-				default:
-					break;
-				}
-				break;  //KICK_STAND
-			default:
-				break;
-			}
-			break; //ROLLGOAL1
-		default:
 			break;
 		}
 	}
