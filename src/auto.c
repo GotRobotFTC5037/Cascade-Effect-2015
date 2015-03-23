@@ -74,16 +74,17 @@ task main()
 
 	disableDiagnosticsDisplay();
 
-	//abs_drive(FORWARD, E_ANGLE, 100, 50, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
-	//wait1Msec(STARTING_DELAY*1000);
+	wait1Msec(g_input_array[STARTING_DELAY]*1000);
 
 	switch(g_input_array[STARTING_POINT])
 	{
+	case START_STOP: break;
 	case START_RAMP: abs_ramp_mission(); break;
-	case START_FLOOR:
+	case START_FLOOR_LEFT:
 		abs_IR_floor_read();
 		abs_floor_mission();
 		break;
+	case START_FLOOR_RIGHT: break;
 	default:
 		PlayTone(200,20);
 		break;

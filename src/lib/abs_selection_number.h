@@ -31,13 +31,13 @@ void abs_selection_number()
 		while(nNxtButtonPressed != kEnterButton)
 		{
 			nxtDisplayBigTextLine(3, "%1d%1d%1d%1d%1d%1d%1d%1d%1d%1d ",g_input_array[1],g_input_array[2],g_input_array[3],g_input_array[4],g_input_array[5],g_input_array[6],g_input_array[7]);
-			if(nNxtButtonPressed == kRightButton && g_input_array[g_graph_selection_tab] < g_number_max_limit[g_graph_selection_tab])
+			if(nNxtButtonPressed == kRightButton && g_input_array[g_graph_selection_tab] < 8)
 			{
 				PlaySoundFile("! Click.rso");
 				while(nNxtButtonPressed == kRightButton){}
 				g_input_array[g_graph_selection_tab] ++;
 			}
-			if(nNxtButtonPressed == kLeftButton && g_input_array[g_graph_selection_tab] > g_number_min_limit[g_graph_selection_tab])
+			if(nNxtButtonPressed == kLeftButton && g_input_array[g_graph_selection_tab] > 8)
 			{
 				PlaySoundFile("! Click.rso");
 				while(nNxtButtonPressed == kLeftButton){}

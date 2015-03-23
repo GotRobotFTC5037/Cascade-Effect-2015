@@ -274,7 +274,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 
 			else if(drive_type == WALL_SONAR)
 			{
-				if(abs_get_angle_sensor_val(RELATIVE_TU)<((dist+pre_dist)-((dist+pre_dist)/1.8)))
+				if(abs_get_angle_sensor_val(RELATIVE_TU)<((dist+pre_dist)-((dist+pre_dist)/5)))
 				{
 					abs_sonar_drive(speed, dir, g_sonar_wall_dist, g_sonar3);
 					stall_detect(stall_action, RELATIVE_TU)

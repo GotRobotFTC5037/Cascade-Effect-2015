@@ -265,6 +265,8 @@ const int g_center_detect_value = 30;
 
 const int g_sonar_wall_dist = 11;
 
+int g_roll_to_parking_turn = 0;
+
 #define NON_IR_DRIVE_SPEED 70
 #define IR_DRIVE_SPEED 40
 
@@ -323,6 +325,46 @@ e_selection_types selection_type = SELECTION_TYPE_CUSTOM;
 
 typedef enum
 {
+	START_STOP,
+	START_RAMP,
+	START_FLOOR_LEFT,
+	START_FLOOR_RIGHT
+} e_starting_points;
+const int STARTING_OPTIONS = 3;
+
+typedef enum
+{
+	FIRST_STOP,
+	FIRST_ROLLGOAL1,
+	FIRST_CENTER_GOAL,
+	FIRST_ROLLGOAL2
+} e_first_objectives;
+const int FIRST_OBJECTIVE_OPTIONS = 3;
+
+typedef enum
+{
+	SECOND_STOP,
+	SECOND_KICK_STAND,
+	SECOND_ROLLGOAL1,
+	SECOND_ROLLGOAL2,
+	SECOND_PARKING_ZONE_RIGHT,
+	SECOND_PARKING_ZONE_LEFT
+} e_second_objectives;
+const int SECOND_OBJECTIVE_OPTIONS = 5;
+
+typedef enum
+{
+	END_STOP,
+	END_KICK_STAND,
+	END_ROLLGOAL1,
+	END_ROLLGOAL2,
+	END_PARKING_ZONE_RIGHT,
+	END_PARKING_ZONE_LEFT
+} e_end_objectives;
+const int END_OBJECTIVE_OPTIONS = 5;
+
+typedef enum
+{
 	SELECTION_VALUE_EMPTY,
 	STARTING_POINT,
 	STARTING_DELAY,
@@ -332,19 +374,6 @@ typedef enum
 	SECOND_OBJECTIVE_DELAY,
 	END_POINT,
 } e_selection_values;
-
-typedef enum
-{
-	SCORE_ERROR,
-	ROLLGOAL1,
-	CENTER_GOAL,
-	KICK_STAND,
-	ROLLGOAL2,
-	START_RAMP,
-	START_FLOOR,
-	PARKING_ZONE,
-	STOP
-} e_scoring_options;
 
 //=========================================================
 // auto sub selections
@@ -544,11 +573,7 @@ int g_debug_time_2 = 0;
 
 int g_quick_mission = 1;
 int g_max_quick_missions = 6;
-int g_auto_ending_points = 3;
 int g_travel_dist = 0;
-int g_auto_starting_points = 2; //ramp or floor
-int g_first_objectives = 3;
-int g_second_objectives = 4;
 int g_drive_heading = 0;
 int g_ir_heading = 5;
 bool g_program_done = false;
@@ -671,8 +696,6 @@ int g_gyro_cal_time = 5;
 
 int g_dist_backwards = 0;
 
-int g_number_min_limit [] = {0,0,0,0,0,0,0,0};
-int g_number_max_limit [] = {0,g_auto_starting_points,30,g_first_objectives,30,g_second_objectives,30,g_auto_ending_points};
 //=============================================================
 // Gyro variables
 //=============================================================
