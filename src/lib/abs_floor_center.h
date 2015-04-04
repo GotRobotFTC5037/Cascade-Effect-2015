@@ -81,7 +81,7 @@ void abs_floor_center()
 		wait1Msec(200);
 		abs_turn(COUNTERCLOCKWISE, POINT, TURN, 33, 40, FORWARD);
 
-		abs_drive(BACKWARD, E_ANGLE, 16, 60, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
+		abs_drive(BACKWARD, E_ANGLE, 14, 60, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
 
 		servo[shutter] = 155;
 
@@ -90,7 +90,7 @@ void abs_floor_center()
 
 		wait1Msec(200);
 
-		servo[shutter] = g_shutter_closed;
+		servo[shutter] = g_shutter_open;
 
 		break;
 	default:

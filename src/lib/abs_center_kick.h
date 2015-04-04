@@ -29,7 +29,7 @@ void abs_center_kick()
 	case 1:
 		abs_drive(FORWARD, E_ANGLE, 4, 35, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
 		abs_turn(COUNTERCLOCKWISE, POINT, TURN, 89, 40, FORWARD);
-		abs_drive(FORWARD, E_ANGLE, 70, 45, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
+		abs_drive(FORWARD, E_ANGLE, 67, 45, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
 		wait1Msec(300);
 		abs_turn(CLOCKWISE, POINT, TURN, 88, 40, FORWARD);
 		abs_drive(BACKWARD, E_ANGLE, 200, 90, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
