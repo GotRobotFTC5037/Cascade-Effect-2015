@@ -90,7 +90,7 @@ void abs_floor_center()
 
 		wait1Msec(200);
 
-		servo[shutter] = g_shutter_open;
+		servo[shutter] = g_shutter_closed;
 
 		break;
 	default:
