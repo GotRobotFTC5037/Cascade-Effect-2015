@@ -164,6 +164,7 @@ void abs_selection_custom()
 		case END_ROLLGOAL2: 								abs_cscreen("End pnt ","90cmROLL","GOAL    "); break;
 		case END_PARKING_ZONE_RIGHT:				abs_cscreen("End pnt ","ParkZone","RIGHT   "); break;
 		case END_PARKING_ZONE_LEFT:					abs_cscreen("End pnt ","ParkZone","LEFT    "); break;
+		case END_OPPONENT:						abs_cscreen("End pnt ","Opponent","Side    "); break;
 		case END_PARKING_ZONE_RIGHT_KICK:		abs_cscreen("End pnt ","ParkZone","RghtKick"); break;
 		default:														abs_cscreen("End pnt ","        ","ERROR   "); break;
 		}

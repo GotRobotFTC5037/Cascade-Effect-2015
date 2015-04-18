@@ -57,6 +57,7 @@
 #include "lib/abs_auto_center_pipe_score.h"
 #include "lib/abs_auto_pipe_lower_mid.h"
 #include "lib/abs_IR_floor_read.h"
+#include "lib/abs_auto_opponent_side.h"
 
 #define DRIVE_TYPE TANK
 
