@@ -18,6 +18,7 @@
 #include "abs_drive.h"
 #include "abs_turn.h"
 #include "abs_second_objective.h"
+#include "abs_ramp_roll1_roll3.h"
 #include "abs_IR_center_read.h"
 #include "abs_auto_pipe_score.h"
 
@@ -47,6 +48,11 @@ void abs_ramp_mission()
 		abs_ramp_roll2();
 		wait1Msec(g_input_array[FIRST_OBJECTIVE_DELAY]*DELAY_MULTIPLICATION_FACTOR);
 		abs_second_objective(FIRST_ROLLGOAL2);
+		break;
+	case FIRST_ROLL1_ROLL3:
+		abs_ramp_roll1_roll3();
+		wait1Msec(g_input_array[FIRST_OBJECTIVE_DELAY]*DELAY_MULTIPLICATION_FACTOR);
+		abs_second_objective(FIRST_ROLL1_ROLL3);
 		break;
 	default: break;
 	}

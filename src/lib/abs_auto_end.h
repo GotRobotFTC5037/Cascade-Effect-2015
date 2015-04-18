@@ -21,7 +21,9 @@
 
 #include "abs_right_parkzone_kick.h"
 #include "abs_roll2_right_parkzone.h"
+#include "abs_roll2_right_parkzone_kick.h"
 #include "abs_kick_roll1.h"
+#include "abs_right_parkzone_roll2.h"
 
 void abs_auto_end(e_second_objectives end_start_pos)
 {
@@ -44,6 +46,16 @@ void abs_auto_end(e_second_objectives end_start_pos)
 			case END_KICK_STAND:
 				abs_right_parkzone_kick();
 				break;
+			case END_ROLLGOAL2:
+				abs_right_parkzone_roll2();
+				break;
+			default:
+				for(int i = 0;i<5;i++)
+				{
+					PlayTone(i*50,20);
+					wait1Msec(300);
+				}
+				break;
 			}
 			break;
 		case SECOND_ROLLGOAL2:
@@ -51,6 +63,9 @@ void abs_auto_end(e_second_objectives end_start_pos)
 			{
 			case END_PARKING_ZONE_RIGHT:
 				abs_roll2_right_parkzone();
+				break;
+			case END_PARKING_ZONE_RIGHT_KICK:
+				abs_roll2_right_parkzone_kick();
 				break;
 			}
 			break;
