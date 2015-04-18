@@ -39,7 +39,7 @@ task abs_auto_center_pipe_score()
 
 		if(lift_done3&&shoulder_done3)
 		{
-			servo[shutter] = 155;
+			servo[shutter] = g_shutter_open;
 			wait1Msec(400);
 			g_auto_lift_done = true;
 			return;

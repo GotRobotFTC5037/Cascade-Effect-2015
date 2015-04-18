@@ -31,21 +31,21 @@ void abs_floor_center()
 		abs_drive(BACKWARD, E_ANGLE, 76, 60, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
 		abs_turn(COUNTERCLOCKWISE, POINT, TURN, 30/*23*/, 40, FORWARD);
 
-		abs_drive(BACKWARD, E_ANGLE, 202, 60, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
+		abs_drive(BACKWARD, E_ANGLE, 187, 60, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
 
 		g_auto_lift_done = false;
 		StartTask(abs_auto_center_pipe_score);
 		wait1Msec(200);
 		abs_turn(CLOCKWISE, POINT, TURN, 126, 40, FORWARD);
 
-		abs_drive(BACKWARD, E_ANGLE, 12, 40, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
+		abs_drive(BACKWARD, E_ANGLE, 6, 40, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
 
 		while(!g_auto_lift_done){}
 		StopTask(abs_auto_center_pipe_score);
 
 		wait1Msec(400);
 
-		servo[shutter] = g_shutter_closed;
+		servo[shutter] = g_shutter_open;
 
 		wait1Msec(500);
 
@@ -53,21 +53,21 @@ void abs_floor_center()
 	case 2:
 		abs_turn(COUNTERCLOCKWISE, POINT, TURN, 31, 40, FORWARD);
 
-		abs_drive(BACKWARD, E_ANGLE, 140, 60, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
+		abs_drive(BACKWARD, E_ANGLE, 137, 60, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
 
 		g_auto_lift_done = false;
 		StartTask(abs_auto_center_pipe_score);
 		wait1Msec(200);
 		abs_turn(CLOCKWISE, POINT, TURN, 74, 40, FORWARD);
 
-		abs_drive(BACKWARD, E_ANGLE, 44, 40, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
+		abs_drive(BACKWARD, E_ANGLE, 36, 40, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
 
 		while(!g_auto_lift_done){}
 		StopTask(abs_auto_center_pipe_score);
 
 		wait1Msec(400);
 
-		servo[shutter] = g_shutter_closed;
+		servo[shutter] = g_shutter_open;
 
 		wait1Msec(500);
 		break;
@@ -76,7 +76,7 @@ void abs_floor_center()
 
 		g_auto_lift_done = false;
 		StartTask(abs_auto_center_pipe_score);
-		abs_drive(BACKWARD, E_ANGLE, 80, 60, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
+		abs_drive(BACKWARD, E_ANGLE, 84, 60, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
 
 		wait1Msec(200);
 		abs_turn(COUNTERCLOCKWISE, POINT, TURN, 33, 40, FORWARD);
@@ -90,7 +90,7 @@ void abs_floor_center()
 
 		wait1Msec(200);
 
-		servo[shutter] = g_shutter_closed;
+		servo[shutter] = g_shutter_open;
 
 		break;
 	default:
