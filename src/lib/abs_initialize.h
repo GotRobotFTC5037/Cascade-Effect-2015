@@ -33,6 +33,7 @@ void abs_initialize()
 	servo[intake_shutter] = g_intake_shutter_up;
 	nMotorEncoder(shoulder) = 0;
 	nMotorEncoder(lift1) = 0;
+	e_IR_types g_selected_IR = IR_180;
 	abs_selection_program();
 	PlaySoundFile("! Click.rso");
 	abs_cscreen("Gyros   ","Calbrtng","  lol   ");
@@ -82,7 +83,6 @@ void abs_initialize()
 	//StartTask(abs_gyro_read);
 
 	abs_reset_angle_sensor_val(HARD_RESET);
-	abs_IR_floor_read();
 
 	PlayTone(700, 10);
 

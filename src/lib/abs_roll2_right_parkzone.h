@@ -19,7 +19,7 @@
 
 void abs_roll2_right_parkzone()
 {
-	abs_turn(COUNTERCLOCKWISE, POINT, TURN, 12, 60, FORWARD);
+	abs_turn(COUNTERCLOCKWISE, POINT, TURN, 15, 60, FORWARD);
 	abs_drive(FORWARD, E_ANGLE, 590, 100, true, GYRO, DONT_SLOW_DOWN, NO_STALL_ACTION);
 	abs_turn(CLOCKWISE, POINT, TURN, 150, 60, FORWARD);
 	servo(goal_claw) = g_goal_claw_up;

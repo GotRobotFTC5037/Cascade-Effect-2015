@@ -82,7 +82,9 @@ void abs_selection_custom()
 		case FIRST_ROLLGOAL1:		abs_cscreen("FirstObj","60cmROLL","GOAL    "); break;
 		case FIRST_CENTER_GOAL:	abs_cscreen("FirstObj","CENTER  ","GOAL    "); break;
 		case FIRST_ROLLGOAL2:		abs_cscreen("FirstObj","90cmROLL","GOAL    "); break;
-		default:								abs_cscreen("FirstObj","        ","ERROR   "); break;
+		case FIRST_DEFENCE:			abs_cscreen("FirstObj","Defence ","        "); break;
+		case FIRST_ROLL1_ROLL3:	abs_cscreen("FirstObj","60cmROLL","30cmROLL"); break;
+		default:								abs_cscreen("FirstObj","        ","        "); break;
 		}
 	}
 	PlaySoundFile("! Click.rso");
@@ -156,14 +158,15 @@ void abs_selection_custom()
 		}
 		switch(g_input_array[END_POINT])
 		{
-		case END_STOP: 								abs_cscreen("End pnt ","        ","STOP    "); break;
-		case END_KICK_STAND:					abs_cscreen("End pnt ","KICK    ","STAND   "); break;
-		case END_ROLLGOAL1: 					abs_cscreen("End pnt ","60cmROLL","GOAL    "); break;
-		case END_ROLLGOAL2: 					abs_cscreen("End pnt ","90cmROLL","GOAL    "); break;
-		case END_PARKING_ZONE_RIGHT:	abs_cscreen("End pnt ","ParkZone","RIGHT   "); break;
-		case END_PARKING_ZONE_LEFT:		abs_cscreen("End pnt ","ParkZone","LEFT    "); break;
+		case END_STOP: 											abs_cscreen("End pnt ","        ","STOP    "); break;
+		case END_KICK_STAND:								abs_cscreen("End pnt ","KICK    ","STAND   "); break;
+		case END_ROLLGOAL1: 								abs_cscreen("End pnt ","60cmROLL","GOAL    "); break;
+		case END_ROLLGOAL2: 								abs_cscreen("End pnt ","90cmROLL","GOAL    "); break;
+		case END_PARKING_ZONE_RIGHT:				abs_cscreen("End pnt ","ParkZone","RIGHT   "); break;
+		case END_PARKING_ZONE_LEFT:					abs_cscreen("End pnt ","ParkZone","LEFT    "); break;
 		case END_OPPONENT:						abs_cscreen("End pnt ","Opponent","Side    "); break;
-		default:											abs_cscreen("End pnt ","        ","ERROR   "); break;
+		case END_PARKING_ZONE_RIGHT_KICK:		abs_cscreen("End pnt ","ParkZone","RghtKick"); break;
+		default:														abs_cscreen("End pnt ","        ","ERROR   "); break;
 		}
 	}
 	PlaySoundFile("! Click.rso");
