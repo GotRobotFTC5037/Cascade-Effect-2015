@@ -22,6 +22,7 @@
 #include "abs_right_parkzone_kick.h"
 #include "abs_roll2_right_parkzone.h"
 #include "abs_kick_roll1.h"
+#include "abs_auto_opponent_side.h"
 
 void abs_auto_end(e_second_objectives end_start_pos)
 {
@@ -57,6 +58,10 @@ void abs_auto_end(e_second_objectives end_start_pos)
 		case SECOND_KICK_STAND:
 			switch(g_input_array[END_POINT])
 			{
+
+			case END_OPPONENT:
+			abs_auto_opponent_side();
+			break;
 			case END_ROLLGOAL1:
 				abs_kick_roll1();
 				break;
