@@ -25,6 +25,7 @@
 #include "lib/abs_floor_roll1.h"
 #include "lib/abs_floor_roll2.h"
 #include "lib/abs_floor_center.h"
+#include "lib/abs_floor_defence.h"
 
 void abs_floor_mission()
 {
@@ -48,6 +49,12 @@ void abs_floor_mission()
 		abs_floor_roll2();
 		wait1Msec(g_input_array[STARTING_DELAY]*DELAY_MULTIPLICATION_FACTOR);
 		abs_second_objective(FIRST_ROLLGOAL2);
+		break;
+	case FIRST_DEFENCE:
+		abs_floor_defence();
+		wait1Msec(g_input_array[STARTING_DELAY]*DELAY_MULTIPLICATION_FACTOR);
+		abs_second_objective(FIRST_DEFENCE);
+		break;
 	default: break;
 	}
 }

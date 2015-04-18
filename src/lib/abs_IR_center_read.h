@@ -33,6 +33,7 @@ task abs_IR_center_read()
 	else //IR_180
 	{
 		while(abs(abs_get_angle_sensor_val(RAW_TU)-beginning_val)<g_IR_center_goal_dist_classic){}
+		PlayTone(200,50);
 		switch(g_bearing_ac1)
 		{
 		case 5:

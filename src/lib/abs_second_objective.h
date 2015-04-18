@@ -22,6 +22,7 @@
 
 #include "abs_center_kick.h"
 #include "abs_roll1_roll2.h"
+#include "abs_roll3_right_parkingzone.h"
 #include "abs_roll1_right_parkingzone.h"
 #include "abs_roll1_left_parkingzone.h"
 
@@ -63,6 +64,17 @@ void abs_second_objective(e_first_objectives second_start_pos)
 				abs_auto_end(SECOND_PARKING_ZONE_LEFT);
 				break;
 			}
+		case FIRST_ROLL1_ROLL3:
+			switch(g_input_array[SECOND_OBJECTIVE])
+			{
+			case SECOND_PARKING_ZONE_RIGHT:
+				abs_roll3_right_parkingzone();
+				wait1Msec(g_input_array[SECOND_OBJECTIVE_DELAY]*DELAY_MULTIPLICATION_FACTOR);
+				abs_auto_end(SECOND_PARKING_ZONE_RIGHT);
+				break;
+				break;
+			}
+			break;
 		default: break;
 		}
 	}

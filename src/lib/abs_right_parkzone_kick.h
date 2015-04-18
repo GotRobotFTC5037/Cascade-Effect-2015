@@ -11,8 +11,8 @@
 */
 
 
-#ifndef ABS_RIGHT_PARKZONE_H
-#define ABS_RIGHT_PARKZONE_H
+#ifndef ABS_RIGHT_PARKZONE_KICK_H
+#define ABS_RIGHT_PARKZONE_KICK_H
 
 #include "abs_drive.h"
 #include "abs_turn.h"
@@ -48,4 +48,4 @@ void abs_right_parkzone_kick()
 	}
 }
 
-#endif /* !ABS_RIGHT_PARKZONE_H */
+#endif /* !ABS_RIGHT_PARKZONE_KICK_H */
