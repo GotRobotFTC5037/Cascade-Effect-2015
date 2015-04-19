@@ -83,6 +83,7 @@ void abs_initialize()
 	//StartTask(abs_gyro_read);
 
 	abs_reset_angle_sensor_val(HARD_RESET);
+	g_angle_reads[0] = abs_get_angle_sensor_val(RELATIVE_TU);
 
 	PlayTone(700, 10);
 

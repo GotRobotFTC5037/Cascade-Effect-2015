@@ -40,9 +40,11 @@ void abs_floor_center()
 
 		abs_drive(BACKWARD, E_ANGLE, 6, 40, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
 
+		servo[impellar1] = 0;
+		servo[impellar2] = 255;
+
 		while(!g_auto_lift_done){}
 		StopTask(abs_auto_center_pipe_score);
-
 		wait1Msec(400);
 
 		servo[shutter] = g_shutter_open;
@@ -62,9 +64,11 @@ void abs_floor_center()
 
 		abs_drive(BACKWARD, E_ANGLE, 36, 40, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
 
+		servo[impellar1] = 0;
+		servo[impellar2] = 255;
+
 		while(!g_auto_lift_done){}
 		StopTask(abs_auto_center_pipe_score);
-
 		wait1Msec(400);
 
 		servo[shutter] = g_shutter_open;
@@ -84,6 +88,9 @@ void abs_floor_center()
 		abs_drive(BACKWARD, E_ANGLE, 14, 60, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
 
 		servo[shutter] = 155;
+
+		servo[impellar1] = 0;
+		servo[impellar2] = 255;
 
 		while(!g_auto_lift_done){}
 		StopTask(abs_auto_center_pipe_score);

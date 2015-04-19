@@ -24,7 +24,7 @@ void abs_right_parkzone_kick()
 	case 1:
 		wait1Msec(50);
 		abs_turn(CLOCKWISE, POINT, TURN, 12, 30, FORWARD);
-		abs_drive(FORWARD, E_ANGLE, 205, 50, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
+		abs_drive(FORWARD, E_ANGLE, 170, 50, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
 		abs_turn(CLOCKWISE, POINT, TURN, 82, 70, FORWARD);
 		abs_drive(BACKWARD, E_ANGLE, 160, 50, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
 		break;

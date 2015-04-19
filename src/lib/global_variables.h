@@ -303,6 +303,8 @@ typedef enum
 
 e_selection_types selection_type = SELECTION_TYPE_CUSTOM;
 
+int g_angle_reads[] = {0,0,0,0};
+
 /**
 *  @enum e_selection_values Tells the robot what number you are editing
 *  @var e_auto_selection_points::SELECTION_VALUE_EMPTY
@@ -576,7 +578,7 @@ int g_debug_time_2 = 0;
 
 
 int g_quick_mission = 1;
-int g_max_quick_missions = 6;
+int g_max_quick_missions = 8;
 int g_travel_dist = 0;
 int g_drive_heading = 0;
 int g_ir_heading = 5;

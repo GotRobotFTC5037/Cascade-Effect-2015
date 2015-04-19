@@ -30,12 +30,6 @@ void abs_auto_end(e_second_objectives end_start_pos)
 {
 	if(g_input_array[END_POINT]==END_STOP)
 	{
-		if(false)//g_input_array[STARTING_POINT] == START_FLOOR && g_input_array[FIRST_OBJECTIVE] == CENTER_GOAL && g_input_array[SECOND_OBJECTIVE] == KICK_STAND && g_center_goal_pos == 3)
-		{
-			abs_drive(BACKWARD, E_ANGLE, 120/*100*/, 60, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
-			abs_turn(COUNTERCLOCKWISE, POINT, TURN, 90, 50, FORWARD);
-			abs_drive(BACKWARD, E_ANGLE, 180, 90, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
-		}
 	}
 	else
 	{
@@ -73,12 +67,35 @@ void abs_auto_end(e_second_objectives end_start_pos)
 		case SECOND_KICK_STAND:
 			switch(g_input_array[END_POINT])
 			{
-
 			case END_OPPONENT:
-			abs_auto_opponent_side();
-			break;
+				abs_auto_opponent_side();
+				break;
 			case END_ROLLGOAL1:
 				abs_kick_roll1();
+				break;
+			case END_ROLLGOAL2:
+				switch(g_center_goal_pos)
+				{
+				case 1:
+					abs_turn(COUNTERCLOCKWISE, SWING, TURN, 240, 90, FORWARD);
+					abs_drive(FORWARD, E_ANGLE, 300, 90, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
+					abs_turn(CLOCKWISE, SWING, TURN, 90, 90, FORWARD);
+					abs_drive(BACKWARD, E_ANGLE, 150, 90, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
+					abs_turn(COUNTERCLOCKWISE, POINT, TURN, 60, 90, FORWARD);
+					abs_drive(BACKWARD, E_ANGLE, 40, 90, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
+					break;
+				case 2:
+					abs_turn(COUNTERCLOCKWISE, SWING, TURN, 205, 90, FORWARD);
+					abs_drive(FORWARD, E_ANGLE, 215, 90, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
+					abs_turn(COUNTERCLOCKWISE, POINT, TURN, 180, 70, BACKWARD);
+					abs_drive(BACKWARD, E_ANGLE, 42, 90, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
+					break;
+				case 3:
+					abs_turn(COUNTERCLOCKWISE, SWING, TURN, 150, 90, FORWARD);
+					abs_drive(FORWARD, E_ANGLE, 200, 90, true, GYRO, DONT_SLOW_DOWN, DO_STALL_ACTION);
+					abs_turn(COUNTERCLOCKWISE, POINT, TURN, 170, 90, FORWARD);
+					break;
+				}
 				break;
 			default: break;
 			}

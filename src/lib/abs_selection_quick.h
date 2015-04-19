@@ -98,6 +98,26 @@ void abs_selection_quick()
 			g_input_array[SECOND_OBJECTIVE_DELAY] = 0;
 			g_input_array[END_POINT] = END_PARKING_ZONE_RIGHT_KICK;								//LOW AREA / KICK
 			break;
+		case 7:
+			abs_cscreen("Mission ","F Center","KckOpnt7");
+			g_input_array[STARTING_POINT] = START_FLOOR_LEFT;					//FLOOR LEFT SIDE
+			g_input_array[STARTING_DELAY] = 0;
+			g_input_array[FIRST_OBJECTIVE] = FIRST_CENTER_GOAL;					//CENTER
+			g_input_array[FIRST_OBJECTIVE_DELAY] = 0;
+			g_input_array[SECOND_OBJECTIVE] = SECOND_KICK_STAND;				//KICK STAND
+			g_input_array[SECOND_OBJECTIVE_DELAY] = 0;
+			g_input_array[END_POINT] = END_OPPONENT;								//OPPONENT
+			break;
+		case 8:
+			abs_cscreen("Mission ","F Center","Kck90 8");
+			g_input_array[STARTING_POINT] = START_FLOOR_LEFT;					//FLOOR LEFT SIDE
+			g_input_array[STARTING_DELAY] = 0;
+			g_input_array[FIRST_OBJECTIVE] = FIRST_CENTER_GOAL;					//CENTER
+			g_input_array[FIRST_OBJECTIVE_DELAY] = 0;
+			g_input_array[SECOND_OBJECTIVE] = SECOND_KICK_STAND;				//KICK STAND
+			g_input_array[SECOND_OBJECTIVE_DELAY] = 0;
+			g_input_array[END_POINT] = END_ROLLGOAL2;								//OPPONENT
+			break;
 		}
 	}
 	while(nNxtButtonPressed == kEnterButton){}
