@@ -33,9 +33,9 @@ task abs_sensors()
 	{
 	(gyro_read % 10 == 0) ? gyro_read=0 : gyro_read++;
 
-		nxtDisplayBigTextLine(1,"%2d %3d",g_sonar,g_sonar2);
-		nxtDisplayBigTextLine(3,"%3d %3d",g_sonar3, g_sonar4);
-		nxtDisplayBigTextLine(5,"%3d %3d",g_sonar5, g_rel_heading);
+		nxtDisplayBigTextLine(1,"%3d %3d",g_angle_reads[0],g_angle_reads[1]);
+		nxtDisplayBigTextLine(3,"%8d",g_angle_reads[2]);
+		nxtDisplayBigTextLine(5,"%8d",abs_get_angle_sensor_val(RELATIVE_TU));
 
 		//------------------------
 		// angle sensor

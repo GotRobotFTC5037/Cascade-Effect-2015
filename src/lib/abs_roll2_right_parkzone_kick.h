@@ -1,4 +1,4 @@
-/**
+ /**
 *
 *  @file abs_roll2_right_parkzone_kick.h
 *
@@ -24,14 +24,15 @@ void abs_roll2_right_parkzone_kick()
 	switch(g_center_goal_pos)
 	{
 	case 1:
-		abs_drive(FORWARD, E_ANGLE, 65, 60, true, GYRO, SLOW_DOWN, NO_STALL_ACTION);
-		abs_turn(COUNTERCLOCKWISE, POINT, TURN, 70, 60, FORWARD);
-		abs_drive(BACKWARD, E_ANGLE, 100, 60, true, GYRO, SLOW_DOWN, NO_STALL_ACTION);
+		abs_drive(FORWARD, E_ANGLE, 120, 60, true, GYRO, SLOW_DOWN, NO_STALL_ACTION);
+		abs_turn(COUNTERCLOCKWISE, POINT, TURN, 80, 60, FORWARD);
+		abs_drive(FORWARD, E_ANGLE, 100, 60, true, GYRO, SLOW_DOWN, NO_STALL_ACTION);
 		break;
 	case 2:
-		PlayTone(400,20);
-		wait1Msec(300);
-		PlayTone(200,20);
+		abs_turn(COUNTERCLOCKWISE, POINT, TURN, 8, 60, FORWARD);
+		abs_drive(FORWARD, E_ANGLE, 135, 60, true, GYRO, SLOW_DOWN, NO_STALL_ACTION);
+		abs_turn(CLOCKWISE, POINT, TURN, 50, 60, FORWARD);
+		abs_drive(FORWARD, E_ANGLE, 100, 60, true, GYRO, SLOW_DOWN, NO_STALL_ACTION);
 		break;
 	case 3:
 		abs_drive(FORWARD, E_ANGLE, 80, 60, true, GYRO, SLOW_DOWN, NO_STALL_ACTION);
